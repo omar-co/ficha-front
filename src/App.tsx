@@ -9,7 +9,6 @@ import SubmitButton from "./components/SubmitButton";
 
 function App() {
     const [store, setStore] = React.useState(MainForm);
-    const [setValue] = React.useState(0);
 
     const onSubmit = (
         data: Partial<MainFormModel>
