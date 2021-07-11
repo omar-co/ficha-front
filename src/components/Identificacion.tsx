@@ -15,7 +15,7 @@ function Identificacion({
     return (
         <div className="tab-pane active" id="identificacion">
             <div className="panel-body">
-                <form role="form" onChange={handleSubmit(onSubmit)}>
+                <form onChange={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <label className='control-label' htmlFor="ramo">Ramo:</label>
                         <select className='form-control' {...register("ramo")}>

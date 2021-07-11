@@ -1,7 +1,4 @@
 import React from "react";
-import {useForm, SubmitHandler} from "react-hook-form";
-import {IdentificationFormModel} from "../model/IdentificacionFormModel";
-import {MainFormModel} from "../model/MainFormModel";
 
 function SubmitButton({store}: {
     store: any;
