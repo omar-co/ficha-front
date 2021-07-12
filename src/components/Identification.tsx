@@ -4,9 +4,7 @@ import {Ramos} from "../data/identification/Ramos";
 import {Modalidad} from "../data/identification/Modalidad";
 import {ProgramasPresupestales} from "../data/identification/ProgramasPresupestales";
 
-function Identificacion({
-                            onSubmit
-                        }: {
+function Identification({onSubmit}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
@@ -38,6 +36,28 @@ function Identificacion({
                             </div>
                         </div>
                     </div>
+                    <div className="form-group">
+                        <label htmlFor="nombrePrograma" className="control-label">Nombre del programa presupuestario:</label>
+                        <input className="form-control" {...register('nombrePrograma')} disabled />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
+                        <select className="form-control" {...register('unidadResponsable')} >
+                            <option value="">demo</option>
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="objetivo" className="control-label">Objetivo del Programa (Propósito):</label>
+                        <input className="form-control" {...register('objetivo')} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="componentes" className="control-label">Bienes y productos generados con posible incidencia (Componentes)_1:</label>
+                        <input className="form-control" {...register('componentes')} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="actividades" className="control-label">Actividad(es) actual(es) con posible incidencia_1:</label>
+                        <textarea className="form-control" {...register('actividades')} />
+                    </div>
                 </form>
 
 
@@ -47,4 +67,4 @@ function Identificacion({
 
 }
 
-export default Identificacion
+export default Identification

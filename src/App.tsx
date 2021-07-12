@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import {MainFormModel} from "./model/MainFormModel";
 import {MainForm} from "./data/MainForm";
-import Identificacion from "./components/Identificacion";
-import Vinculacion from "./components/vinculacion";
+import Identification from "./components/Identification";
+import Vinculation from "./components/Vinculation";
 import TabsMenu from "./components/TabsMenu";
 import SubmitButton from "./components/SubmitButton";
 
@@ -30,8 +30,8 @@ function App() {
                 </div>
                 <div className="col-md-9">
                     <div className="tab-content">
-                        <Identificacion onSubmit={onSubmit}/>
-                        <Vinculacion/>
+                        <Identification onSubmit={onSubmit}/>
+                        <Vinculation onSubmit={onSubmit}/>
                     </div>
                 </div>
                 <SubmitButton store={store}/>
