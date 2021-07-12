@@ -1,5 +1,8 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
+import {Sectores} from "../data/vinculation/Sectores";
+import {Ejes} from "../data/vinculation/Ejes";
+import {MetasAdaptacion, MetasMitigacion} from "../data/vinculation/Metas";
 
 function Vinculation({onSubmit} : {
     onSubmit: SubmitHandler<any>;
@@ -18,8 +21,7 @@ function Vinculation({onSubmit} : {
                     <div className="form-group">
                         <label className='control-label' htmlFor="sectores">I. Sectores:</label>
                         <select className='form-control' {...register('sectores')}>
-                            <option value="0">Selecciona</option>
-                            <option value="1">Demo</option>
+                            {Sectores.map((index) => <option value={index}>{index}</option>)}
                         </select>
                     </div>
                     <div className="form-group">
@@ -32,8 +34,26 @@ function Vinculation({onSubmit} : {
                     <div className="form-group">
                         <label className='control-label' htmlFor="ejes">II. Ejes:</label>
                         <select className='form-control' {...register('ejes')}>
-                            <option value="0">Selecciona</option>
-                            <option value="1">Demo</option>
+                            {Ejes.map((index) => <option value={index}>{index}</option>)}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label className='control-label' htmlFor="metaMitigacion">Meta mitigación:</label>
+                        <select className='form-control' {...register('metaMitigacion')}>
+                            {MetasMitigacion.map((index) => <option value={index}>{index}</option>)}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label className='control-label' htmlFor="metaAdaptacion">Meta mitigación:</label>
+                        <select className='form-control' {...register('metaAdaptacion')}>
+                            {MetasAdaptacion.map((index) => <option value={index}>{index}</option>)}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label className='control-label' htmlFor="vinculacion">¿La vinculación del programa con la Contribución Determinada tiene un enfoque de mediano-largo plazo? </label>
+                        <select className='form-control' {...register('vinculacion')}>
+                            <option value="0">n.a.</option>
+                            <option value="1">Si</option>
                         </select>
                     </div>
                 </form>
