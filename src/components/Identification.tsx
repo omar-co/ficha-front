@@ -47,6 +47,19 @@ function Identification({onSubmit}: {
         }
     }
 
+    const activities = () => {
+        const ramo = Nombres.find(({ramo, modalidad, value}) => (
+            (ramo === getValues('ramo') && modalidad === getValues('modalidad') && value === getValues('programa'))
+        ));
+
+        if(ramo) {
+            const index = ramo.actividadId;
+            const value = ramo.actividadInstitucional;
+            return <option value={index}>{value}</option>
+        }
+    }
+
+
     return (
         <div className="tab-pane active" id="identificacion">
             <div className="panel-body">
@@ -79,6 +92,13 @@ function Identification({onSubmit}: {
                         <label htmlFor="nombrePrograma" className="control-label">Nombre del programa
                             presupuestario:</label>
                         <input className="form-control" {...register('nombrePrograma')} value={programName()} readOnly/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="actividadInstitucional" className="control-label">Actividad Institucional:</label>
+                        <select className="form-control" {...register('actividadInstitucional')} >
+                            <option value="">Selecciona una Opcion</option>
+                            {activities()}
+                        </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
