@@ -1,7 +1,7 @@
 import React from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import {Ramos} from "../data/identification/Ramos";
-import {ProgramasPresupestales, Programas, Nombres} from "../data/identification/ProgramasPresupestales";
+import {Nombres} from "../data/identification/ProgramasPresupestales";
 
 function Identification({onSubmit}: {
     onSubmit: SubmitHandler<any>;
