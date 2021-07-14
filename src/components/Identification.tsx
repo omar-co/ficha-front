@@ -10,10 +10,10 @@ function Identification({onSubmit}: {
     const {handleSubmit, register, getValues, setValue} = useForm();
 
     const modalities = () => (
-        Ramos.filter(({value}) =>
+        getValues('ramo') ? Ramos.filter(({value}) =>
             value === getValues('ramo')).map(ramo =>
             ramo.modalidad!.map(modalidad => (
-            <option value={modalidad}>{modalidad}</option>)))
+            <option value={modalidad}>{modalidad}</option>))) : null
     );
 
     const programa = () => (

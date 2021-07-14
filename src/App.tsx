@@ -6,6 +6,9 @@ import Identification from "./components/Identification";
 import Vinculation from "./components/Vinculation";
 import TabsMenu from "./components/TabsMenu";
 import SubmitButton from "./components/SubmitButton";
+import Aportacion from "./components/Aportacion";
+import Cuantificacion from "./components/Cuantificacion";
+import Indicadores from "./components/Indicadores";
 
 function App() {
     const [store, setStore] = React.useState(MainForm);
@@ -32,6 +35,9 @@ function App() {
                     <div className="tab-content">
                         <Identification onSubmit={onSubmit}/>
                         <Vinculation onSubmit={onSubmit}/>
+                        <Aportacion onSubmit={onSubmit}/>
+                        <Cuantificacion onSubmit={onSubmit}/>
+                        <Indicadores onSubmit={onSubmit}/>
                     </div>
                 </div>
                 <SubmitButton store={store}/>
