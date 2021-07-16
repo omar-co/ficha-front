@@ -1,36 +1,39 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {Objetivos} from "../data/aportacion/Objetivos";
+import {Actividades, Estrategias, Objetivos, Valores} from "../data/aportacion/Objetivos";
 import { Etapas } from "../data/aportacion/Etapas";
-
 
 function Aportacion({onSubmit}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
-    const {handleSubmit, register, getValues, setValue} = useForm();
+    const {handleSubmit, register, getValues} = useForm();
 
     const strategies = () => (
-        getValues('objetivoPrioritario') ? Objetivos.filter(({id}) =>
-            id === getValues('objetivoPrioritario')).map(objetivo =>
-            objetivo.estrategia!.map(strategy => (
-                <option value={strategy.strategyId}>{strategy.strategyName}</option>))) : null
+        getValues('objetivoPrioritario') ? Estrategias.filter(({objetivo_id}) =>
+            objetivo_id === getValues('objetivoPrioritario')).map(strategy => (
+                <option value={strategy.id}>{strategy.name}</option>)) : null
     );
 
     const actions = () => (
-        getValues('objetivoPrioritario') ? Objetivos.filter(({id}) =>
-            id === getValues('objetivoPrioritario')).map(objetivo =>
-            objetivo.estrategia!.map(strategy => (
-                getValues('estrategiaPrioritaria') ? objetivo.estrategia!.filter(({strategyId}) =>
-                    strategyId === getValues('estrategiaPrioritaria')).map(object =>
-                        object.actions.map(quien => (
-                            <option value={quien.id}>{quien.name}</option>
-                        ))
-                ): null
-            )
-            )
-        ):null
+       getValues('estrategiaPrioritaria') ? Actividades.filter(({estrategia_id}) =>
+            estrategia_id === getValues('estrategiaPrioritaria')).map(actions => (
+                <option value={actions.id}>{actions.name}</ option>
+       )): null
     );
+
+
+    const values = () => {
+        const value = Valores.filter(({accion_id}) => (
+            accion_id === getValues('actividadPuntual')
+        ));
+
+        if(value){
+            return value;
+        }
+    }
+
+
 
     return(
         <div key='1' className="tab-pane" id="aportacion">
@@ -54,7 +57,7 @@ function Aportacion({onSubmit}: {
                     </div>
                     <div key='5' className="form-group">
                         <label htmlFor="actividadPuntual" className="control-label">Actividad puntual:</label>
-                        <select className="form-control" {...register('actividadPuntual', {valueAsNumber: true})}>
+                        <select className="form-control" {...register('actividadPuntual')}>
                             {actions()}
                         </select>
                     </div>
@@ -62,15 +65,15 @@ function Aportacion({onSubmit}: {
                         <div key='7' className="form-group col-md-4">
                             <br/>
                             <label htmlFor="tipoAccion" className="control-label">Tipo de Acción puntual:</label>
-                            <input className="form-control" {...register('tipoAccion')}  readOnly/>
+                            <input className="form-control" {...register('tipoAccion')} value={values()!.map(({accion}) => accion)} readOnly/>
                         </div>
                         <div key='8' className="form-group col-md-4">
                             <label htmlFor="instCoordinadas" className="control-label">Instituciones coordinadas:</label>
-                            <input className="form-control" {...register('instCoordinadas')}  readOnly/>
+                            <input className="form-control" {...register('instCoordinadas')} value={(values()!.map(({instituciones}) => instituciones))} readOnly/>
                         </div>
                         <div key='9' className="form-group col-md-4">
                             <label htmlFor="encargado" className="control-label">Encargado del seguimiento:</label>
-                            <input className="form-control" {...register('encargado')}  readOnly/>
+                            <input className="form-control" {...register('encargado')} value={values()!.map(({encargado}) => encargado)}  readOnly/>
                         </div>
                     </div>
                     <div key='10' className="form-group">
