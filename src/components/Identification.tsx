@@ -2,37 +2,47 @@ import React from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import {Ramos} from "../data/identification/Ramos";
 import {Nombres} from "../data/identification/ProgramasPresupestales";
+import {Programas} from "../data/identification/Modalidad";
 
 function Identification({onSubmit}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
-    const {handleSubmit, register, getValues, setValue} = useForm();
+    const {handleSubmit, register, getValues} = useForm();
 
     const modalities = () => (
         getValues('ramo') ? Ramos.filter(({value}) =>
             value === getValues('ramo')).map(ramo =>
             ramo.modalidad!.map(modalidad => (
-            <option value={modalidad}>{modalidad}</option>))) : null
+                <option value={modalidad}>{modalidad}</option>))) : null
     );
 
+    const key = () => (
+        getValues('ramo') + '-' + getValues('modalidad')
+    )
+
     const programa = () => (
-      Nombres.filter(({ramo, modalidad})=>
-          (ramo === getValues('ramo') && modalidad === getValues('modalidad'))).map(({value}) => (
-          <option value={value}>{value}</option>
-      ))
+            (getValues('modalidad') && getValues('ramo')) ?
+                Programas.find(({id}) => id === key()) : null
+        )
+    ;
+
+    const programaId = () => (
+        programa() ?
+            programa()!.values.map(({id}) => (
+                <option value={id}>{id}</option>
+            )) : null
     );
 
     const programName = () => {
-        const ramo = Nombres.find(({ramo, modalidad, value}) => (
-            (ramo === getValues('ramo') && modalidad === getValues('modalidad') && value === getValues('programa'))
-        ));
-
-        if (ramo){
-            setValue('nombrePrograma', ramo.nombre);
-            return ramo.nombre;
+        if (programa() && getValues('programa')) {
+            const value = programa()?.values.find(({id}) => getValues('programa') === id);
+            if (value) {
+                return value.label;
+            }
         }
-        return ''
+
+        return '';
     };
 
     const responsible = () => {
@@ -52,7 +62,7 @@ function Identification({onSubmit}: {
             (ramo === getValues('ramo') && modalidad === getValues('modalidad') && value === getValues('programa'))
         ));
 
-        if(ramo) {
+        if (ramo) {
             const index = ramo.actividadId;
             const value = ramo.actividadInstitucional;
             return <option value={index}>{value}</option>
@@ -81,9 +91,9 @@ function Identification({onSubmit}: {
                                 <label htmlFor="modalidad" className="control-label">
                                     ID_Programa presupuestario:
                                 </label>
-                                <select className="form-control" {...register('programa', {valueAsNumber:true})}>
+                                <select className="form-control" {...register('programa', {valueAsNumber: true})}>
                                     <option value="">Selecciona una Opcion</option>
-                                    {programa()}
+                                    {programaId()}
                                 </select>
                             </div>
                         </div>
@@ -94,7 +104,8 @@ function Identification({onSubmit}: {
                         <input className="form-control" {...register('nombrePrograma')} value={programName()} readOnly/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="actividadInstitucional" className="control-label">Actividad Institucional:</label>
+                        <label htmlFor="actividadInstitucional" className="control-label">Actividad
+                            Institucional:</label>
                         <select className="form-control" {...register('actividadInstitucional')} >
                             <option value="">Selecciona una Opcion</option>
                             {activities()}
