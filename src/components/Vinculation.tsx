@@ -1,6 +1,6 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {Sectores} from "../data/vinculation/Sectores";
+import {Categorias, Sectores} from "../data/vinculation/Sectores";
 import {Ejes} from "../data/vinculation/Ejes";
 import {MetasAdaptacion, MetasMitigacion} from "../data/vinculation/Metas";
 
@@ -8,7 +8,13 @@ function Vinculation({onSubmit} : {
     onSubmit: SubmitHandler<any>;
 }) {
 
-    const { handleSubmit, register } = useForm();
+    const { handleSubmit, register, getValues } = useForm();
+
+    const categories = () => (
+        getValues('sectores') ? Categorias.filter(({sector_id}) =>
+            sector_id === getValues('sectores')).map(category => (
+            <option value={category.id}>{category.name}</option>)) : null
+    );
 
     return (
         <div key={2} className="tab-pane" id="vinculacion">
@@ -20,15 +26,15 @@ function Vinculation({onSubmit} : {
                 <form onChange={handleSubmit(onSubmit)}>
                     <div key={1} className="form-group">
                         <label className='control-label' htmlFor="sectores">I. Sectores:</label>
-                        <select className='form-control' {...register('sectores')}>
-                            {Sectores.map((index) => <option value={index}>{index}</option>)}
+                        <select className='form-control' {...register('sectores', {valueAsNumber: true})}>
+                            {Sectores.map((index) => <option value={index.id}>{index.name}</option>)}
                         </select>
                     </div>
                     <div key={4} className="form-group">
                         <label className='control-label' htmlFor="categoria">I. Categorías:</label>
                         <select className='form-control' {...register('categoria')}>
-                            <option value="0">Selecciona</option>
-                            <option value="1">Demo</option>
+                            <option value="0">Seleccione una opción</option>
+                            {categories()}
                         </select>
                     </div>
                     <div key={5} className="form-group">
