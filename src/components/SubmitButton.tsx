@@ -8,7 +8,7 @@ function SubmitButton({store}: {
 
     return (
         <div className="form-group">
-            <button className='btn btn-primary' onClick={logger} >Enviar</button>
+            <button className='btn btn-primary' onClick={logger} disabled >Descargar Excel</button>
         </div>
     );
 
