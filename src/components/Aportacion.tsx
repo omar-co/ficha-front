@@ -1,13 +1,17 @@
-import React from "react";
+import  React, {useState}  from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {Actividades, Estrategias, Objetivos, Valores} from "../data/aportacion/Objetivos";
 import { Etapas } from "../data/aportacion/Etapas";
+import CurrencyInput from 'react-currency-input-field';
 
 function Aportacion({onSubmit}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
     const {handleSubmit, register, getValues} = useForm();
+    const [rawValue, setRawValue] = useState<string | undefined>(' ');
+    const [rawValue1, setRawValue1] = useState<string | undefined>(' ');
+    const [rawValue2, setRawValue2] = useState<string | undefined>(' ');
 
     const strategies = () => (
         getValues('objetivoPrioritario') ? Estrategias.filter(({objetivo_id}) =>
@@ -33,7 +37,20 @@ function Aportacion({onSubmit}: {
         }
     }
 
+    const validateValue = (value: string | undefined): void => {
+        const rawValue = value === undefined ? 'undefined' : value;
+        setRawValue(rawValue || ' ');
+    }
 
+    const validateValue1 = (value1: string | undefined): void => {
+        const rawValue1 = value1 === undefined ? 'undefined' : value1;
+        setRawValue1(rawValue1 || ' ');
+    }
+
+    const validateValue2 = (value2: string | undefined): void => {
+        const rawValue2 = value2 === undefined ? 'undefined' : value2;
+        setRawValue2(rawValue2 || ' ');
+    }
 
     return(
         <div key='1' className="tab-pane" id="aportacion">
@@ -112,6 +129,67 @@ function Aportacion({onSubmit}: {
                             <select className="form-control" {...register('etapa2')}>
                                 {Etapas.map((index) => <option value={index.id}>{index.name}</option>)}
                             </select>
+                        </div>
+                    </div>
+                    <br/>
+                    <label className="control-label">Vinculación con otros instrumentos relevantes
+                        para financiamiento climático internacional con los Marcadores de Río (OCDE1) y la UNDRR (en caso de aplicar)</label>
+                    <hr className="red"/>
+                    <div className="row">
+                        <div className="form-group col-md-6">
+                            <label htmlFor="diversidadBiologica" className="control-label">Convenio sobre la Diversidad Biológica:</label>
+                            <select className="form-control" {...register('diversidadBiologica')}>
+                                <option value="1">Si</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                        <div className="form-group col-md-6">
+                            <label htmlFor="diversidadBiologica" className="control-label">Convenio sobre la Diversidad Biológica:</label>
+                            <select className="form-control" {...register('diversidadBiologica')}>
+                                <option value="1">Si</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group col-md-6">
+                            <label htmlFor="recursosConvenio" className="control-label">Recursos internacionales recibidos para este ejercicio presupuestario en el marco de este Convenio:</label>
+                            <CurrencyInput className="form-control" onValueChange={validateValue}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosConvenio', {value: rawValue, valueAsNumber: true})}/>
+                        </div>
+                        <div className="form-group col-md-6">
+                            <label htmlFor="recursosConvencion" className="control-label">Recursos internacionales recibidos para este ejercicio presupuestario en el marco de esta Convención:</label>
+                            <CurrencyInput className="form-control" onValueChange={validateValue1}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosConvencion', {value: rawValue1, valueAsNumber: true})}/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 form-group">
+                            <label htmlFor="plataforma" className="control-label">Plataforma para la Reducción del Riesgo de Desastres:</label>
+                            <select className="form-control" {...register('plataforma')}>
+                                <option value="1">Si</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group col-md-6">
+                            <label htmlFor="recursosInternacionales" className="control-label">Recursos internacionales recibidos para este ejercicio presupuestario en el marco de esta Plataforma:</label>
+                            <CurrencyInput className="form-control" onValueChange={validateValue2}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosInternacionales', {value: rawValue2, valueAsNumber: true})}/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div className="form-group col-md-6">
+                            <label htmlFor="marcador" className="control-label">Marcador Río:</label>
+                            <select className="form-control" {...register('marcador')}>
+                                <option value="3">Los objetivos atienden explícitamente cambio climático.</option>
+                                <option value="2">Los objetivos no atienden explícitamente cambio climático, pero tiene impacto indirecto positivo.</option>
+                                <option value="1">Sin relevancia.</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-12 form-group">
+                            <label htmlFor="observaciones" className="control-label">Observaciones:</label>
+                            <textarea className="form-control" {...register('observaciones')}/>
                         </div>
                     </div>
                 </form>
