@@ -1,0 +1,9 @@
+.obligatorio {
+    color: #bf1650;
+    display: block;
+}
+
+.obligatorio::before {
+    display: inline;
+    content: "⚠ ";
+}

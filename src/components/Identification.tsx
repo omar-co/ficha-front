@@ -8,7 +8,7 @@ function Identification({onSubmit}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
-    const {handleSubmit, register, getValues} = useForm();
+    const {handleSubmit, register, getValues, formState: { errors }} = useForm({mode: "onBlur"});
 
     const modalities = () => (
         getValues('ramo') ? Ramos.filter(({value}) =>
@@ -76,17 +76,19 @@ function Identification({onSubmit}: {
                 <form onChange={handleSubmit(onSubmit)}>
                     <div className="form-group">
                         <label className='control-label' htmlFor="ramo">Ramo:</label>
-                        <select className='form-control' {...register("ramo", {valueAsNumber: true})}>
-                            {Ramos.map(({value, label}, index) => <option value={value}>{label}</option>)}
+                        <select className='form-control' {...register("ramo", {valueAsNumber: true, required: true})}>
+                            {Ramos.map(({value, label}, index) => <option key={index} value={value}>{label}</option>)}
                         </select>
+                        {errors.ramo?.type === 'required' && <span className="obligatorio">Dato Obligatorio</span>}
                     </div>
                     <div className="form-inline">
                         <div className="form-group">
                             <label htmlFor="modalidad" className="control-label">Modalidad:</label>
-                            <select className="form-control" {...register('modalidad')}>
+                            <select className="form-control" {...register('modalidad', {required: true})}>
                                 <option value="">Selecciona una Opcion</option>
                                 {modalities()}
                             </select>
+                            {errors.modalidad?.type === 'required' && <span className="obligatorio">Dato Obligatorio</span>}
                             <div className="form-group">
                                 <label htmlFor="modalidad" className="control-label">
                                     ID_Programa presupuestario:

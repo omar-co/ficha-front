@@ -11,45 +11,45 @@ function Vinculation({onSubmit} : {
     const { handleSubmit, register } = useForm();
 
     return (
-        <div className="tab-pane" id="vinculacion">
-            <div className="panel-body">
+        <div key={2} className="tab-pane" id="vinculacion">
+            <div key={3} className="panel-body">
                 <h6>
                     Vinculación con metas de la Contribución Determinada a Nivel Nacional y la Ley General de Cambio Climático
                 </h6>
                 <hr className="red"/>
                 <form onChange={handleSubmit(onSubmit)}>
-                    <div className="form-group">
+                    <div key={1} className="form-group">
                         <label className='control-label' htmlFor="sectores">I. Sectores:</label>
                         <select className='form-control' {...register('sectores')}>
                             {Sectores.map((index) => <option value={index}>{index}</option>)}
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div key={4} className="form-group">
                         <label className='control-label' htmlFor="categoria">I. Categorías:</label>
                         <select className='form-control' {...register('categoria')}>
                             <option value="0">Selecciona</option>
                             <option value="1">Demo</option>
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div key={5} className="form-group">
                         <label className='control-label' htmlFor="ejes">II. Ejes:</label>
                         <select className='form-control' {...register('ejes')}>
                             {Ejes.map((index) => <option value={index}>{index}</option>)}
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div key={6} className="form-group">
                         <label className='control-label' htmlFor="metaMitigacion">Meta mitigación:</label>
                         <select className='form-control' {...register('metaMitigacion')}>
                             {MetasMitigacion.map((index) => <option value={index}>{index}</option>)}
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div key={7} className="form-group">
                         <label className='control-label' htmlFor="metaAdaptacion">Meta mitigación:</label>
                         <select className='form-control' {...register('metaAdaptacion')}>
                             {MetasAdaptacion.map((index) => <option value={index}>{index}</option>)}
                         </select>
                     </div>
-                    <div className="form-group">
+                    <div key={8} className="form-group">
                         <label className='control-label' htmlFor="vinculacion">¿La vinculación del programa con la Contribución Determinada tiene un enfoque de mediano-largo plazo? </label>
                         <select className='form-control' {...register('vinculacion')}>
                             <option value="0">n.a.</option>
