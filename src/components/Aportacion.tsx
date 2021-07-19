@@ -63,18 +63,21 @@ function Aportacion({onSubmit}: {
                     <div key='3' className="form-group">
                         <label className='control-label' htmlFor="objetivoPrioritario">Objetivo prioritario:</label>
                         <select className='form-control' {...register('objetivoPrioritario', {valueAsNumber: true})}>
+                            <option value="0">Seleccione una opción</option>
                             {Objetivos.map((index) => <option value={index.id}>{index.name}</option>)}
                         </select>
                     </div>
                     <div key='4' className="form-group">
                         <label htmlFor="estrategiaPrioritaria" className="control-label">Estrategia prioritaria:</label>
                         <select className="form-control" {...register('estrategiaPrioritaria', {valueAsNumber: true})}>
+                            <option value="0">Seleccione una opción</option>
                             {strategies()}
                         </select>
                     </div>
                     <div key='5' className="form-group">
                         <label htmlFor="actividadPuntual" className="control-label">Actividad puntual:</label>
                         <select className="form-control" {...register('actividadPuntual')}>
+                            <option value="0">Seleccione una opción</option>
                             {actions()}
                         </select>
                     </div>

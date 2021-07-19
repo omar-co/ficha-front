@@ -27,6 +27,7 @@ function Vinculation({onSubmit} : {
                     <div key={1} className="form-group">
                         <label className='control-label' htmlFor="sectores">I. Sectores:</label>
                         <select className='form-control' {...register('sectores', {valueAsNumber: true})}>
+                            <option value="0">Seleccione una opción</option>
                             {Sectores.map((index) => <option value={index.id}>{index.name}</option>)}
                         </select>
                     </div>
@@ -50,7 +51,7 @@ function Vinculation({onSubmit} : {
                         </select>
                     </div>
                     <div key={7} className="form-group">
-                        <label className='control-label' htmlFor="metaAdaptacion">Meta mitigación:</label>
+                        <label className='control-label' htmlFor="metaAdaptacion">Meta adaptación:</label>
                         <select className='form-control' {...register('metaAdaptacion')}>
                             {MetasAdaptacion.map((index) => <option value={index}>{index}</option>)}
                         </select>
