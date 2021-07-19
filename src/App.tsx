@@ -9,6 +9,8 @@ import SubmitButton from "./components/SubmitButton";
 import Aportacion from "./components/Aportacion";
 import Cuantificacion from "./components/Cuantificacion";
 import Indicadores from "./components/Indicadores";
+import AreasIdentificacion from "./components/AreasIdentificacion";
+import Componentes from "./components/Componentes";
 
 function App() {
     const [store, setStore] = React.useState(MainForm);
@@ -38,6 +40,8 @@ function App() {
                         <Aportacion onSubmit={onSubmit}/>
                         <Cuantificacion onSubmit={onSubmit}/>
                         <Indicadores onSubmit={onSubmit}/>
+                        <AreasIdentificacion onSubmit={onSubmit}/>
+                        <Componentes onSubmit={onSubmit}/>
                     </div>
                 </div>
                 <SubmitButton store={store}/>

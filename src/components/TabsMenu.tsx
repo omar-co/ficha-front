@@ -20,7 +20,7 @@ function TabsMenu() {
                 <a href="#indicadores" data-toggle="tab">VINCULACIÓN A INDICADORES</a>
             </li>
             <li>
-                <a href="#identificacion" data-toggle="tab">IDENTIFICACIÓN DE ÁREAS DE MEJORA EN ACTIVIDADES ACTUALES</a>
+                <a href="#areasIdentificacion" data-toggle="tab">IDENTIFICACIÓN DE ÁREAS DE MEJORA EN ACTIVIDADES ACTUALES</a>
             </li>
             <li>
                 <a href="#componentes" data-toggle="tab">COMPONENTES DE MITIGACIÓN Y ADAPTACIÓN</a>
