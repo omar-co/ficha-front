@@ -74,30 +74,32 @@ function Identification({onSubmit}: {
         <div className="tab-pane active" id="identificacion">
             <div className="panel-body">
                 <form onChange={handleSubmit(onSubmit)}>
-                    <div className="form-group">
-                        <label className='control-label' htmlFor="ramo">Ramo:</label>
-                        <select className='form-control' {...register("ramo", {valueAsNumber: true, required: true})}>
-                            {Ramos.map(({value, label}, index) => <option key={index} value={value}>{label}</option>)}
-                        </select>
-                        {errors.ramo?.type === 'required' && <span className="obligatorio">Dato Obligatorio</span>}
+                    <div className="row">
+                        <div className="form-group col-md-12">
+                            <label className='control-label' htmlFor="ramo">Ramo:</label>
+                            <select className='form-control' {...register("ramo", {valueAsNumber: true, required: true})}>
+                                {Ramos.map(({value, label}, index) => <option key={index} value={value}>{label}</option>)}
+                            </select>
+                            {errors.ramo?.type === 'required' && <span className="obligatorio">Dato Obligatorio</span>}
+                        </div>
                     </div>
-                    <div className="form-inline">
-                        <div className="form-group">
+                    <div className="row">
+                        <div className="form-group col-md-6">
                             <label htmlFor="modalidad" className="control-label">Modalidad:</label>
                             <select className="form-control" {...register('modalidad', {required: true})}>
                                 <option value="">Selecciona una Opcion</option>
                                 {modalities()}
                             </select>
                             {errors.modalidad?.type === 'required' && <span className="obligatorio">Dato Obligatorio</span>}
-                            <div className="form-group">
-                                <label htmlFor="modalidad" className="control-label">
-                                    ID_Programa presupuestario:
-                                </label>
-                                <select className="form-control" {...register('programa', {valueAsNumber: true})}>
-                                    <option value="">Selecciona una Opcion</option>
-                                    {programaId()}
-                                </select>
-                            </div>
+                        </div>
+                        <div className="form-group col-md-6">
+                            <label htmlFor="modalidad" className="control-label">
+                                ID_Programa presupuestario:
+                            </label>
+                            <select className="form-control" {...register('programa', {valueAsNumber: true})}>
+                                <option value="">Selecciona una Opcion</option>
+                                {programaId()}
+                            </select>
                         </div>
                     </div>
                     <div className="form-group">
