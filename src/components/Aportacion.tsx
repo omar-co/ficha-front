@@ -3,8 +3,10 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {Actividades, Estrategias, Objetivos, Valores} from "../data/aportacion/Objetivos";
 import { Etapas } from "../data/aportacion/Etapas";
 import CurrencyInput from 'react-currency-input-field';
+import {Marcadores} from "../data/shared";
 
-function Aportacion({onSubmit}: {
+function Aportacion({onSubmit, store}: {
+    store: any;
     onSubmit: SubmitHandler<any>;
 }) {
 
@@ -52,6 +54,10 @@ function Aportacion({onSubmit}: {
         setRawValue2(rawValue2 || ' ');
     }
 
+    const updateForm = () => {
+        store.porcentajeAtcc =  Marcadores[store.marcador] * 100;
+        return handleSubmit(onSubmit);
+    }
     return(
         <div key='1' className="tab-pane" id="aportacion">
             <div key='2' className="panel-body">
@@ -59,7 +65,7 @@ function Aportacion({onSubmit}: {
                     Aportación al programa especial de cambio climático
                 </h6>
                 <hr className="red"/>
-                <form onChange={handleSubmit(onSubmit)}>
+                <form onChange={updateForm()}>
                     <div key='3' className="form-group">
                         <label className='control-label' htmlFor="objetivoPrioritario">Objetivo prioritario:</label>
                         <select className='form-control' {...register('objetivoPrioritario', {valueAsNumber: true})}>
@@ -182,10 +188,10 @@ function Aportacion({onSubmit}: {
                         <br/>
                         <div className="form-group col-md-6">
                             <label htmlFor="marcador" className="control-label">Marcador Río:</label>
-                            <select className="form-control" {...register('marcador')}>
-                                <option value="3">Los objetivos atienden explícitamente cambio climático.</option>
-                                <option value="2">Los objetivos no atienden explícitamente cambio climático, pero tiene impacto indirecto positivo.</option>
-                                <option value="1">Sin relevancia.</option>
+                            <select className="form-control" {...register('marcador', {valueAsNumber: true})}>
+                                <option value="2">Los objetivos atienden explícitamente cambio climático.</option>
+                                <option value="1">Los objetivos no atienden explícitamente cambio climático, pero tiene impacto indirecto positivo.</option>
+                                <option value="0">Sin relevancia.</option>
                             </select>
                         </div>
                     </div>

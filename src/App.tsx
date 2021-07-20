@@ -37,8 +37,8 @@ function App() {
                     <div className="tab-content">
                         <Identification onSubmit={onSubmit}/>
                         <Vinculation onSubmit={onSubmit}/>
-                        <Aportacion onSubmit={onSubmit}/>
-                        <Cuantificacion onSubmit={onSubmit}/>
+                        <Aportacion onSubmit={onSubmit} store={store}/>
+                        <Cuantificacion onSubmit={onSubmit} store={store}/>
                         <Indicadores onSubmit={onSubmit}/>
                         <AreasIdentificacion onSubmit={onSubmit}/>
                         <Componentes onSubmit={onSubmit}/>
