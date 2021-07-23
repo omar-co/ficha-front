@@ -122,20 +122,22 @@ function Cuantificacion({onSubmit, store}: {
                             <label className='control-label' htmlFor="grupoFuncionalAdaptacion">Grupo funcional:</label>
                             <select
                                 className='form-control' {...register('grupoFuncionalAdaptacion', {valueAsNumber: true})}>
+                                <option>Seleccione una opción</option>
                                 {Finalidad.map((index) => <option value={index.id}>{index.name}</option>)}
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="funcionAdaptacion">Función:</label>
                             <select className="form-control" {...register('funcionAdaptacion', {valueAsNumber: true})}>
+                                <option>Seleccione una opción</option>
                                 {funciones()}
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="subfuncionAdaptacion">Subfunción:</label>
                             <select className="form-control" {...register('subfuncionAdaptacion')}>
-                                <option value="1">Demo</option>
-                                <option value="2">Select</option>
+                                <option>Seleccione una opción</option>
+                                {subfunctions()}
                             </select>
                         </div>
                     </div>
