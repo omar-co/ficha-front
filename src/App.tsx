@@ -11,6 +11,8 @@ import Cuantificacion from "./components/Cuantificacion";
 import Indicadores from "./components/Indicadores";
 import AreasIdentificacion from "./components/AreasIdentificacion";
 import Componentes from "./components/Componentes";
+import Mitigacion from "./components/Mitigacion";
+import Adaptacion from "./components/Adaptacion";
 
 function App() {
     const [store, setStore] = React.useState(MainForm);
@@ -31,7 +33,7 @@ function App() {
             <hr className="red"/>
             <div className="row">
                 <div className="col-md-3">
-                    <TabsMenu/>
+                    <TabsMenu store={store}/>
                 </div>
                 <div className="col-md-9">
                     <div className="tab-content">
@@ -42,6 +44,8 @@ function App() {
                         <Indicadores onSubmit={onSubmit}/>
                         <AreasIdentificacion onSubmit={onSubmit}/>
                         <Componentes onSubmit={onSubmit}/>
+                        <Mitigacion onSubmit={onSubmit}/>
+                        <Adaptacion onSubmit={onSubmit}/>
                     </div>
                 </div>
                 <SubmitButton store={store}/>

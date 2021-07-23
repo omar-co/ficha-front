@@ -18,7 +18,8 @@ function Componentes({onSubmit}: {
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <label htmlFor="programas" className="control-label">¿Los programas del PP contabilizan las emisiones de actividades institucionales ?</label>
-                            <select className="form-control" {...register('programas')}>
+                            <select className="form-control" {...register('programas', {valueAsNumber: true})}>
+                                <option value="">Seleccione una opción</option>
                                 <option value="1">Si</option>
                                 <option value="2">No</option>
                             </select>
@@ -31,7 +32,8 @@ function Componentes({onSubmit}: {
                     <div className="row">
                         <div className="col-md-12 form-group">
                             <label htmlFor="objetivo" className="control-label">¿El objetivo del PP se vincula con alguna(s) problemática(s) relacionada(s) con el clima?</label>
-                            <select className="form-control" {...register('objetivo')}>
+                            <select className="form-control" {...register('objetivo', {valueAsNumber: true})}>
+                                <option value="">Seleccione una opción</option>
                                 <option value="1">Si</option>
                                 <option value="2">No</option>
                             </select>

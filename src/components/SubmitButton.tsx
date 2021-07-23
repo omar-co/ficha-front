@@ -22,7 +22,7 @@ function SubmitButton({store}: {
 
     return (
         <div className="form-group">
-            <button className='btn btn-primary' onClick={() => saveData(store)}  >Enviar</button>
+            <button className='btn btn-primary' onClick={() => saveData(store)} disabled>Descargar Excel</button>
         </div>
     );
 
