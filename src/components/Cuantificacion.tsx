@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import CurrencyInput from 'react-currency-input-field';
-import {Finalidad, Funcion} from "../data/cuantificacion/Presupuestos";
+import {Finalidad, Funcion, Subfuncion} from "../data/cuantificacion/Presupuestos";
 import {Marcadores} from "../data/shared";
 
 function Cuantificacion({onSubmit, store}: {
@@ -30,6 +30,14 @@ function Cuantificacion({onSubmit, store}: {
         }
         setValue('atcc', (store.rawPp * Marcadores[store.marcador]));
     };
+
+    const subfunctions = () => (
+        getValues('funcion') ? Subfuncion.filter(({funcion_id}) =>
+            funcion_id === getValues('funcion')).map(obj => (
+                <option value={obj.id}>{obj.name}</option>
+            )
+        ) : null
+    );
 
     return (
         <div className="tab-pane" id="cuantificacion">
@@ -64,20 +72,22 @@ function Cuantificacion({onSubmit, store}: {
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="grupoFuncional">Grupo funcional:</label>
                             <select className='form-control' {...register('grupoFuncional', {valueAsNumber: true})}>
+                                <option>Seleccione una opción</option>
                                 {Finalidad.map((index) => <option value={index.id}>{index.name}</option>)}
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="funcion">Función:</label>
                             <select className="form-control" {...register('funcion', {valueAsNumber: true})}>
+                                <option>Seleccione una opción</option>
                                 {funciones()}
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="subfuncion">Subfunción:</label>
                             <select className="form-control" {...register('subfuncion')}>
-                                <option value="1">Demo</option>
-                                <option value="2">Select</option>
+                                <option>Seleccione una opción</option>
+                                {subfunctions()}
                             </select>
                         </div>
                     </div>
