@@ -1,6 +1,8 @@
 import React from "react";
 
-function TabsMenu() {
+function TabsMenu({store}: {
+    store: any
+}) {
 
     return (
         <ul className="nav nav-tabs tabs-left">
@@ -25,6 +27,8 @@ function TabsMenu() {
             <li>
                 <a href="#componentes" data-toggle="tab">COMPONENTES DE MITIGACIÓN Y ADAPTACIÓN</a>
             </li>
+            {store.programas === 1 && <li><a href="#mitigacion" data-toggle="tab">COMPONENTE DE MITIGACIÓN</a></li>}
+            {store.objetivo === 1 && <li><a href="#adaptacion" data-toggle="tab">COMPONENTE DE ADAPTACIÓN</a></li>}
         </ul>
     );
 }
