@@ -1,28 +1,24 @@
 import React from "react";
 import axios from "axios";
+import {saveAs} from 'file-saver'
 
 function SubmitButton({store}: {
     store: any;
 }) {
 
-
-     async function saveData(store){
-         try {
-             return await axios({
-                url: `url/api/`,
-                method: 'POST',
-                data: store,
-            });
-        }catch(e){
-            console.log(e);
-        }
+    const saveData = async () => {
+        return axios.post('https://hacienda.frb.io/api/generate', store, {
+            responseType: 'blob',
+        }).then(
+            response => new Blob([response.data])
+        ).then(
+            blob => saveAs(blob, 'Ficha.xlsx')
+        );
     }
-
-    //const logger = () => console.log(store);
 
     return (
         <div className="form-group">
-            <button className='btn btn-primary' onClick={() => saveData(store)} disabled>Descargar Excel</button>
+            <button className='btn btn-primary' onClick={() => saveData()} disabled>Descargar Excel</button>
         </div>
     );
 
