@@ -7,7 +7,7 @@ function SubmitButton({store}: {
 }) {
 
     const saveData = async () => {
-        return axios.post('https://hacienda.frb.io/api/generate', store, {
+        return axios.post(process.env.REACT_APP_API_URL + '/generate', store, {
             responseType: 'blob',
         }).then(
             response => new Blob([response.data])
