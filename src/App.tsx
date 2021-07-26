@@ -13,6 +13,7 @@ import AreasIdentificacion from "./components/AreasIdentificacion";
 import Componentes from "./components/Componentes";
 import Mitigacion from "./components/Mitigacion";
 import Adaptacion from "./components/Adaptacion";
+import ObjetivosDesarrolloSustentable from "./components/ObjetivosDesarrolloSustentable";
 
 function App() {
     const [store, setStore] = React.useState(MainForm);
@@ -46,6 +47,7 @@ function App() {
                         <Componentes onSubmit={onSubmit}/>
                         <Mitigacion onSubmit={onSubmit}/>
                         <Adaptacion onSubmit={onSubmit}/>
+                        <ObjetivosDesarrolloSustentable onSubmit={onSubmit}/>
                     </div>
                 </div>
                 <SubmitButton store={store}/>
