@@ -84,14 +84,15 @@ function Indicadores({onSubmit}: {
                 <hr/>
                 <div className="row">
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion" className="control-label">Indicador_1:</label>
+                        <label htmlFor="pnccMitigacion" className="control-label">Emisiones totales nacionales de gases y compuestos de efecto invernadero en CO2e:</label>
                         <select className='form-control' {...register("pnccMitigacion", {valueAsNumber: true})}>
                             <option value="">Selecciona una Opcion</option>
                             {PnccMitigacion.map(({id, name}, index) => <option value={id}>{name}</option>)}
                         </select>
                     </div>
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion2" className="control-label">Indicador_2:</label>
+                        <br/>
+                        <label htmlFor="pnccMitigacion2" className="control-label">Emisión de bióxido de carbono por quema de combustibles fósiles:</label>
                         <select className='form-control' {...register("pnccMitigacion2", {valueAsNumber: true})}>
                             <option value="">Selecciona una Opcion</option>
                             {PnccMitigacion.map(({id, name}, index) => <option value={id}>{name}</option>)}
@@ -100,80 +101,45 @@ function Indicadores({onSubmit}: {
                 </div>
                 <div className="row">
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion3" className="control-label">Indicador_3:</label>
+                        <label htmlFor="pnccMitigacion3" className="control-label">Toneladas de CO2e mitigadas por el Programa Especial de Cambio Climático:</label>
                         <input className="form-control" {...register('pnccMitigacion3')}/>
                     </div>
+                    <br/>
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion4" className="control-label">Indicador_4:</label>
+                        <label htmlFor="pnccMitigacion4" className="control-label">Emisión de bióxido de carbono por Producto Interno Bruto:</label>
                         <input className="form-control" {...register('pnccMitigacion4')}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion5" className="control-label">Indicador_5:</label>
+                        <br/>
+                        <label htmlFor="pnccMitigacion5" className="control-label">Emisión per cápita por bióxido de carbono:</label>
                         <input className="form-control" {...register('pnccMitigacion5')}/>
                     </div>
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion6" className="control-label">Indicador_6:</label>
+                        <label htmlFor="pnccMitigacion6" className="control-label">Participación de fuentes renovables y alternas en la producción nacional de energía:</label>
                         <input className="form-control" {...register('pnccMitigacion6')}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion7" className="control-label">Indicador_7:</label>
+                        <label htmlFor="pnccMitigacion7" className="control-label">Participación de fuentes de energía límpia para la generación de energía eléctrica:</label>
                         <input className="form-control" {...register('pnccMitigacion7')}/>
                     </div>
                     <div className="form-group col-md-6">
-                        <label htmlFor="pnccMitigacion8" className="control-label">Indicador_8:</label>
+                        <label htmlFor="pnccMitigacion8" className="control-label">Participación de fuentes de energía límpia para la generación de energía eléctrica:</label>
                         <input className="form-control" {...register('pnccMitigacion8')}/>
                     </div>
                 </div>
                 <label className="control-label">Adaptación:</label>
                 <hr/>
                 <div className="row">
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion" className="control-label">Indicador_1:</label>
+                    <div className="form-group col-md-12">
+                        <label htmlFor="pnccAdaptacion" className="control-label">Fortalecimiento de capacidades adaptativas de los municipios para responder al cambio climático:</label>
                         <select className='form-control' {...register("pnccAdaptacion", {valueAsNumber: true})}>
                             <option value="">Selecciona una Opcion</option>
                             {PnccAdaptacion.map(({id, name}, index) => <option value={id}>{name}</option>)}
                         </select>
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion2" className="control-label">Indicador_2:</label>
-                        <select className='form-control' {...register("pnccAdaptacion2", {valueAsNumber: true})}>
-                            <option value="">Selecciona una Opcion</option>
-                            {PnccAdaptacion.map(({id, name}, index) => <option value={id}>{name}</option>)}
-                        </select>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion3" className="control-label">Indicador_3:</label>
-                        <input className="form-control" {...register('pnccAdaptacion3')}/>
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion4" className="control-label">Indicador_4:</label>
-                        <input className="form-control" {...register('pnccAdaptacion4')}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion5" className="control-label">Indicador_5:</label>
-                        <input className="form-control" {...register('pnccAdaptacion5')}/>
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion6" className="control-label">Indicador_6:</label>
-                        <input className="form-control" {...register('pnccAdaptacion6')}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion7" className="control-label">Indicador_7:</label>
-                        <input className="form-control" {...register('pnccAdaptacion7')}/>
-                    </div>
-                    <div className="form-group col-md-6">
-                        <label htmlFor="pnccAdaptacion8" className="control-label">Indicador_8:</label>
-                        <input className="form-control" {...register('pnccAdaptacion8')}/>
                     </div>
                 </div>
             </form>
