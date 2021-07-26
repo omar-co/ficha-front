@@ -4,6 +4,7 @@ import {Ramos} from "../data/identification/Ramos";
 import {Nombres} from "../data/identification/ProgramasPresupestales";
 import {Programas} from "../data/identification/Modalidad";
 import axios from "axios";
+import {Finalidad, Funcion, Subfuncion} from "../data/cuantificacion/Presupuestos";
 
 function Identification({onSubmit}: {
     onSubmit: SubmitHandler<any>;
@@ -66,7 +67,7 @@ function Identification({onSubmit}: {
         ));
 
         if (ramo) {
-            return ramo.ur.map((value, index) => (
+            return ramo.ur.map((value) => (
                 <option value={value}>{value}</option>
             ))
         }
@@ -90,7 +91,23 @@ function Identification({onSubmit}: {
             <option value={concepto}>{concepto}</option>
             )
         ) : null
-    )
+    );
+
+    const funciones = () => (
+        getValues('finalidad') ? Funcion.filter(({finalidad_id}) =>
+            finalidad_id === getValues('finalidad')).map(obj => (
+                <option value={obj.id}>{obj.name}</option>
+            )
+        ) : null
+    );
+
+    const subfunctions = () => (
+        getValues('funcion') ? Subfuncion.filter(({funcion_id}) =>
+            funcion_id === getValues('funcion')).map(obj => (
+                <option value={obj.id}>{obj.name}</option>
+            )
+        ) : null
+    );
 
     return (
         <div className="tab-pane active" id="identificacion">
@@ -202,6 +219,34 @@ function Identification({onSubmit}: {
                         <div className="col-md-12">
                             <label htmlFor="descripcion" className="control-label">Descripcion</label>
                             <input className="form-control" {...register('nombrePrograma')} readOnly/>
+                        </div>
+                    </div>
+                    <br/>
+                    <label htmlFor="mitigacion" className="control-label">
+                        Partida presupuestaria al ATCC_1 (Mitigación)
+                    </label>
+                    <hr className="red"/>
+                    <div className="row">
+                        <div className="form-group col-md-4">
+                            <label className='control-label' htmlFor="finalidad">Finalidad:</label>
+                            <select className='form-control' {...register('finalidad', {valueAsNumber: true})}>
+                                <option>Seleccione una opción</option>
+                                {Finalidad.map((index) => <option value={index.id}>{index.name}</option>)}
+                            </select>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label className='control-label' htmlFor="funcion">Función:</label>
+                            <select className="form-control" {...register('funcion', {valueAsNumber: true})}>
+                                <option>Seleccione una opción</option>
+                                {funciones()}
+                            </select>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <label className='control-label' htmlFor="subfuncion">Subfunción:</label>
+                            <select className="form-control" {...register('subfuncion')}>
+                                <option>Seleccione una opción</option>
+                                {subfunctions()}
+                            </select>
                         </div>
                     </div>
                 </form>
