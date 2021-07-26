@@ -19,6 +19,9 @@ function TabsMenu({store}: {
                 <a href="#cuantificacion" data-toggle="tab">CUANTIFICACIÓN PRESUPUESTAL</a>
             </li>
             <li>
+                <a href="#ods" data-toggle="tab">OBJETIVOS DE DESARROLLO SOSTENIBLE</a>
+            </li>
+            <li>
                 <a href="#indicadores" data-toggle="tab">VINCULACIÓN A INDICADORES</a>
             </li>
             <li>
