@@ -14,7 +14,7 @@ function FiltroModal( {store}: {
             const url = '/relacion-economica/' + store.ramo + '/' + store.fuenteFinanciamiento + '/' + store.tipoGasto + '/' + (!store.directamente) + '/' + store.modalidad;
             axios.get(process.env.REACT_APP_API_URL + url).then(
                 (response) => {
-                    setData(response.data.data)
+                    setData(response.data)
                 }
             )
         }
