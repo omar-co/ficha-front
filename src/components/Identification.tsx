@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
-import {Ramos} from "../data/identification/Ramos";
-import {Nombres} from "../data/identification/ProgramasPresupestales";
-import {Programas} from "../data/identification/Modalidad";
 import {Finalidad, Funcion, Subfuncion} from "../data/cuantificacion/Presupuestos";
 import axios from "axios";
 
@@ -11,69 +8,26 @@ function Identification({onSubmit}: {
 }) {
 
     const initial: any[] = [];
-    const {handleSubmit, register, getValues, formState: {errors}} = useForm({mode: "onBlur"});
+    const {handleSubmit, register, getValues} = useForm({mode: "onBlur"});
     const [gasto, setGasto] = useState(initial);
     const [entidad, setEntidad] = useState(initial);
     const [fuente, setFuente] = useState(initial);
+    const [ramo, setRamo] = useState(initial);
+    const [modalidad, setModalidad] = useState(initial);
+    const [pp, setPp] = useState(initial);
 
-    const modalities = () => (
-        getValues('ramo') ? Ramos.filter(({value}) =>
-            value === getValues('ramo')).map(ramo =>
-            ramo.modalidad!.map(modalidad => (
-                <option value={modalidad}>{modalidad}</option>))) : null
-    );
-
-    const key = () => (
-        getValues('ramo') + '-' + getValues('modalidad')
-    )
-
-    const programa = () => (
-            (getValues('modalidad') && getValues('ramo')) ?
-                Programas.find(({id}) => id === key()) : null
-        )
-    ;
-
-    const programaId = () => (
-        programa() ?
-            programa()!.values.map(({id}) => (
-                <option value={id}>{id}</option>
-            )) : null
-    );
 
     const programName = () => {
-        if (programa() && getValues('programa')) {
-            const value = programa()?.values.find(({id}) => getValues('programa') === id);
-            if (value) {
-                return value.label;
-            }
+        if (getValues('programa')) {
+            return pp.find(({id}) =>
+                id === getValues('programa')
+            ).name
         }
 
         return '';
     };
 
-    const responsible = () => {
-        const ramo = Nombres.find(({ramo, modalidad, value}) => (
-            (ramo === getValues('ramo') && modalidad === getValues('modalidad') && value === getValues('programa'))
-        ));
 
-        if (ramo) {
-            return ramo.ur.map((value) => (
-                <option value={value}>{value}</option>
-            ))
-        }
-    }
-
-    const activities = () => {
-        const ramo = Nombres.find(({ramo, modalidad, value}) => (
-            (ramo === getValues('ramo') && modalidad === getValues('modalidad') && value === getValues('programa'))
-        ));
-
-        if (ramo) {
-            const index = ramo.actividadId;
-            const value = ramo.actividadInstitucional;
-            return <option value={index}>{value}</option>
-        }
-    }
 
     const funciones = () => (
         getValues('finalidad') ? Funcion.filter(({finalidad_id}) =>
@@ -95,21 +49,39 @@ function Identification({onSubmit}: {
         const gastoApi = process.env.REACT_APP_API_URL + '/tipo-gasto';
         const entidadApi = process.env.REACT_APP_API_URL + '/entidad-federativa';
         const fuenteApi = process.env.REACT_APP_API_URL + '/fuente-financiamiento';
+        const ramoApi = process.env.REACT_APP_API_URL + '/ramo';
+        const modalidadApi = process.env.REACT_APP_API_URL + '/modalidad';
 
         const getGasto = axios.get(gastoApi)
         const getEntidad = axios.get(entidadApi)
         const getFuente = axios.get(fuenteApi)
-        axios.all([getGasto, getEntidad, getFuente]).then(
+        const getRamo = axios.get(ramoApi)
+        const getModalidad = axios.get(modalidadApi)
+        axios.all([getGasto, getEntidad, getFuente, getRamo, getModalidad]).then(
             axios.spread((...allData) => {
                 const allGastoData = allData[0].data;
                 const allEntidadData = allData[1].data;
                 const allFuenteData = allData[2].data;
+                const allRamoData = allData[3].data;
+                const allModalidadData = allData[4].data;
 
                 setGasto(allGastoData);
                 setEntidad(allEntidadData);
                 setFuente(allFuenteData);
+                setRamo(allRamoData);
+                setModalidad(allModalidadData);
             })
         )
+    }
+
+    const getPp = () => {
+        if(getValues('ramo') && getValues('modalidad')){
+            axios.get(process.env.REACT_APP_API_URL + '/programa-presupuestal/' + getValues('ramo') + '/' + getValues('modalidad')).then(
+                (response) => {
+                    setPp(response.data)
+                }
+            )
+        }
     }
 
     const spendingType = () => (
@@ -130,10 +102,27 @@ function Identification({onSubmit}: {
         )
     );
 
+    const ramos = () => (
+        ramo.map((obj) =>
+            <option value={obj.id}>{obj.id} - {obj.name}</option>
+        )
+    )
+
+    const modalidades = () => (
+        modalidad.map((obj) =>
+            <option value={obj.id}>{obj.letter} - {obj.description}</option>
+        )
+    );
+
     useEffect(() => {
-        fetchData()
+        fetchData();
     }, []);
 
+    const programasPresupuestales = () => (
+        pp.map((obj) =>
+            <option value={obj.id}>{obj.clave} - {obj.name}</option>
+        )
+    );
 
     return (
         <div className="tab-pane active" id="identificacion">
@@ -145,22 +134,19 @@ function Identification({onSubmit}: {
                             <select className='form-control' {...register("ramo", {
                                 valueAsNumber: true,
                                 required: true
-                            })}>
-                                {Ramos.map(({value, label}, index) => <option key={index}
-                                                                              value={value}>{label}</option>)}
+                            })} onClick={getPp}>
+                                <option value="">Seleccione una opción:</option>
+                                {ramos()}
                             </select>
-                            {errors.ramo?.type === 'required' && <span className="obligatorio">Dato Obligatorio</span>}
                         </div>
                     </div>
                     <div className="row">
                         <div className="form-group col-md-6">
                             <label htmlFor="modalidad" className="control-label">Modalidad:</label>
-                            <select className="form-control" {...register('modalidad', {required: true})}>
+                            <select className="form-control" {...register('modalidad', {required: true})}  onClick={getPp}>
                                 <option value="">Selecciona una Opcion</option>
-                                {modalities()}
+                                {modalidades()}
                             </select>
-                            {errors.modalidad?.type === 'required' &&
-                            <span className="obligatorio">Dato Obligatorio</span>}
                         </div>
                         <div className="form-group col-md-6">
                             <label htmlFor="modalidad" className="control-label">
@@ -168,7 +154,7 @@ function Identification({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('programa', {valueAsNumber: true})}>
                                 <option value="">Selecciona una Opcion</option>
-                                {programaId()}
+                                {programasPresupuestales()}
                             </select>
                         </div>
                     </div>
@@ -182,14 +168,14 @@ function Identification({onSubmit}: {
                             Institucional:</label>
                         <select className="form-control" {...register('actividadInstitucional')} >
                             <option value="">Selecciona una Opcion</option>
-                            {activities()}
+
                         </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
                         <select className="form-control" {...register('unidadResponsable')} >
                             <option value="">Selecciona una Opcion</option>
-                            {responsible()}
+
                         </select>
                     </div>
                     <div className="form-group">
