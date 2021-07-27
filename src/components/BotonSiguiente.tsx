@@ -12,14 +12,12 @@ function BotonSiguiente({store}: {
     };
 
     const validate = () => {
-        (store.accionPutual || store.componenteMitigacion || store.actividadPuntual || store.pnccAdaptacion ||
+        if (store.accionPutual || store.componenteMitigacion || store.actividadPuntual || store.pnccAdaptacion ||
             store.pnccMitigacion || store.pnccMitigacion2 || store.pnccMitigacion3 || store.pnccMitigacion4 ||
-            store.pnccMitigacion5 || store.pnccMitigacion6 || store.pnccMitigacion7 || store.pnccMitigacion8) ||
-        (store.validacionOds = true);
+            store.pnccMitigacion5 || store.pnccMitigacion6 || store.pnccMitigacion7 || store.pnccMitigacion8) {
+            store.validacionOds = true;
+        }
     };
-
-
-    store.validacionOds = true;
 
 
     return (
