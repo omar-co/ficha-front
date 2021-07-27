@@ -274,21 +274,21 @@ function Identification({onSubmit}: {
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="finalidad">Finalidad:</label>
                             <select className='form-control' {...register('finalidad', {valueAsNumber: true})}>
-                                <option>Seleccione una opción</option>
+                                <option value="">Seleccione una opción</option>
                                 {Finalidad.map((index) => <option value={index.id}>{index.name}</option>)}
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="funcion">Función:</label>
                             <select className="form-control" {...register('funcion', {valueAsNumber: true})}>
-                                <option>Seleccione una opción</option>
+                                <option value="">Seleccione una opción</option>
                                 {funciones()}
                             </select>
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="subfuncion">Subfunción:</label>
                             <select className="form-control" {...register('subfuncion')}>
-                                <option>Seleccione una opción</option>
+                                <option value="">Seleccione una opción</option>
                                 {subfunctions()}
                             </select>
                         </div>
@@ -298,7 +298,7 @@ function Identification({onSubmit}: {
                         <div className="form-group col-md-6">
                             <label htmlFor="tipoGasto" className="control-label">Tipo de gasto:</label>
                             <select className="form-control" {...register('tipoGasto')}>
-                                <option>Seleccione una opción</option>
+                                <option value="">Seleccione una opción</option>
                                 {spendingType()}
                             </select>
                         </div>
@@ -306,7 +306,7 @@ function Identification({onSubmit}: {
                             <label htmlFor="fuenteFinanciamiento" className="control-label">Fuente de
                                 Financiamiento:</label>
                             <select className='form-control' {...register('fuenteFinanciamiento')}>
-                                <option>Seleccione una opción</option>
+                                <option value="">Seleccione una opción</option>
                                 {sources()}
                             </select>
                         </div>
@@ -315,7 +315,7 @@ function Identification({onSubmit}: {
                         <div className="col-md-6">
                             <label htmlFor="entidadFederativa" className="control-label">Entidad Federativa:</label>
                             <select className='form-control' {...register('entidadFederativa')}>
-                                <option>Seleccione una opción</option>
+                                <option value="">Seleccione una opción</option>
                                 {entity()}
                             </select>
                         </div>
