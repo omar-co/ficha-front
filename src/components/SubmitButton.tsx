@@ -18,7 +18,7 @@ function SubmitButton({store}: {
 
     return (
         <div className="form-group">
-            <button className='btn btn-primary' onClick={() => saveData()} disabled>Descargar Excel</button>
+            <button className='btn btn-primary' onClick={() => saveData()}>Descargar Excel</button>
         </div>
     );
 

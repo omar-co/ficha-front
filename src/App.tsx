@@ -40,6 +40,7 @@ function App() {
                     <Switch>
                         <Route path="/cuantificacion">
                             <Cuantificacion onSubmit={onSubmit} store={store}/>
+                            <SubmitButton store={store}/>
                         </Route>
                         <Route path="/areas">
                             <AreasIdentificacion onSubmit={onSubmit}/>
@@ -68,7 +69,6 @@ function App() {
                             <ObjetivosDesarrolloSustentable onSubmit={onSubmit}/>
                         </div>
                     </div>
-                    <SubmitButton store={store}/>
                 </Router>
             </div>
         </div>
