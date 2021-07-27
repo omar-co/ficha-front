@@ -90,11 +90,6 @@ function Cuantificacion({onSubmit, store}: {
                     <label htmlFor="partida" className="control-label">Partida especifica</label>
                     <hr className="red"/>
 
-                    {/*<div className="row">*/}
-                    {/*    <div className="col-md-12 form-group">*/}
-                    {/*        <FiltroTabla store={store}/>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
                     <FiltroModal store={store}/>
 
                     <br/>
