@@ -3,7 +3,8 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import CurrencyInput from 'react-currency-input-field';
 import {Marcadores} from "../data/shared";
 import axios from "axios";
-import Demo from "./Demo";
+import FiltroModal from "./FiltroModal";
+
 
 function Cuantificacion({onSubmit, store}: {
     store: any;
@@ -88,7 +89,15 @@ function Cuantificacion({onSubmit, store}: {
                     <label htmlFor="partida" className="control-label">Partida especifica</label>
                     <hr className="red"/>
 
-                    <Demo />
+                    {/*<div className="row">*/}
+                    {/*    <div className="col-md-12 form-group">*/}
+                    {/*        <FiltroTabla store={store}/>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    <FiltroModal store={store}/>
+
+                    <br/>
+                    <br/>
 
                     <div className="row">
                         <div className="col-md-6">
