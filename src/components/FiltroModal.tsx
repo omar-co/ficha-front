@@ -11,7 +11,8 @@ function FiltroModal( {store}: {
 
     const getFilterData = () => {
         if(store.ramo && store.fuenteFinanciamiento && store.tipoGasto){
-            axios.get(process.env.REACT_APP_API_URL + '/relacion-economica/' + store.ramo + '/' + store.fuenteFinanciamiento + '/' + store.tipoGasto).then(
+            const url = '/relacion-economica/' + store.ramo + '/' + store.fuenteFinanciamiento + '/' + store.tipoGasto + '/' + (!store.directamente) + '/' + store.modalidad;
+            axios.get(process.env.REACT_APP_API_URL + url).then(
                 (response) => {
                     setData(response.data.data)
                 }
