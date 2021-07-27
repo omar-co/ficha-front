@@ -20,6 +20,7 @@ function FiltroModal( {store}: {
     }
 
 
+
     return(
         <div className="text-center">
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onClick={getFilterData}>
@@ -30,19 +31,18 @@ function FiltroModal( {store}: {
                 <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 className="modal-title" id="exampleModalLabel">Seleccionar programas</h5>
                             <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
-                            <FiltroTabla store={data}/>
+                            <FiltroTabla store={data} mainStore={store}/>
                         </div>
                         <br/>
                         <br/>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" className="btn btn-primary">Seleccionar</button>
                         </div>
                     </div>
                 </div>

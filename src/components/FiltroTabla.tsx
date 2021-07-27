@@ -1,11 +1,16 @@
 import * as React from 'react';
 import {DataGrid, GridColDef } from '@material-ui/data-grid';
 import {GRID_LOCALE_TEXT} from "../data/cuantificacion/TraduccionDataGrid";
+import {useState} from "react";
 
 
-export default function FiltroTabla({store}: {
-    store: any
+export default function FiltroTabla({store, mainStore}: {
+    store: any;
+    mainStore: any;
 }) {
+
+    const initial: any[] = [];
+    const [select, setSelection] = useState(initial);
 
     const columns: GridColDef[] = [
         {field: 'ciclo', headerName: 'Ciclo', width: 150},
@@ -43,9 +48,15 @@ export default function FiltroTabla({store}: {
         {field: 'monto_aprobado', headerName: 'Monto Aprobado', width: 150} ,
     ];
 
+    const addItemsToMainArray = (item: any) => {
+       mainStore.programasSeleccionados = item;
+    }
+
     return (
         <div id="table" className="text-center"  style={{height: 400, width: '100%'}}>
-            <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => console.log(item)} />
+            <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)} />
+            <br/>
+            <button type="button" className="btn btn-primary" onClick={() => addItemsToMainArray(select)}>Guardar programas seleccionados</button>
         </div>
 );
 }
