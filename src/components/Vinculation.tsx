@@ -1,7 +1,5 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {Categorias, Sectores} from "../data/vinculation/Sectores";
-import {MetasAdaptacion, MetasMitigacion} from "../data/vinculation/Metas";
 import {Acciones, Componentes, Ejes} from "../data/vinculation/Ods";
 
 function Vinculation({onSubmit} : {
