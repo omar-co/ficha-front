@@ -4,6 +4,7 @@ import {Actividades, Estrategias, Objetivos, Valores} from "../data/aportacion/O
 import { Etapas } from "../data/aportacion/Etapas";
 import CurrencyInput from 'react-currency-input-field';
 import {Marcadores} from "../data/shared";
+import { useHistory } from "react-router-dom";
 
 function Aportacion({onSubmit, store}: {
     store: any;
@@ -14,6 +15,12 @@ function Aportacion({onSubmit, store}: {
     const [rawValue, setRawValue] = useState<string | undefined>(' ');
     const [rawValue1, setRawValue1] = useState<string | undefined>(' ');
     const [rawValue2, setRawValue2] = useState<string | undefined>(' ');
+
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/indicadores");
+    }
 
     const strategies = () => (
         getValues('objetivoPrioritario') ? Estrategias.filter(({objetivo_id}) =>
@@ -61,10 +68,6 @@ function Aportacion({onSubmit, store}: {
     return(
         <div key='1' className="tab-pane" id="aportacion">
             <div key='2' className="panel-body">
-                <h6>
-                    Aportación al programa especial de cambio climático
-                </h6>
-                <hr className="red"/>
                 <form onChange={updateForm()}>
                     <div key='3' className="form-group">
                         <label className='control-label' htmlFor="objetivoPrioritario">Objetivo prioritario:</label>
@@ -89,7 +92,6 @@ function Aportacion({onSubmit, store}: {
                     </div>
                     <div key='6' className="row">
                         <div key='7' className="form-group col-md-4">
-                            <br/>
                             <label htmlFor="tipoAccion" className="control-label">Tipo de Acción puntual:</label>
                             <input className="form-control" {...register('tipoAccion')} value={values()!.map(({accion}) => accion)} readOnly/>
                         </div>
@@ -185,7 +187,6 @@ function Aportacion({onSubmit, store}: {
                             <CurrencyInput className="form-control" onValueChange={validateValue2}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosInternacionales', {value: rawValue2, valueAsNumber: true})}/>
                         </div>
                         <br/>
-                        <br/>
                         <div className="form-group col-md-6">
                             <label htmlFor="marcador" className="control-label">Marcador Río:</label>
                             <select className="form-control" {...register('marcador', {valueAsNumber: true})}>
@@ -200,6 +201,9 @@ function Aportacion({onSubmit, store}: {
                             <label htmlFor="observaciones" className="control-label">Observaciones:</label>
                             <textarea className="form-control" {...register('observaciones')}/>
                         </div>
+                    </div>
+                    <div className="form-group right">
+                        <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
                     </div>
                 </form>
             </div>

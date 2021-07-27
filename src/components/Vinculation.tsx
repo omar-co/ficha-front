@@ -1,6 +1,7 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {Acciones, Componentes, Ejes} from "../data/vinculation/Ods";
+import { useHistory } from "react-router-dom";
 
 function Vinculation({onSubmit} : {
     onSubmit: SubmitHandler<any>;
@@ -8,6 +9,11 @@ function Vinculation({onSubmit} : {
 
     const { handleSubmit, register, getValues } = useForm();
 
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/pecc");
+    }
 
 
     return (
@@ -42,6 +48,9 @@ function Vinculation({onSubmit} : {
                             <option value="0">Seleccione una opción</option>
                             {Componentes.map((item) => <option key={item.id} value={item.id}>{item.nombre}</option>)}
                         </select>
+                    </div>
+                    <div className="form-group right">
+                        <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
                     </div>
                 </form>
             </div>

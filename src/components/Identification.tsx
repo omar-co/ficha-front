@@ -125,7 +125,7 @@ function Identification({onSubmit}: {
     );
 
     return (
-        <div className="tab-pane active" id="identificacion">
+        <div className="tab-pane" id="identificacion">
             <div className="panel-body">
                 <form onChange={handleSubmit(onSubmit)}>
                     <div className="row">

@@ -7,3 +7,7 @@
     display: inline;
     content: "⚠ ";
 }
+
+.pull-right {
+    float: right !important;
+}

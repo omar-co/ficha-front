@@ -1,8 +1,10 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {PnccAdaptacion, PnccMitigacion} from "../data/indicadores/Pncc";
+import BotonSiguiente from "./BotonSiguiente";
 
-function Indicadores({onSubmit}: {
+function Indicadores({onSubmit, store}: {
+    store: any;
     onSubmit: SubmitHandler<any>;
 }) {
     const {handleSubmit, register } = useForm();
@@ -16,6 +18,7 @@ function Indicadores({onSubmit}: {
                 <label className="control-label">Mitigación:</label>
                 <hr/>
                 <div className="row">
+                    <br/>
                     <div className="form-group col-md-6">
                         <label htmlFor="pnccMitigacion" className="control-label">Emisiones totales nacionales de gases y compuestos de efecto invernadero en CO2e:</label>
                         <select className='form-control' {...register("pnccMitigacion", {valueAsNumber: true})}>
@@ -24,7 +27,6 @@ function Indicadores({onSubmit}: {
                         </select>
                     </div>
                     <div className="form-group col-md-6">
-                        <br/>
                         <label htmlFor="pnccMitigacion2" className="control-label">Emisión de bióxido de carbono por quema de combustibles fósiles:</label>
                         <select className='form-control' {...register("pnccMitigacion2", {valueAsNumber: true})}>
                             <option value="">Selecciona una Opcion</option>
@@ -75,6 +77,7 @@ function Indicadores({onSubmit}: {
                         </select>
                     </div>
                 </div>
+                <BotonSiguiente store={store} />
             </form>
         </div>
     </div>

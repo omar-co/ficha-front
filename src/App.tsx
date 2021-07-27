@@ -1,19 +1,22 @@
 import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 import './App.css';
 import {MainFormModel} from "./model/MainFormModel";
 import {MainForm} from "./data/MainForm";
 import Identification from "./components/Identification";
 import Vinculation from "./components/Vinculation";
-import TabsMenu from "./components/TabsMenu";
 import SubmitButton from "./components/SubmitButton";
 import Aportacion from "./components/Aportacion";
 import Cuantificacion from "./components/Cuantificacion";
 import Indicadores from "./components/Indicadores";
 import AreasIdentificacion from "./components/AreasIdentificacion";
-import Componentes from "./components/Componentes";
-import Mitigacion from "./components/Mitigacion";
-import Adaptacion from "./components/Adaptacion";
 import ObjetivosDesarrolloSustentable from "./components/ObjetivosDesarrolloSustentable";
+import Validacion from "./components/Validacion";
+import Pregunta from "./components/Pregunta";
 
 function App() {
     const [store, setStore] = React.useState(MainForm);
@@ -33,24 +36,36 @@ function App() {
             <h4>VINCULACIÓN ENTRE LOS PROGRAMAS PRESUPUESTARIOS, EL ANEXO TRANSVERSAL DE CAMBIO CLIMÁTICO Y LA CONTRIBUCIÓN DETERMINADA A NIVEL NACIONAL</h4>
             <hr className="red"/>
             <div className="row">
-                <div className="col-md-3">
-                    <TabsMenu store={store}/>
-                </div>
-                <div className="col-md-9">
-                    <div className="tab-content">
-                        <Identification onSubmit={onSubmit}/>
-                        <Vinculation onSubmit={onSubmit}/>
-                        <Aportacion onSubmit={onSubmit} store={store}/>
-                        <Cuantificacion onSubmit={onSubmit} store={store}/>
-                        <Indicadores onSubmit={onSubmit}/>
-                        <AreasIdentificacion onSubmit={onSubmit}/>
-                        <Componentes onSubmit={onSubmit}/>
-                        <Mitigacion onSubmit={onSubmit}/>
-                        <Adaptacion onSubmit={onSubmit}/>
-                        <ObjetivosDesarrolloSustentable onSubmit={onSubmit}/>
+                <Router>
+                    <Switch>
+                        <Route path="/identificacion">
+                            <Identification onSubmit={onSubmit}/>
+                        </Route>
+                        <Route path="/objetivo">
+                            <Pregunta onSubmit={onSubmit}/>
+                        </Route>
+                        <Route path="/validacion">
+                            <Validacion onSubmit={onSubmit} store={store}/>
+                        </Route>
+                        <Route path="/indicadores">
+                            <Indicadores onSubmit={onSubmit} store={store}/>
+                        </Route>
+                        <Route path="/pecc">
+                            <Aportacion onSubmit={onSubmit} store={store}/>
+                        </Route>
+                        <Route path="/">
+                            <Vinculation onSubmit={onSubmit}/>
+                        </Route>
+                    </Switch>
+                    <div className="col-md-12">
+                        <div className="tab-content">
+                            <Cuantificacion onSubmit={onSubmit} store={store}/>
+                            <AreasIdentificacion onSubmit={onSubmit}/>
+                            <ObjetivosDesarrolloSustentable onSubmit={onSubmit}/>
+                        </div>
                     </div>
-                </div>
-                <SubmitButton store={store}/>
+                    <SubmitButton store={store}/>
+                </Router>
             </div>
         </div>
     </div>
