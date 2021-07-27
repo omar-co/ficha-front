@@ -18,6 +18,8 @@ function Identification({onSubmit}: {
     const [pp, setPp] = useState(initial);
     const [actividad, setActividad] = useState(initial);
     const [unidad, setUnidad] = useState(initial);
+    const [nivel, setNivel] = useState(initial);
+    const [objetivo, setObjetivo] = useState(initial);
 
     let history = useHistory();
 
@@ -92,7 +94,7 @@ function Identification({onSubmit}: {
         }
     }
 
-    const getActividades = () => {
+    const getActividadesAndUnidades = () => {
         if(getValues('ramo')){
             const actividadApi = process.env.REACT_APP_API_URL + '/actividad/' + getValues('ramo');
             const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo')
@@ -107,6 +109,26 @@ function Identification({onSubmit}: {
                    setActividad(allActividadData);
                    setUnidad(allUnidadData);
                })
+            )
+        }
+    }
+
+    const getNiveles = () => {
+        if(getValues('ramo') && getValues('unidadResponsable')){
+            axios.get(process.env.REACT_APP_API_URL + '/nivel-objetivo/' + getValues('ramo') + '/' + getValues('unidadResponsable')).then(
+                (response) => {
+                    setNivel(response.data)
+                }
+            )
+        }
+    }
+
+    const getObjetivos = () => {
+        if(getValues('ramo') && getValues('unidadResponsable') && getValues('nivel')){
+            axios.get(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo') + '/' + getValues('unidadResponsable') + '/' + getValues('nivel')).then(
+                (response) => {
+                    setObjetivo(response.data)
+                }
             )
         }
     }
@@ -159,9 +181,21 @@ function Identification({onSubmit}: {
 
     const unidades = () => (
         unidad.map((obj) =>
-            <option value={obj.id}>{obj.clave} - {obj.name}</option>
+            <option value={obj.clave}>{obj.clave} - {obj.name}</option>
         )
     );
+
+   const niveles = () => (
+       nivel.map((obj) =>
+           <option value={obj.id_nivel}>{obj.desc_nivel}</option>
+       )
+   );
+
+   const objetivos = () => (
+       objetivo.map((obj) =>
+           <option value={obj.id_objetivo}>{obj.desc_objetivo}</option>
+       )
+   );
 
     return (
         <div className="tab-pane" id="identificacion">
@@ -173,7 +207,7 @@ function Identification({onSubmit}: {
                             <select className='form-control' {...register("ramo", {
                                 valueAsNumber: true,
                                 required: true
-                            })} onClick={getActividades}>
+                            })} onClick={getActividadesAndUnidades}>
                                 <option value="">Seleccione una opción:</option>
                                 {ramos()}
                             </select>
@@ -212,7 +246,7 @@ function Identification({onSubmit}: {
                     </div>
                     <div className="form-group">
                         <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
-                        <select className="form-control" {...register('unidadResponsable')} >
+                        <select className="form-control" {...register('unidadResponsable')} onClick={getNiveles}>
                             <option value="">Selecciona una Opcion</option>
                             {unidades()}
                         </select>
@@ -288,6 +322,29 @@ function Identification({onSubmit}: {
                         <div className="col-md-6">
                             <label htmlFor="claveCartera" className="control-label">Clave de Cartera:</label>
                             <input className='form-control' {...register('claveCartera')}/>
+                        </div>
+                    </div>
+                    <br/>
+                    <div className="row">
+                        <div className="col-md-12">
+                            <label className="control-label">Objetivos MIR</label>
+                        </div>
+                    </div>
+                    <hr className="red"/>
+                    <div className="row">
+                        <div className="col-md-6">
+                            <label htmlFor="nivel" className="control-label">Nivel</label>
+                            <select className="form-control" {...register('nivel')} onClick={getObjetivos} >
+                                <option value="">Seleccione una opción...</option>
+                                {niveles()}
+                            </select>
+                        </div>
+                        <div className="col-md-6">
+                            <label htmlFor="objetivoMir" className="control-label">Objetivo MIR:</label>
+                            <select className="form-control" {...register('objetivoMir')}>
+                                <option value="">Seleccione una opción...</option>
+                                {objetivos()}
+                            </select>
                         </div>
                     </div>
                     <div className="row">
