@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import CurrencyInput from 'react-currency-input-field';
 import {Marcadores} from "../data/shared";
-import axios from "axios";
+
 import FiltroModal from "./FiltroModal";
 
 
@@ -11,10 +11,10 @@ function Cuantificacion({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
-    const {handleSubmit, register, setValue, getValues} = useForm();
+    const {handleSubmit, register, setValue} = useForm();
     const [pp, setPp] = useState<string | undefined>(' ');
     const [rawPp, setRawPp] = useState<string | undefined>(' ');
-    const [data, setData] = useState(  {data: []} );
+   // const [data, setData] = useState({data: []});
 
     const formatAndRawPpValue = (pp: string | undefined): void => {
         setRawPp(pp === undefined ? 'undefined' : pp || ' ');
@@ -24,20 +24,21 @@ function Cuantificacion({onSubmit, store}: {
         }
         setValue('atcc', (store.rawPp * Marcadores[store.marcador]));
     };
+    /*
+      useEffect(() => {
+          axios.get(process.env.REACT_APP_API_URL + '/capitulo').then(
+              res => setData(res.data)
+          );
+      });
 
-    useEffect(() => {
-        axios.get(process.env.REACT_APP_API_URL + '/capitulo').then(
-            res => setData(res.data)
-        );
-    }, []);
-
-    const capitulos = () => (
-        data.data && getValues('capitulo') ? data.data.filter(({capitulo}) =>
-            capitulo === getValues('capitulo')).map(concepto => (
-                <option value={concepto}>{concepto}</option>
-            )
-        ) : null
-    );
+      /*
+      const capitulos = () => (
+          data.data && getValues('capitulo') ? data.data.filter(({capitulo}) =>
+              capitulo === getValues('capitulo')).map(concepto => (
+                  <option value={concepto}>{concepto}</option>
+              )
+          ) : null
+      ); */
 
     return (
         <div className="tab-pane" id="cuantificacion">
@@ -99,50 +100,50 @@ function Cuantificacion({onSubmit, store}: {
                     <br/>
                     <br/>
 
-                    <div className="row">
-                        <div className="col-md-6">
-                            <label htmlFor="capitulo" className="control-label">Capitulo</label>
-                            <select className="form-control" {...register('capitulo')}>
-                                <option value="">Seleccione una opcion</option>
-                                <option value="1000">1000</option>
-                                <option value="2000">2000</option>
-                                <option value="3000">3000</option>
-                                <option value="4000">4000</option>
-                                <option value="5000">5000</option>
-                                <option value="6000">6000</option>
-                                <option value="7000">7000</option>
-                                <option value="8000">8000</option>
-                                <option value="9000">9000</option>
-                            </select>
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="concepto" className="control-label">Concepto</label>
-                            <select className="form-control" {...register('concepto')}>
-                                {capitulos()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-6">
-                            <label htmlFor="partidaGenerica" className="control-label">Partida Generica</label>
-                            <select className="form-control">
-                                {/*{partidaEspecifica()}*/}
-                            </select>
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="partidaEspecifica" className="control-label">Partida Especifica</label>
-                            <select className="form-control">
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <label htmlFor="descripcion" className="control-label">Descripcion</label>
-                            <input className="form-control" {...register('nombrePrograma')} readOnly/>
-                        </div>
-                    </div>
+                    {/*<div className="row">*/}
+                    {/*    <div className="col-md-6">*/}
+                    {/*        <label htmlFor="capitulo" className="control-label">Capitulo</label>*/}
+                    {/*        <select className="form-control" {...register('capitulo')}>*/}
+                    {/*            <option value="">Seleccione una opcion</option>*/}
+                    {/*            <option value="1000">1000</option>*/}
+                    {/*            <option value="2000">2000</option>*/}
+                    {/*            <option value="3000">3000</option>*/}
+                    {/*            <option value="4000">4000</option>*/}
+                    {/*            <option value="5000">5000</option>*/}
+                    {/*            <option value="6000">6000</option>*/}
+                    {/*            <option value="7000">7000</option>*/}
+                    {/*            <option value="8000">8000</option>*/}
+                    {/*            <option value="9000">9000</option>*/}
+                    {/*        </select>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="col-md-6">*/}
+                    {/*        <label htmlFor="concepto" className="control-label">Concepto</label>*/}
+                    {/*        <select className="form-control" {...register('concepto')}>*/}
+                    {/*            {capitulos()}*/}
+                    {/*        </select>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className="row">*/}
+                    {/*    <div className="col-md-6">*/}
+                    {/*        <label htmlFor="partidaGenerica" className="control-label">Partida Generica</label>*/}
+                    {/*        <select className="form-control">*/}
+                    {/*            /!*{partidaEspecifica()}*!/*/}
+                    {/*        </select>*/}
+                    {/*    </div>*/}
+                    {/*    <div className="col-md-6">*/}
+                    {/*        <label htmlFor="partidaEspecifica" className="control-label">Partida Especifica</label>*/}
+                    {/*        <select className="form-control">*/}
+                    {/*            <option value="1">1</option>*/}
+                    {/*            <option value="1">2</option>*/}
+                    {/*        </select>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    {/*<div className="row">*/}
+                    {/*    <div className="col-md-12">*/}
+                    {/*        <label htmlFor="descripcion" className="control-label">Descripcion</label>*/}
+                    {/*        <input className="form-control" {...register('nombrePrograma')} readOnly/>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </form>
             </div>
         </div>
