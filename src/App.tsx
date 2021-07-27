@@ -38,6 +38,12 @@ function App() {
             <div className="row">
                 <Router>
                     <Switch>
+                        <Route path="/cuantificacion">
+                            <Cuantificacion onSubmit={onSubmit} store={store}/>
+                        </Route>
+                        <Route path="/areas">
+                            <AreasIdentificacion onSubmit={onSubmit}/>
+                        </Route>
                         <Route path="/identificacion">
                             <Identification onSubmit={onSubmit}/>
                         </Route>
@@ -59,8 +65,6 @@ function App() {
                     </Switch>
                     <div className="col-md-12">
                         <div className="tab-content">
-                            <Cuantificacion onSubmit={onSubmit} store={store}/>
-                            <AreasIdentificacion onSubmit={onSubmit}/>
                             <ObjetivosDesarrolloSustentable onSubmit={onSubmit}/>
                         </div>
                     </div>

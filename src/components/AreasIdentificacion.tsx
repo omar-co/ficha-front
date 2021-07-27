@@ -1,11 +1,19 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 function AreasIdentificacion({onSubmit}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
     const {handleSubmit, register,} = useForm();
+
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/cuantificacion");
+    }
+
 
     return(
         <div className="tab-pane" id="areasIdentificacion">
@@ -25,6 +33,11 @@ function AreasIdentificacion({onSubmit}: {
                         <div className="col-md-12 form-group">
                             <label htmlFor="justificacion" className="control-label">Justificación ¿Cómo los cambios a la(s) actividad(es) del Pp garantizan la incidencia en el Cambio Climático?</label>
                             <textarea className="form-control" {...register('justificacion')} />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group right">
+                            <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
                         </div>
                     </div>
                 </form>

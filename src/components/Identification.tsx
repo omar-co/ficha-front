@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import {Finalidad, Funcion, Subfuncion} from "../data/cuantificacion/Presupuestos";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function Identification({onSubmit}: {
     onSubmit: SubmitHandler<any>;
@@ -16,6 +17,11 @@ function Identification({onSubmit}: {
     const [modalidad, setModalidad] = useState(initial);
     const [pp, setPp] = useState(initial);
 
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/areas");
+    }
 
     const programName = () => {
         if (getValues('programa')) {
@@ -222,12 +228,6 @@ function Identification({onSubmit}: {
                     </div>
                     <hr/>
                     <div className="row">
-                        <div className="col-md-12">
-                            <label htmlFor="objetoGasto" className="control-label">Objeto del gasto:</label>
-                            <input className="form-control" {...register('objetoGasto')}/>
-                        </div>
-                    </div>
-                    <div className="row">
                         <div className="form-group col-md-6">
                             <label htmlFor="tipoGasto" className="control-label">Tipo de gasto:</label>
                             <select className="form-control" {...register('tipoGasto')}>
@@ -255,6 +255,11 @@ function Identification({onSubmit}: {
                         <div className="col-md-6">
                             <label htmlFor="claveCartera" className="control-label">Clave de Cartera:</label>
                             <input className='form-control' {...register('claveCartera')}/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group right">
+                            <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
                         </div>
                     </div>
                 </form>
