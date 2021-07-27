@@ -16,6 +16,8 @@ function Identification({onSubmit}: {
     const [ramo, setRamo] = useState(initial);
     const [modalidad, setModalidad] = useState(initial);
     const [pp, setPp] = useState(initial);
+    const [actividad, setActividad] = useState(initial);
+    const [unidad, setUnidad] = useState(initial);
 
     let history = useHistory();
 
@@ -90,6 +92,25 @@ function Identification({onSubmit}: {
         }
     }
 
+    const getActividades = () => {
+        if(getValues('ramo')){
+            const actividadApi = process.env.REACT_APP_API_URL + '/actividad/' + getValues('ramo');
+            const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo')
+
+            const getActividad = axios.get(actividadApi)
+            const getUnidad = axios(unidadApi)
+            axios.all([getActividad, getUnidad]).then(
+               axios.spread((...allData) => {
+                   const allActividadData = allData[0].data;
+                   const allUnidadData = allData[1].data;
+
+                   setActividad(allActividadData);
+                   setUnidad(allUnidadData);
+               })
+            )
+        }
+    }
+
     const spendingType = () => (
         gasto.map((obj) =>
             <option value={obj.id}>{obj.nombre}</option>
@@ -130,6 +151,18 @@ function Identification({onSubmit}: {
         )
     );
 
+    const actividades = () => (
+        actividad.map((obj) =>
+            <option value={obj.id}>{obj.clave} - {obj.name}</option>
+        )
+    );
+
+    const unidades = () => (
+        unidad.map((obj) =>
+            <option value={obj.id}>{obj.clave} - {obj.name}</option>
+        )
+    );
+
     return (
         <div className="tab-pane" id="identificacion">
             <div className="panel-body">
@@ -140,7 +173,7 @@ function Identification({onSubmit}: {
                             <select className='form-control' {...register("ramo", {
                                 valueAsNumber: true,
                                 required: true
-                            })} onClick={getPp}>
+                            })} onClick={getActividades}>
                                 <option value="">Seleccione una opción:</option>
                                 {ramos()}
                             </select>
@@ -149,7 +182,7 @@ function Identification({onSubmit}: {
                     <div className="row">
                         <div className="form-group col-md-6">
                             <label htmlFor="modalidad" className="control-label">Modalidad:</label>
-                            <select className="form-control" {...register('modalidad', {required: true})}  onClick={getPp}>
+                            <select className="form-control" {...register('modalidad', {required: true})}  onClick={getPp} >
                                 <option value="">Selecciona una Opcion</option>
                                 {modalidades()}
                             </select>
@@ -174,14 +207,14 @@ function Identification({onSubmit}: {
                             Institucional:</label>
                         <select className="form-control" {...register('actividadInstitucional')} >
                             <option value="">Selecciona una Opcion</option>
-
+                            {actividades()}
                         </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
                         <select className="form-control" {...register('unidadResponsable')} >
                             <option value="">Selecciona una Opcion</option>
-
+                            {unidades()}
                         </select>
                     </div>
                     <div className="form-group">
