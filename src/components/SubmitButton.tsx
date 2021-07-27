@@ -12,7 +12,7 @@ function SubmitButton({store}: {
         }).then(
             response => new Blob([response.data])
         ).then(
-            blob => saveAs(blob, 'Ficha.xlsx')
+            blob => saveAs(blob, 'Transversales_Archivo.xlsx')
         );
     }
 
