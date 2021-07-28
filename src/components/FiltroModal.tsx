@@ -10,8 +10,8 @@ function FiltroModal( {store}: {
     const [data, setData] = useState(initial);
 
     const getFilterData = () => {
-        if(store.ramo && store.fuenteFinanciamiento && store.tipoGasto){
-            const url = '/relacion-economica/' + store.ramo + '/' + store.fuenteFinanciamiento + '/' + store.tipoGasto + '/' + (!store.directamente) + '/' + store.modalidad;
+        if(store.ramo && store.programa && store.modalidad){
+            const url = '/relacion-economica/' + store.ramo + '/' + store.programa + '/' + (!store.directamente) + '/' + store.modalidad;
             axios.get(process.env.REACT_APP_API_URL + url).then(
                 (response) => {
                     setData(response.data)

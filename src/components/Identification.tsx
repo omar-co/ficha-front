@@ -29,9 +29,9 @@ function Identification({onSubmit}: {
 
     const programName = () => {
         if (getValues('programa')) {
-            return pp.find(({id}) =>
-                id === getValues('programa')
-            ).name
+            return pp.find(({id_pp}) =>
+                id_pp === getValues('programa')
+            ).desc_pp
         }
 
         return '';
@@ -60,26 +60,22 @@ function Identification({onSubmit}: {
         const entidadApi = process.env.REACT_APP_API_URL + '/entidad-federativa';
         const fuenteApi = process.env.REACT_APP_API_URL + '/fuente-financiamiento';
         const ramoApi = process.env.REACT_APP_API_URL + '/ramo';
-        const modalidadApi = process.env.REACT_APP_API_URL + '/modalidad';
 
         const getGasto = axios.get(gastoApi)
         const getEntidad = axios.get(entidadApi)
         const getFuente = axios.get(fuenteApi)
         const getRamo = axios.get(ramoApi)
-        const getModalidad = axios.get(modalidadApi)
-        axios.all([getGasto, getEntidad, getFuente, getRamo, getModalidad]).then(
+        axios.all([getGasto, getEntidad, getFuente, getRamo]).then(
             axios.spread((...allData) => {
                 const allGastoData = allData[0].data;
                 const allEntidadData = allData[1].data;
                 const allFuenteData = allData[2].data;
                 const allRamoData = allData[3].data;
-                const allModalidadData = allData[4].data;
 
                 setGasto(allGastoData);
                 setEntidad(allEntidadData);
                 setFuente(allFuenteData);
                 setRamo(allRamoData);
-                setModalidad(allModalidadData);
             })
         )
     }
@@ -97,17 +93,21 @@ function Identification({onSubmit}: {
     const getActividadesAndUnidades = () => {
         if(getValues('ramo')){
             const actividadApi = process.env.REACT_APP_API_URL + '/actividad/' + getValues('ramo');
-            const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo')
+            const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo');
+            const modalidadApi = process.env.REACT_APP_API_URL + '/modalidad/' + getValues('ramo');
 
             const getActividad = axios.get(actividadApi)
             const getUnidad = axios(unidadApi)
-            axios.all([getActividad, getUnidad]).then(
+            const getModalidad = axios.get(modalidadApi)
+            axios.all([getActividad, getUnidad, getModalidad]).then(
                axios.spread((...allData) => {
                    const allActividadData = allData[0].data;
                    const allUnidadData = allData[1].data;
+                   const allModalidadData = allData[2].data;
 
                    setActividad(allActividadData);
                    setUnidad(allUnidadData);
+                   setModalidad(allModalidadData);
                })
             )
         }
@@ -159,7 +159,7 @@ function Identification({onSubmit}: {
 
     const modalidades = () => (
         modalidad.map((obj) =>
-            <option value={obj.id}>{obj.letter} - {obj.description}</option>
+            <option value={obj.id_modalidad}>{obj.id_modalidad} - {obj.desc_modalidad}</option>
         )
     );
 
@@ -169,7 +169,7 @@ function Identification({onSubmit}: {
 
     const programasPresupuestales = () => (
         pp.map((obj) =>
-            <option value={obj.id}>{obj.clave} - {obj.name}</option>
+            <option value={obj.id_pp}>{obj.id_pp} - {obj.desc_pp}</option>
         )
     );
 
