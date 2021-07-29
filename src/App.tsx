@@ -42,6 +42,9 @@ function App() {
                             <Cuantificacion onSubmit={onSubmit} store={store}/>
                             <SubmitButton store={store}/>
                         </Route>
+                        <Route path="/ods">
+                            <ObjetivosDesarrolloSustentable onSubmit={onSubmit} store={store}/>
+                        </Route>
                         <Route path="/areas">
                             <AreasIdentificacion onSubmit={onSubmit}/>
                         </Route>
@@ -64,11 +67,6 @@ function App() {
                             <Vinculation onSubmit={onSubmit}/>
                         </Route>
                     </Switch>
-                    <div className="col-md-12">
-                        <div className="tab-content">
-                            <ObjetivosDesarrolloSustentable onSubmit={onSubmit}/>
-                        </div>
-                    </div>
                 </Router>
             </div>
         </div>

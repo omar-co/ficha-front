@@ -1,12 +1,39 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {Ods} from "../data/indicadores/Ods";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
-function ObjetivosDesarrolloSustentable({onSubmit}: {
+function ObjetivosDesarrolloSustentable({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
+    store: any
 }){
 
-    const {handleSubmit, register} = useForm();
+    let history = useHistory();
+    let initial: any[] = [];
+
+    const [ods, setOds] = useState(initial);
+
+    function handleClick() {
+        history.push("/cuantificacion");
+    }
+
+    const {handleSubmit} = useForm();
+
+    useEffect(() => {
+        if(store.ramo && store.modalidad && store.programa){
+            axios.get(process.env.REACT_APP_API_URL + '/ods/' +  store.ramo + '/' + store.modalidad + '/' + store.programa).then(
+                (response) => {
+                    setOds(response.data)
+                }
+            )
+        }
+    }, [store.ramo, store.modalidad, store.programa]);
+
+    const showOds = () => (
+        ods.map((obj) =>
+            <input className="form-control" value={obj.id_ods + ' - ' + obj.desc_ods} disabled/>
+        )
+    );
 
     return(
         <div className="tab-pane" id="ods">
@@ -16,42 +43,20 @@ function ObjetivosDesarrolloSustentable({onSubmit}: {
                 </h6>
                 <hr className="red"/>
                 <form onChange={handleSubmit(onSubmit)}>
-                    <label className="control-label">Mitigación:</label>
-                    <hr/>
-                    <div className="row">
-                        <div className="form-group col-md-12">
-                            <label className='control-label' htmlFor="odsMitigacion">Objetivo de Desarrollo Sostenible_1:</label>
-                            <select className='form-control' {...register("odsMitigacion", {valueAsNumber: true})}>
-                                {Ods.map(({id, name}) => <option value={id}>{name}</option>)}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="form-group col-md-12">
-                            <label className='control-label' htmlFor="odsMitigacion2">Objetivo de Desarrollo Sostenible_2:</label>
-                            <select className='form-control' {...register("odsMitigacion2", {valueAsNumber: true})}>
-                                {Ods.map(({id, name}) => <option value={id}>{name}</option>)}
-                            </select>
-                        </div>
-                    </div>
-                    <label className="control-label">Adaptación:</label>
-                    <hr/>
-                    <div className="row">
-                        <div className="form-group col-md-12">
-                            <label className='control-label' htmlFor="odsAdaptacion">Objetivo de Desarrollo Sostenible_1:</label>
-                            <select className='form-control' {...register("odsAdaptacion", {valueAsNumber: true})}>
-                                {Ods.map(({id, name}) => <option value={id}>{name}</option>)}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="form-group col-md-12">
-                            <label className='control-label' htmlFor="odsAdaptacion2">Objetivo de Desarrollo Sostenible_2:</label>
-                            <select className='form-control' {...register("odsAdaptacion2", {valueAsNumber: true})}>
-                                {Ods.map(({id, name}) => <option value={id}>{name}</option>)}
-                            </select>
-                        </div>
-                    </div>
+                   <div className="form-group">
+                       <div className="row">
+                           <div className="col-md-12">
+                               <label htmlFor="ods" className="control-label">Objetivo de Desarrollo Sustentable</label>
+                               {showOds()}
+                           </div>
+                       </div>
+                       <br/>
+                       <div className="row">
+                           <div className="form-group right">
+                               <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                           </div>
+                       </div>
+                   </div>
                 </form>
             </div>
         </div>

@@ -11,7 +11,7 @@ function AreasIdentificacion({onSubmit}: {
     let history = useHistory();
 
     function handleClick() {
-        history.push("/cuantificacion");
+        history.push("/ods");
     }
 
 
