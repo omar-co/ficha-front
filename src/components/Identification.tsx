@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
-import {Finalidad, Funcion, Subfuncion} from "../data/cuantificacion/Presupuestos";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -21,6 +20,9 @@ function Identification({onSubmit}: {
     const [nivel, setNivel] = useState(initial);
     const [objetivo, setObjetivo] = useState(initial);
     const [objetivoPrograma, setObjetivoPrograma] = useState(initial);
+    const [finalidad, setFinalidad] = useState(initial);
+    const [funcion, setFuncion] = useState(initial);
+    const [subfuncion, setSubfuncion] = useState(initial);
 
     let history = useHistory();
 
@@ -37,24 +39,6 @@ function Identification({onSubmit}: {
 
         return '';
     };
-
-
-
-    const funciones = () => (
-        getValues('finalidad') ? Funcion.filter(({finalidad_id}) =>
-            finalidad_id === getValues('finalidad')).map(obj => (
-                <option value={obj.id}>{obj.name}</option>
-            )
-        ) : null
-    );
-
-    const subfunctions = () => (
-        getValues('funcion') ? Subfuncion.filter(({funcion_id}) =>
-            funcion_id === getValues('funcion')).map(obj => (
-                <option value={obj.id}>{obj.name}</option>
-            )
-        ) : null
-    );
 
     const fetchData = () => {
         const gastoApi = process.env.REACT_APP_API_URL + '/tipo-gasto';
@@ -115,18 +99,33 @@ function Identification({onSubmit}: {
             const actividadApi = process.env.REACT_APP_API_URL + '/actividad/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
             const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
             const objetivoProgramaApi = process.env.REACT_APP_API_URL + '/objetivo-programa/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
+            const finalidadApi = process.env.REACT_APP_API_URL + '/finalidad/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
+            const funcionApi = process.env.REACT_APP_API_URL + '/funcion/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
+            const subfuncionApi = process.env.REACT_APP_API_URL + '/subfuncion/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
+
             const getActividad = axios.get(actividadApi)
             const getUnidad = axios.get(unidadApi)
             const getObjetivoPrograma = axios.get(objetivoProgramaApi)
-            axios.all([getActividad, getUnidad, getObjetivoPrograma]).then(
+            const getFinalidad = axios.get(finalidadApi)
+            const getFuncion = axios.get(funcionApi)
+            const getSubfuncion = axios.get(subfuncionApi)
+
+            axios.all([getActividad, getUnidad, getObjetivoPrograma, getFinalidad, getFuncion, getSubfuncion]).then(
                 axios.spread((...allData) => {
                     const allActividadData = allData[0].data;
                     const allUnidadData = allData[1].data;
                     const allObjetivoProgramaData = allData[2].data;
+                    const allFinalidadData = allData[3].data;
+                    const allFuncionData = allData[4].data;
+                    const allSubfuncionData = allData[5].data;
 
                     setActividad(allActividadData);
                     setUnidad(allUnidadData);
-                    setObjetivoPrograma(allObjetivoProgramaData);                })
+                    setObjetivoPrograma(allObjetivoProgramaData);
+                    setFinalidad(allFinalidadData)
+                    setFuncion(allFuncionData)
+                    setSubfuncion(allSubfuncionData)
+                })
             )
         }
     }
@@ -223,6 +222,27 @@ function Identification({onSubmit}: {
        )
    );
 
+   const finalidades = () => (
+       finalidad.map((obj) =>
+               obj.desc_gpo_funcional.toString()
+
+       )
+   );
+
+    const funciones = () => (
+        funcion.map((obj) =>
+            obj.desc_funcion.toString()
+
+        )
+    );
+
+    const subfunciones = () => (
+        subfuncion.map((obj) =>
+            obj.desc_subfuncion.toString()
+
+        )
+    );
+
     return (
         <div className="tab-pane" id="identificacion">
             <div className="panel-body">
@@ -293,24 +313,15 @@ function Identification({onSubmit}: {
                     <div className="row">
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="finalidad">Finalidad:</label>
-                            <select className='form-control' {...register('finalidad', {valueAsNumber: true})}>
-                                <option value="">Seleccione una opción</option>
-                                {Finalidad.map((index) => <option value={index.id}>{index.name}</option>)}
-                            </select>
+                            <input className="form-control" value={finalidades()} disabled />
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="funcion">Función:</label>
-                            <select className="form-control" {...register('funcion', {valueAsNumber: true})}>
-                                <option value="">Seleccione una opción</option>
-                                {funciones()}
-                            </select>
+                            <input className="form-control" value={funciones()} disabled />
                         </div>
                         <div className="form-group col-md-4">
                             <label className='control-label' htmlFor="subfuncion">Subfunción:</label>
-                            <select className="form-control" {...register('subfuncion')}>
-                                <option value="">Seleccione una opción</option>
-                                {subfunctions()}
-                            </select>
+                            <input className="form-control" value={subfunciones()} disabled />
                         </div>
                     </div>
                     <hr/>
