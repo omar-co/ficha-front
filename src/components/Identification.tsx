@@ -20,6 +20,7 @@ function Identification({onSubmit}: {
     const [unidad, setUnidad] = useState(initial);
     const [nivel, setNivel] = useState(initial);
     const [objetivo, setObjetivo] = useState(initial);
+    const [objetivoPrograma, setObjetivoPrograma] = useState(initial);
 
     let history = useHistory();
 
@@ -90,42 +91,49 @@ function Identification({onSubmit}: {
         }
     }
 
-    const getActividadesAndUnidades = () => {
+    const getModalidadesAndNiveles = () => {
         if(getValues('ramo')){
-            const actividadApi = process.env.REACT_APP_API_URL + '/actividad/' + getValues('ramo');
-            const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo');
             const modalidadApi = process.env.REACT_APP_API_URL + '/modalidad/' + getValues('ramo');
+            const nivelesApi =process.env.REACT_APP_API_URL + '/nivel-objetivo/' + getValues('ramo');
+            const getModalidad = axios.get(modalidadApi);
+            const getNiveles = axios.get(nivelesApi);
+            axios.all([getModalidad, getNiveles]).then(
+                axios.spread((...allData) => {
+                    const allModalidadData = allData[0].data;
+                    const allNivelesData = allData[1].data;
 
-            const getActividad = axios.get(actividadApi)
-            const getUnidad = axios(unidadApi)
-            const getModalidad = axios.get(modalidadApi)
-            axios.all([getActividad, getUnidad, getModalidad]).then(
-               axios.spread((...allData) => {
-                   const allActividadData = allData[0].data;
-                   const allUnidadData = allData[1].data;
-                   const allModalidadData = allData[2].data;
-
-                   setActividad(allActividadData);
-                   setUnidad(allUnidadData);
-                   setModalidad(allModalidadData);
-               })
+                    setModalidad(allModalidadData);
+                    setNivel(allNivelesData);
+                })
             )
+
         }
     }
 
-    const getNiveles = () => {
-        if(getValues('ramo') && getValues('unidadResponsable')){
-            axios.get(process.env.REACT_APP_API_URL + '/nivel-objetivo/' + getValues('ramo') + '/' + getValues('unidadResponsable')).then(
-                (response) => {
-                    setNivel(response.data)
-                }
+    const getActividadesUnidadesAndObjetivoPrograma = () => {
+        if(getValues('ramo') && getValues('modalidad') && getValues('programa')){
+            const actividadApi = process.env.REACT_APP_API_URL + '/actividad/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
+            const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
+            const objetivoProgramaApi = process.env.REACT_APP_API_URL + '/objetivo-programa/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
+            const getActividad = axios.get(actividadApi)
+            const getUnidad = axios.get(unidadApi)
+            const getObjetivoPrograma = axios.get(objetivoProgramaApi)
+            axios.all([getActividad, getUnidad, getObjetivoPrograma]).then(
+                axios.spread((...allData) => {
+                    const allActividadData = allData[0].data;
+                    const allUnidadData = allData[1].data;
+                    const allObjetivoProgramaData = allData[2].data;
+
+                    setActividad(allActividadData);
+                    setUnidad(allUnidadData);
+                    setObjetivoPrograma(allObjetivoProgramaData);                })
             )
         }
     }
 
     const getObjetivos = () => {
-        if(getValues('ramo') && getValues('unidadResponsable') && getValues('nivel')){
-            axios.get(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo') + '/' + getValues('unidadResponsable') + '/' + getValues('nivel')).then(
+        if(getValues('ramo') && getValues('nivel')){
+            axios.get(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo') + '/' + getValues('nivel')).then(
                 (response) => {
                     setObjetivo(response.data)
                 }
@@ -175,13 +183,21 @@ function Identification({onSubmit}: {
 
     const actividades = () => (
         actividad.map((obj) =>
-            <option value={obj.id}>{obj.clave} - {obj.name}</option>
-        )
+            <div className="row">
+                <div className="col-md-12">
+                    <input className="form-control" value={obj.id_ai + ' - ' + obj.desc_ai} readOnly/>
+                </div>
+            </div>
+           )
     );
 
     const unidades = () => (
         unidad.map((obj) =>
-            <option value={obj.clave}>{obj.clave} - {obj.name}</option>
+            <div className="row">
+                <div className="col-md-12">
+                    <input className="form-control" value={obj.id_ur + ' - ' + obj.desc_ur} readOnly/>
+                </div>
+            </div>
         )
     );
 
@@ -197,6 +213,16 @@ function Identification({onSubmit}: {
        )
    );
 
+   const objetivosPrograma = () => (
+       objetivoPrograma.map((obj) =>
+           <div className="row">
+               <div className="col-md-12">
+                   <input className="form-control" value={obj.objetivo_progr_pres} readOnly/>
+               </div>
+           </div>
+       )
+   );
+
     return (
         <div className="tab-pane" id="identificacion">
             <div className="panel-body">
@@ -207,7 +233,7 @@ function Identification({onSubmit}: {
                             <select className='form-control' {...register("ramo", {
                                 valueAsNumber: true,
                                 required: true
-                            })} onClick={getActividadesAndUnidades}>
+                            })} onClick={getModalidadesAndNiveles}>
                                 <option value="">Seleccione una opción:</option>
                                 {ramos()}
                             </select>
@@ -225,7 +251,7 @@ function Identification({onSubmit}: {
                             <label htmlFor="modalidad" className="control-label">
                                 ID_Programa presupuestario:
                             </label>
-                            <select className="form-control" {...register('programa', {valueAsNumber: true})}>
+                            <select className="form-control" {...register('programa', {valueAsNumber: true})} onClick={getActividadesUnidadesAndObjetivoPrograma}>
                                 <option value="">Selecciona una Opcion</option>
                                 {programasPresupuestales()}
                             </select>
@@ -239,21 +265,15 @@ function Identification({onSubmit}: {
                     <div className="form-group">
                         <label htmlFor="actividadInstitucional" className="control-label">Actividad
                             Institucional:</label>
-                        <select className="form-control" {...register('actividadInstitucional')} >
-                            <option value="">Selecciona una Opcion</option>
-                            {actividades()}
-                        </select>
+                        {actividades()}
                     </div>
                     <div className="form-group">
                         <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
-                        <select className="form-control" {...register('unidadResponsable')} onClick={getNiveles}>
-                            <option value="">Selecciona una Opcion</option>
-                            {unidades()}
-                        </select>
+                        {unidades()}
                     </div>
                     <div className="form-group">
                         <label htmlFor="objetivo" className="control-label">Objetivo del Programa (Propósito):</label>
-                        <input className="form-control" {...register('objetivo')} />
+                        {objetivosPrograma()}
                     </div>
                     <div className="form-group">
                         <label htmlFor="componentes" className="control-label">Bienes y productos generados con posible
