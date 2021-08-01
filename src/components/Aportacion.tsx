@@ -155,8 +155,8 @@ function Aportacion({onSubmit, store}: {
                             </select>
                         </div>
                         <div className="form-group col-md-6">
-                            <label htmlFor="diversidadBiologica" className="control-label">Convenio sobre la Diversidad Biológica:</label>
-                            <select className="form-control" {...register('diversidadBiologica')}>
+                            <label htmlFor="diversidadBiologica" className="control-label">Convenio internacional de lucha contra la desertificación:</label>
+                            <select className="form-control" {...register('desertificacion')}>
                                 <option value="1">Si</option>
                                 <option value="2">No</option>
                             </select>
@@ -182,18 +182,9 @@ function Aportacion({onSubmit, store}: {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                             <label htmlFor="recursosInternacionales" className="control-label">Recursos internacionales recibidos para este ejercicio presupuestario en el marco de esta Plataforma:</label>
                             <CurrencyInput className="form-control" onValueChange={validateValue2}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosInternacionales', {value: rawValue2, valueAsNumber: true})}/>
-                        </div>
-                        <br/>
-                        <div className="form-group col-md-6">
-                            <label htmlFor="marcador" className="control-label">Marcador Río:</label>
-                            <select className="form-control" {...register('marcador', {valueAsNumber: true})}>
-                                <option value="2">Los objetivos atienden explícitamente cambio climático.</option>
-                                <option value="1">Los objetivos no atienden explícitamente cambio climático, pero tiene impacto indirecto positivo.</option>
-                                <option value="0">Sin relevancia.</option>
-                            </select>
                         </div>
                     </div>
                     <div className="row">

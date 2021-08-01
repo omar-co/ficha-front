@@ -44,7 +44,7 @@ function Mitigacion({onSubmit}: {
     );
 
     const tercerasPreguntas = () => (
-       ( getValues('fines') && getValues('reducir') === 0) ?  <div className="row">
+       ( getValues('fines') && getValues('reducir') == 0) ?  <div className="row">
            <br/>
             <div className="col-md-12">
                 <label htmlFor="secuestrar" className="control-label">
@@ -60,7 +60,7 @@ function Mitigacion({onSubmit}: {
     );
 
     const cuartasPreguntas = () => (
-       (getValues('reducir') || getValues('secuestrar') === 1) ?
+       (getValues('reducir') || getValues('secuestrar') == 1) ?
            <div className="row">
             <br/>
             <div className="col-md-12">
