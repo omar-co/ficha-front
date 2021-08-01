@@ -14,15 +14,15 @@ function Validacion({onSubmit, store}: {
     };
 
     const error = () => (
-        <div className="alert alert-danger">Su Pp no contribuye a la Política Nacional de Cambio Climático Gracias
+        <div className="alert alert-danger">
+            Su Pp no contribuye a la Política Nacional de Cambio Climático. Gracias
         </div>
     )
 
     const exitoso = () => (
         <div>
             <div className="alert alert-success">
-                Las acciones sustantivas y de apoyo establecidas en la AI actividad Institucional o en el Pp Programa
-                presupuestal contribuyen a alguna acción relacionada con cambio climático
+                ¿Las acciones sustantivas y de apoyo establecidas en la AI actividad Institucional o en el Pp Programa presupuestal contribuyen a alguna acción relacionada con cambio climático?
             </div>
             <Componentes onSubmit={onSubmit} />
 
