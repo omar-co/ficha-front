@@ -8,13 +8,13 @@ function Mitigacion({onSubmit}: {
     const {handleSubmit, register, getValues} = useForm();
 
     const totalAmount = () => {
-        if (getValues('fines')) {
+        if (!getValues('fines')) {
             totals =
                 getValues('definicion') +
                 getValues('tipo') +
                 getValues('gycei') +
                 getValues('fuentes');
-        } else if(getValues('fines') == 0) {
+        } else if(getValues('fines') === 1){
             totals = 100;
         }
 
@@ -28,7 +28,7 @@ function Mitigacion({onSubmit}: {
     }
 
     const segundaPreguntas = () => (
-      getValues('fines') ? <div className="row">
+      getValues('fines') === 0 ? <div className="row">
           <br/>
             <div className="col-md-12">
                 <label htmlFor="reducir" className="control-label">
@@ -37,14 +37,14 @@ function Mitigacion({onSubmit}: {
                 <select className="form-control" {...register('reducir', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
                     <option value="1">Si</option>
-                    <option value="0">No</option>
+                    <option value="0">No</option>W
                 </select>
             </div>
         </div>:null
     );
 
     const terceraPreguntas = () => (
-       (getValues('fines') && getValues('reducir') == 0) ?  <div className="row">
+       (getValues('fines') === 0 && getValues('reducir') === 0) ?  <div className="row">
            <br/>
             <div className="col-md-12">
                 <label htmlFor="secuestrar" className="control-label">
@@ -56,13 +56,14 @@ function Mitigacion({onSubmit}: {
                     <option value="0">No</option>
                 </select>
             </div>
+
         </div>: null
     );
 
     const cuartaPreguntas = () => (
-       (getValues('reducir') || getValues('secuestrar') == 1) ?
+       (getValues('reducir') === 1 || getValues('secuestrar') === 1) ?
            <div className="row">
-            <br/>
+               <hr/>
             <div className="col-md-12">
                 <label htmlFor="definicion" className="control-label">¿Se cuenta con una definición del límite geográfico en la que se lleve a cabo el proyecto y/o actividad?</label>
                 <select className="form-control" {...register('definicion', {valueAsNumber: true})}>
@@ -115,8 +116,8 @@ function Mitigacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fines', {valueAsNumber: true})}>
                                 <option value="">Selecciona una opcion</option>
-                                <option value="0">Si</option>
-                                <option value="100">No</option>
+                                <option value="1" >Si</option>
+                                <option value="0">No</option>
                             </select>
                         </div>
                     </div>
