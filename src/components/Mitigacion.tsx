@@ -27,7 +27,7 @@ function Mitigacion({onSubmit}: {
         }
     }
 
-    const segundasPreguntas = () => (
+    const segundaPreguntas = () => (
       getValues('fines') ? <div className="row">
           <br/>
             <div className="col-md-12">
@@ -43,8 +43,8 @@ function Mitigacion({onSubmit}: {
         </div>:null
     );
 
-    const tercerasPreguntas = () => (
-       ( getValues('fines') && getValues('reducir') == 0) ?  <div className="row">
+    const terceraPreguntas = () => (
+       (getValues('fines') && getValues('reducir') == 0) ?  <div className="row">
            <br/>
             <div className="col-md-12">
                 <label htmlFor="secuestrar" className="control-label">
@@ -59,7 +59,7 @@ function Mitigacion({onSubmit}: {
         </div>: null
     );
 
-    const cuartasPreguntas = () => (
+    const cuartaPreguntas = () => (
        (getValues('reducir') || getValues('secuestrar') == 1) ?
            <div className="row">
             <br/>
@@ -120,9 +120,9 @@ function Mitigacion({onSubmit}: {
                             </select>
                         </div>
                     </div>
-                    { segundasPreguntas() }
-                    { tercerasPreguntas() }
-                    { cuartasPreguntas() }
+                    { segundaPreguntas() }
+                    { terceraPreguntas() }
+                    { cuartaPreguntas() }
                     {totalAmount()}
                 </form>
             </div>
