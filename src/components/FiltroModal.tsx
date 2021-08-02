@@ -22,7 +22,7 @@ function FiltroModal( {store}: {
 
     useEffect(() => {
         getFilterData();
-    }, [getFilterData()]);
+    });
 
 
 

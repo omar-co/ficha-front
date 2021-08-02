@@ -56,8 +56,8 @@ export default function FiltroTabla({store, mainStore}: {
         const modalidad = item.getValue(item.id, 'id_modalidad');
         if (modalidad === 'S' || modalidad === 'U') {
             if (window.confirm('¿Requiere establecer un monto distinto al total de la partida especifica?')) {
-                let justificacion = window.prompt('Justifique la necesidad de establecer un monto distinto al total de la partida especifica', '');
-                let monto = window.prompt('Monto en pesos', '');
+                window.prompt('Justifique la necesidad de establecer un monto distinto al total de la partida especifica', '');
+                window.prompt('Monto en pesos', '');
             }
         }
     };
