@@ -1,13 +1,12 @@
 import React from "react";
-import {SubmitHandler} from "react-hook-form";
+
 
 import FiltroModal from "./FiltroModal";
 import TabsMenu from "./TabsMenu";
 
 
-function Cuantificacion({onSubmit, store}: {
+function Cuantificacion({ store}: {
     store: any;
-    onSubmit: SubmitHandler<any>;
 }) {
 
     return (

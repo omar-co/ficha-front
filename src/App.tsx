@@ -41,7 +41,7 @@ function App() {
                     <Router>
                         <Switch>
                             <Route path="/cuantificacion">
-                                <Cuantificacion onSubmit={onSubmit} store={store}/>
+                                <Cuantificacion store={store}/>
                                 <SubmitButton store={store}/>
                             </Route>
                             <Route path="/areas">
