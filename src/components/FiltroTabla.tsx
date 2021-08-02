@@ -52,9 +52,19 @@ export default function FiltroTabla({store, mainStore}: {
        mainStore.programasSeleccionados = item;
     }
 
+    const validarModaldiad = (item) => {
+        const modalidad = item.getValue(item.id, 'id_modalidad');
+        if (modalidad === 'S' || modalidad === 'U') {
+            if (window.confirm('¿Requiere establecer un monto distinto al total de la partida especifica?')) {
+                let justificacion = window.prompt('Justifique la necesidad de establecer un monto distinto al total de la partida especifica', '');
+                let monto = window.prompt('Monto en pesos', '');
+            }
+        }
+    };
+
     return (
-        <div id="table" className="text-center"  style={{height: 400, width: '100%'}}>
-            <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)} />
+        <div id="table" className="text-center"  style={{height: 600, width: '100%'}}>
+            <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)} onRowClick={item => validarModaldiad(item)} />
             <br/>
             <button type="button" className="btn btn-primary" onClick={() => addItemsToMainArray(select)}>Guardar programas seleccionados</button>
         </div>
