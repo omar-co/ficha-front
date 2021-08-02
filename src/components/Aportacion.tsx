@@ -1,11 +1,12 @@
 import  React from "react";
-import {SubmitHandler, useForm} from "react-hook-form";
+import {SubmitHandler, useForm, Controller} from "react-hook-form";
 import {Actividades, Estrategias, Objetivos, Valores} from "../data/aportacion/Objetivos";
 import { Etapas } from "../data/aportacion/Etapas";
 import TabsMenu from "./TabsMenu";
 
 import {Marcadores} from "../data/shared";
 import { useHistory } from "react-router-dom";
+import Select from 'react-select';
 
 function Aportacion({onSubmit, store}: {
     store: any;
@@ -16,21 +17,88 @@ function Aportacion({onSubmit, store}: {
 
     let history = useHistory();
 
+
     function handleClick() {
         history.push("/ndc");
     }
 
+    const methods = useForm();
+
+    const addObjetivosToStore = (item: any) => {
+        store.objetivoPrioritario = item.map((obj) =>
+            obj.id
+        )
+    }
+
+    const addEstrategiasToStore = (item: any) => {
+        store.estrategias = item.map((obj) =>
+            obj.id
+        )
+    }
+
+    const addActividadesToStore = (item: any) => {
+        store.actividadPuntual = item.map((obj) =>
+            obj.id
+        )
+        console.log(store);
+    }
+
+    const objetivos = () => (
+        <Controller
+            name={'objetivosMultipleSelect'}
+            control={methods.control}
+            defaultValue={[]}
+            render={({ field: { onChange, onBlur, value, ref } }) => <Select
+                onChange={val => addObjetivosToStore(val)}
+                inputRef={ref}
+                isMulti
+                defaultValue=''
+                options={Objetivos}
+                getOptionLabel={(option) => option.name}
+                getOptionValue={(option) => option.id}
+                className="basic-multi-select"
+                classNamePrefix="select"
+            />}
+        />
+    );
+
+
     const strategies = () => (
-        getValues('objetivoPrioritario') ? Estrategias.filter(({objetivo_id}) =>
-            objetivo_id === getValues('objetivoPrioritario')).map(strategy => (
-                <option value={strategy.id}>{strategy.name}</option>)) : null
+        <Controller
+            name={'estrategiasMultipleSelect'}
+            control={methods.control}
+            defaultValue={[]}
+            render={({ field: { onChange, onBlur, value, ref } }) => <Select
+                onChange={val => addEstrategiasToStore(val)}
+                inputRef={ref}
+                isMulti
+                defaultValue=''
+                options={Estrategias}
+                getOptionLabel={(option) => option.name}
+                getOptionValue={(option) => option.id}
+                className="basic-multi-select"
+                classNamePrefix="select"
+            />}
+        />
     );
 
     const actions = () => (
-       getValues('estrategiaPrioritaria') ? Actividades.filter(({estrategia_id}) =>
-            estrategia_id === getValues('estrategiaPrioritaria')).map(actions => (
-                <option value={actions.id}>{actions.name}</ option>
-       )): null
+        <Controller
+            name={'actividadesMultipleSelection'}
+            control={methods.control}
+            defaultValue={[]}
+            render={({ field: { onChange, onBlur, value, ref } }) => <Select
+                onChange={val => addActividadesToStore(val)}
+                inputRef={ref}
+                isMulti
+                defaultValue=''
+                options={Actividades}
+                getOptionLabel={(option) => option.name}
+                getOptionValue={(option) => option.id}
+                className="basic-multi-select"
+                classNamePrefix="select"
+            />}
+        />
     );
 
 
@@ -60,24 +128,15 @@ function Aportacion({onSubmit, store}: {
                         <form onChange={updateForm()}>
                             <div key='3' className="form-group">
                                 <label className='control-label' htmlFor="objetivoPrioritario">Objetivo prioritario:</label>
-                                <select className='form-control' {...register('objetivoPrioritario', {valueAsNumber: true})}>
-                                    <option value="0">Seleccione una opción</option>
-                                    {Objetivos.map((index) => <option value={index.id}>{index.name}</option>)}
-                                </select>
+                                {objetivos()}
                             </div>
                             <div key='4' className="form-group">
                                 <label htmlFor="estrategiaPrioritaria" className="control-label">Estrategia prioritaria:</label>
-                                <select className="form-control" {...register('estrategiaPrioritaria', {valueAsNumber: true})}>
-                                    <option value="0">Seleccione una opción</option>
-                                    {strategies()}
-                                </select>
+                                {strategies()}
                             </div>
                             <div key='5' className="form-group">
                                 <label htmlFor="actividadPuntual" className="control-label">Actividad puntual:</label>
-                                <select className="form-control" {...register('actividadPuntual')}>
-                                    <option value="0">Seleccione una opción</option>
-                                    {actions()}
-                                </select>
+                                {actions()}
                             </div>
                             <div key='6' className="row">
                                 <div key='7' className="form-group col-md-4">
@@ -113,8 +172,8 @@ function Aportacion({onSubmit, store}: {
                             <div key='14' className="form-group">
                                 <label htmlFor="tipoIncidencia" className="control-label">Tipo de incidencia:</label>
                                 <select className="form-control" {...register('tipoIncidencia')}>
-                                    <option value="1">Directa</option>
-                                    <option value="2">Indirecta</option>
+                                    <option value="1">Explícita</option>
+                                    <option value="2">Implícita</option>
                                 </select>
                             </div>
                             <div key='15' className="row">

@@ -185,14 +185,22 @@ function Identification({onSubmit, store}: {
 
     const methods = useForm();
 
+    const addActividadesToMainStore = (item: any) => {
+        store.actividadMultiple = item.map((obj) => obj.id_ai);
+    }
+
+    const addUnidadesToMainStore = (item: any) => {
+        store.unidadMultiple = item.map((obj) => obj.id_ur)
+    }
+
     const actividades = () => (
 
         <Controller
-            name={'prueba'}
+            name={'actividadMultipleSelect'}
             control={methods.control}
             defaultValue={[]}
-            render={({ field: { onChange, onBlur, value, ref } }) => <Select
-                onChange={val => onChange(val.value)}
+            render={({ field: { value, ref } }) => <Select
+                onChange={val => addActividadesToMainStore(val)}
                 inputRef={ref}
                 value={actividad.find(c => c.value === value)}
                 isMulti
@@ -207,13 +215,23 @@ function Identification({onSubmit, store}: {
     )
 
     const unidades = () => (
-        unidad.map((obj) =>
-            <div className="row">
-                <div className="col-md-12">
-                    <input className="form-control" value={obj.id_ur + ' - ' + obj.desc_ur} readOnly/>
-                </div>
-            </div>
-        )
+        <Controller
+            name={'unidadMultipleSelect'}
+            control={methods.control}
+            defaultValue={[]}
+            render={({ field: { ref }}) =>
+                <Select
+                    onChange={val => addUnidadesToMainStore(val)}
+                    inputRef={ref}
+                    isMulti
+                    defaultValue=''
+                    getOptionLabel={(option) => option.desc_ur}
+                    getOptionValue={(option) => option.id_ur}
+                    options={unidad}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                />}
+        />
     );
 
    const niveles = () => (
