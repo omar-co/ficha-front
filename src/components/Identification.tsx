@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
-import {useForm, SubmitHandler} from "react-hook-form";
+import {useForm, SubmitHandler, Controller} from "react-hook-form";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
+import Select from 'react-select';
 
-function Identification({onSubmit}: {
+function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
+    store: any;
 }) {
 
     const initial: any[] = [];
@@ -181,24 +183,55 @@ function Identification({onSubmit}: {
         )
     );
 
+    const methods = useForm();
+
+    const addActividadesToMainStore = (item: any) => {
+        store.actividadMultiple = item.map((obj) => obj.id_ai);
+    }
+
+    const addUnidadesToMainStore = (item: any) => {
+        store.unidadMultiple = item.map((obj) => obj.id_ur)
+    }
+
     const actividades = () => (
-        actividad.map((obj) =>
-            <div className="row">
-                <div className="col-md-12">
-                    <input className="form-control" value={obj.id_ai + ' - ' + obj.desc_ai} readOnly/>
-                </div>
-            </div>
-           )
-    );
+
+        <Controller
+            name={'actividadMultipleSelect'}
+            control={methods.control}
+            defaultValue={[]}
+            render={({ field: { value, ref } }) => <Select
+                onChange={val => addActividadesToMainStore(val)}
+                inputRef={ref}
+                value={actividad.find(c => c.value === value)}
+                isMulti
+                defaultValue=''
+                getOptionLabel={(option) => option.desc_ai}
+                getOptionValue={(option) => option.id_ai}
+                options={actividad}
+                className="basic-multi-select"
+                classNamePrefix="select"
+            />}
+        />
+    )
 
     const unidades = () => (
-        unidad.map((obj) =>
-            <div className="row">
-                <div className="col-md-12">
-                    <input className="form-control" value={obj.id_ur + ' - ' + obj.desc_ur} readOnly/>
-                </div>
-            </div>
-        )
+        <Controller
+            name={'unidadMultipleSelect'}
+            control={methods.control}
+            defaultValue={[]}
+            render={({ field: { ref }}) =>
+                <Select
+                    onChange={val => addUnidadesToMainStore(val)}
+                    inputRef={ref}
+                    isMulti
+                    defaultValue=''
+                    getOptionLabel={(option) => option.desc_ur}
+                    getOptionValue={(option) => option.id_ur}
+                    options={unidad}
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                />}
+        />
     );
 
    const niveles = () => (
