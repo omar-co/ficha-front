@@ -69,7 +69,7 @@ function App() {
                                 <Indicadores onSubmit={onSubmit} store={store}/>
                             </Route>
                             <Route path="/">
-                                <Identification onSubmit={onSubmit}/>
+                                <Identification onSubmit={onSubmit} store={store}/>
                             </Route>
                         </Switch>
                     </Router>
