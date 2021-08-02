@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import TabsMenu from "./TabsMenu";
 
 function Identification({onSubmit}: {
     onSubmit: SubmitHandler<any>;
@@ -27,7 +28,7 @@ function Identification({onSubmit}: {
     let history = useHistory();
 
     function handleClick() {
-        history.push("/areas");
+        history.push("/indicadores");
     }
 
     const programName = () => {
@@ -244,148 +245,156 @@ function Identification({onSubmit}: {
     );
 
     return (
-        <div className="tab-pane" id="identificacion">
-            <div className="panel-body">
-                <form onChange={handleSubmit(onSubmit)}>
-                    <div className="row">
-                        <div className="form-group col-md-12">
-                            <label className='control-label' htmlFor="ramo">Ramo:</label>
-                            <select className='form-control' {...register("ramo", {
-                                valueAsNumber: true,
-                                required: true
-                            })} onClick={getModalidadesAndNiveles}>
-                                <option value="">Seleccione una opción:</option>
-                                {ramos()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="form-group col-md-6">
-                            <label htmlFor="modalidad" className="control-label">Modalidad:</label>
-                            <select className="form-control" {...register('modalidad', {required: true})}  onClick={getPp} >
-                                <option value="">Selecciona una Opcion</option>
-                                {modalidades()}
-                            </select>
-                        </div>
-                        <div className="form-group col-md-6">
-                            <label htmlFor="modalidad" className="control-label">
-                                ID_Programa presupuestario:
+        <div className="row">
+            <div className="col-md-3">
+                <TabsMenu tag={'identificacion'}/>
+            </div>
+            <div className="col-md-9">
+                <div className="tab-pane" id="identificacion">
+                    <div className="panel-body">
+                        <form onChange={handleSubmit(onSubmit)}>
+                            <div className="row">
+                                <div className="form-group col-md-12">
+                                    <label className='control-label' htmlFor="ramo">Ramo:</label>
+                                    <select className='form-control' {...register("ramo", {
+                                        valueAsNumber: true,
+                                        required: true
+                                    })} onClick={getModalidadesAndNiveles}>
+                                        <option value="">Seleccione una opción:</option>
+                                        {ramos()}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="modalidad" className="control-label">Modalidad:</label>
+                                    <select className="form-control" {...register('modalidad', {required: true})}  onClick={getPp} >
+                                        <option value="">Selecciona una Opcion</option>
+                                        {modalidades()}
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="modalidad" className="control-label">
+                                        ID_Programa presupuestario:
+                                    </label>
+                                    <select className="form-control" {...register('programa', {valueAsNumber: true})} onClick={getActividadesUnidadesAndObjetivoPrograma}>
+                                        <option value="">Selecciona una Opcion</option>
+                                        {programasPresupuestales()}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="nombrePrograma" className="control-label">Nombre del programa
+                                    presupuestario:</label>
+                                <input className="form-control" {...register('nombrePrograma')} value={programName()} readOnly/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="actividadInstitucional" className="control-label">Actividad
+                                    Institucional:</label>
+                                {actividades()}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
+                                {unidades()}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="objetivo" className="control-label">Objetivo del Programa (Propósito):</label>
+                                {objetivosPrograma()}
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="componentes" className="control-label">Bienes y productos generados con posible
+                                    incidencia (Componentes)_1:</label>
+                                <input className="form-control" {...register('componentes')} />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="actividades" className="control-label">Actividad(es) actual(es) con posible
+                                    incidencia_1:</label>
+                                <textarea className="form-control" {...register('actividades')} />
+                            </div>
+                            <br/>
+                            <label htmlFor="mitigacion" className="control-label">
+                                Partida presupuestaria al ATCC_1 (Mitigación)
                             </label>
-                            <select className="form-control" {...register('programa', {valueAsNumber: true})} onClick={getActividadesUnidadesAndObjetivoPrograma}>
-                                <option value="">Selecciona una Opcion</option>
-                                {programasPresupuestales()}
-                            </select>
-                        </div>
+                            <hr className="red"/>
+                            <div className="row">
+                                <div className="form-group col-md-4">
+                                    <label className='control-label' htmlFor="finalidad">Finalidad:</label>
+                                    <input className="form-control" value={finalidades()} disabled />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label className='control-label' htmlFor="funcion">Función:</label>
+                                    <input className="form-control" value={funciones()} disabled />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label className='control-label' htmlFor="subfuncion">Subfunción:</label>
+                                    <input className="form-control" value={subfunciones()} disabled />
+                                </div>
+                            </div>
+                            <hr/>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="tipoGasto" className="control-label">Tipo de gasto:</label>
+                                    <select className="form-control" {...register('tipoGasto')}>
+                                        <option value="">Seleccione una opción</option>
+                                        {spendingType()}
+                                    </select>
+                                </div>
+                                <div className="col-md-6">
+                                    <label htmlFor="fuenteFinanciamiento" className="control-label">Fuente de
+                                        Financiamiento:</label>
+                                    <select className='form-control' {...register('fuenteFinanciamiento')}>
+                                        <option value="">Seleccione una opción</option>
+                                        {sources()}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <label htmlFor="entidadFederativa" className="control-label">Entidad Federativa:</label>
+                                    <select className='form-control' {...register('entidadFederativa')}>
+                                        <option value="">Seleccione una opción</option>
+                                        {entity()}
+                                    </select>
+                                </div>
+                                <div className="col-md-6">
+                                    <label htmlFor="claveCartera" className="control-label">Clave de Cartera:</label>
+                                    <input className='form-control' {...register('claveCartera')}/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <label className="control-label">Objetivos MIR</label>
+                                </div>
+                            </div>
+                            <hr className="red"/>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <label htmlFor="nivel" className="control-label">Nivel</label>
+                                    <select className="form-control" {...register('nivel')} onClick={getObjetivos} >
+                                        <option value="">Seleccione una opción...</option>
+                                        {niveles()}
+                                    </select>
+                                </div>
+                                <div className="col-md-6">
+                                    <label htmlFor="objetivoMir" className="control-label">Objetivo MIR:</label>
+                                    <select className="form-control" {...register('objetivoMir')}>
+                                        <option value="">Seleccione una opción...</option>
+                                        {objetivos()}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="form-group right">
+                                    <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="nombrePrograma" className="control-label">Nombre del programa
-                            presupuestario:</label>
-                        <input className="form-control" {...register('nombrePrograma')} value={programName()} readOnly/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="actividadInstitucional" className="control-label">Actividad
-                            Institucional:</label>
-                        {actividades()}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
-                        {unidades()}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="objetivo" className="control-label">Objetivo del Programa (Propósito):</label>
-                        {objetivosPrograma()}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="componentes" className="control-label">Bienes y productos generados con posible
-                            incidencia (Componentes)_1:</label>
-                        <input className="form-control" {...register('componentes')} />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="actividades" className="control-label">Actividad(es) actual(es) con posible
-                            incidencia_1:</label>
-                        <textarea className="form-control" {...register('actividades')} />
-                    </div>
-                    <br/>
-                    <label htmlFor="mitigacion" className="control-label">
-                        Partida presupuestaria al ATCC_1 (Mitigación)
-                    </label>
-                    <hr className="red"/>
-                    <div className="row">
-                        <div className="form-group col-md-4">
-                            <label className='control-label' htmlFor="finalidad">Finalidad:</label>
-                            <input className="form-control" value={finalidades()} disabled />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label className='control-label' htmlFor="funcion">Función:</label>
-                            <input className="form-control" value={funciones()} disabled />
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label className='control-label' htmlFor="subfuncion">Subfunción:</label>
-                            <input className="form-control" value={subfunciones()} disabled />
-                        </div>
-                    </div>
-                    <hr/>
-                    <div className="row">
-                        <div className="form-group col-md-6">
-                            <label htmlFor="tipoGasto" className="control-label">Tipo de gasto:</label>
-                            <select className="form-control" {...register('tipoGasto')}>
-                                <option value="">Seleccione una opción</option>
-                                {spendingType()}
-                            </select>
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="fuenteFinanciamiento" className="control-label">Fuente de
-                                Financiamiento:</label>
-                            <select className='form-control' {...register('fuenteFinanciamiento')}>
-                                <option value="">Seleccione una opción</option>
-                                {sources()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-6">
-                            <label htmlFor="entidadFederativa" className="control-label">Entidad Federativa:</label>
-                            <select className='form-control' {...register('entidadFederativa')}>
-                                <option value="">Seleccione una opción</option>
-                                {entity()}
-                            </select>
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="claveCartera" className="control-label">Clave de Cartera:</label>
-                            <input className='form-control' {...register('claveCartera')}/>
-                        </div>
-                    </div>
-                    <br/>
-                    <div className="row">
-                        <div className="col-md-12">
-                            <label className="control-label">Objetivos MIR</label>
-                        </div>
-                    </div>
-                    <hr className="red"/>
-                    <div className="row">
-                        <div className="col-md-6">
-                            <label htmlFor="nivel" className="control-label">Nivel</label>
-                            <select className="form-control" {...register('nivel')} onClick={getObjetivos} >
-                                <option value="">Seleccione una opción...</option>
-                                {niveles()}
-                            </select>
-                        </div>
-                        <div className="col-md-6">
-                            <label htmlFor="objetivoMir" className="control-label">Objetivo MIR:</label>
-                            <select className="form-control" {...register('objetivoMir')}>
-                                <option value="">Seleccione una opción...</option>
-                                {objetivos()}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="form-group right">
-                            <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
+
     );
 
 }

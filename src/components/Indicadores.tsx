@@ -1,16 +1,24 @@
 import React, {useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {DataGrid, GridColDef, GridRowsProp} from '@material-ui/data-grid';
-import BotonSiguiente from "./BotonSiguiente";
 import {GRID_LOCALE_TEXT} from "../data/cuantificacion/TraduccionDataGrid";
+import { useHistory } from "react-router-dom";
+import TabsMenu from "./TabsMenu";
 
 function Indicadores({onSubmit, store}: {
     store: any;
     onSubmit: SubmitHandler<any>;
 }) {
+
+    let history = useHistory();
+
     const {handleSubmit } = useForm();
     const initial: any[] = [];
     const [select, setSelection] = useState(initial);
+
+    function handleClick() {
+        history.push("/pecc");
+    }
 
     const rows: GridRowsProp = [
         {id: 1, idField: 'A1', politica: 'Adaptación', nombre: 'Fortalecimiento de capacidades adaptativas de los municipios para responder al cambio climático'},
@@ -37,25 +45,37 @@ function Indicadores({onSubmit, store}: {
 
 
     return (
-    <div className="tab-pane" id="indicadores">
-        <div className="panel-body">
-            <form onChange={handleSubmit(onSubmit)}>
-                <label className="control-label">Vinculación con el Sistema de Indicadores de la Política Nacional de Cambio Climático:</label>
-                <hr className="red"/>
-                <div className="row">
-                    <div style={{height: 400, width: 800, marginLeft: 200}}>
-                        <DataGrid  rows={rows} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)}/>
+        <div className="row">
+            <div className="col-md-3">
+                <TabsMenu tag={'indicadores'}/>
+            </div>
+            <div className="col-md-9">
+                <div className="tab-pane" id="indicadores">
+                    <div className="panel-body">
+                        <form onChange={handleSubmit(onSubmit)}>
+                            <label className="control-label">Vinculación con el Sistema de Indicadores de la Política Nacional de Cambio Climático:</label>
+                            <hr className="red"/>
+                            <div className="row">
+                                <div style={{height: 400, width: 800}}>
+                                    <DataGrid  rows={rows} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)}/>
+                                </div>
+                                <br/>
+                                <div className="text-center">
+                                    <button type="button" className="btn btn-primary" onClick={() => addItemsToMainArray(select)}>Guardar indicadores seleccionados</button>
+                                </div>
+                                <br/>
+                            </div>
+                            <div className="row">
+                                <div className="form-group right">
+                                    <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <br/>
-                    <div className="text-center">
-                        <button type="button" className="btn btn-primary" onClick={() => addItemsToMainArray(select)}>Guardar indicadores seleccionados</button>
-                    </div>
-                    <br/>
                 </div>
-                <BotonSiguiente store={store} />
-            </form>
+            </div>
         </div>
-    </div>
+
     );
 
 

@@ -17,6 +17,7 @@ import AreasIdentificacion from "./components/AreasIdentificacion";
 import ObjetivosDesarrolloSustentable from "./components/ObjetivosDesarrolloSustentable";
 import Validacion from "./components/Validacion";
 import Pregunta from "./components/Pregunta";
+import VinculacionOtros from "./components/VinculacionOtros";
 
 function App() {
     const [store, setStore] = React.useState(MainForm);
@@ -36,38 +37,43 @@ function App() {
             <h4>HERRAMIENTA PARA LA IDENTIFICACIÓN Y CUANTIFICACIÓN PARA LA INTEGRACIÓN DEL ANEXO TRANSVERSAL DE CAMBIO CLIMÁTICO.</h4>
             <hr className="red"/>
             <div className="row">
-                <Router>
-                    <Switch>
-                        <Route path="/cuantificacion">
-                            <Cuantificacion onSubmit={onSubmit} store={store}/>
-                            <SubmitButton store={store}/>
-                        </Route>
-                        <Route path="/ods">
-                            <ObjetivosDesarrolloSustentable onSubmit={onSubmit} store={store}/>
-                        </Route>
-                        <Route path="/areas">
-                            <AreasIdentificacion onSubmit={onSubmit}/>
-                        </Route>
-                        <Route path="/identificacion">
-                            <Identification onSubmit={onSubmit}/>
-                        </Route>
-                        <Route path="/objetivo">
-                            <Pregunta onSubmit={onSubmit}/>
-                        </Route>
-                        <Route path="/validacion">
-                            <Validacion onSubmit={onSubmit} store={store}/>
-                        </Route>
-                        <Route path="/indicadores">
-                            <Indicadores onSubmit={onSubmit} store={store}/>
-                        </Route>
-                        <Route path="/pecc">
-                            <Aportacion onSubmit={onSubmit} store={store}/>
-                        </Route>
-                        <Route path="/">
-                            <Vinculation onSubmit={onSubmit}/>
-                        </Route>
-                    </Switch>
-                </Router>
+                <div className="col-md-12">
+                    <Router>
+                        <Switch>
+                            <Route path="/cuantificacion">
+                                <Cuantificacion onSubmit={onSubmit} store={store}/>
+                                <SubmitButton store={store}/>
+                            </Route>
+                            <Route path="/areas">
+                                <AreasIdentificacion onSubmit={onSubmit}/>
+                            </Route>
+                            <Route path="/ods">
+                                <ObjetivosDesarrolloSustentable onSubmit={onSubmit} store={store}/>
+                            </Route>
+                            <Route path="/pregunta">
+                                <Pregunta onSubmit={onSubmit}/>
+                            </Route>
+                            <Route path="/validacion">
+                                <Validacion onSubmit={onSubmit} store={store}/>
+                            </Route>
+                            <Route path="/otros">
+                                <VinculacionOtros onSubmit={onSubmit}/>
+                            </Route>
+                            <Route path="/ndc">
+                                <Vinculation onSubmit={onSubmit}/>
+                            </Route>
+                            <Route path="/pecc">
+                                <Aportacion onSubmit={onSubmit} store={store}/>
+                            </Route>
+                            <Route path="/indicadores">
+                                <Indicadores onSubmit={onSubmit} store={store}/>
+                            </Route>
+                            <Route path="/">
+                                <Identification onSubmit={onSubmit}/>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </div>
             </div>
         </div>
     </div>

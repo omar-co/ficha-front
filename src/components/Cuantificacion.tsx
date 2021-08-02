@@ -2,6 +2,7 @@ import React from "react";
 import {SubmitHandler} from "react-hook-form";
 
 import FiltroModal from "./FiltroModal";
+import TabsMenu from "./TabsMenu";
 
 
 function Cuantificacion({onSubmit, store}: {
@@ -10,17 +11,25 @@ function Cuantificacion({onSubmit, store}: {
 }) {
 
     return (
-        <div className="tab-pane" id="cuantificacion">
-            <div className="panel-body">
-                <label className="control-label">Partida especifica</label>
-                <hr className="red"/>
+        <div className="row">
+            <div className="col-md-3">
+                <TabsMenu tag={'cuantificacion'}/>
+            </div>
+            <div className="col-md-9">
+                <div className="tab-pane" id="cuantificacion">
+                    <div className="panel-body">
+                        <label className="control-label">Partida especifica</label>
+                        <hr className="red"/>
 
-                <FiltroModal store={store}/>
+                        <FiltroModal store={store}/>
 
-                <br/>
-                <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
             </div>
         </div>
+
     );
 
 }

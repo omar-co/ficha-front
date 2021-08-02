@@ -2,6 +2,7 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 import Componentes from "./Componentes";
 import {SubmitHandler} from "react-hook-form";
+import TabsMenu from "./TabsMenu";
 
 function Validacion({onSubmit, store}: {
     store: any;
@@ -10,7 +11,7 @@ function Validacion({onSubmit, store}: {
     let history = useHistory();
 
     const handleClick = () => {
-        history.push("/objetivo");
+        history.push("/pregunta");
     };
 
     const error = () => (
@@ -27,7 +28,7 @@ function Validacion({onSubmit, store}: {
             <Componentes onSubmit={onSubmit} />
 
             <div className="form-group right">
-                <button className='btn btn-primary pull-right' onClick={handleClick}>Siguiente</button>
+                <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
             </div>
         </div>
 
@@ -38,8 +39,13 @@ function Validacion({onSubmit, store}: {
     );
 
     return (
-        <div>
-            {mensaje()}
+        <div className="row">
+            <div className="col-md-3">
+                <TabsMenu tag={'componentes'}/>
+            </div>
+            <div className="col-md-9">
+                {mensaje()}
+            </div>
         </div>
     )
 }
