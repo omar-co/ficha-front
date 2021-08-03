@@ -9,7 +9,7 @@ function TabsMenu({tag}: {
         <nav>
             <ul className="nav nav-tabs tabs-left">
                 <li className={tag === 'identificacion' ? 'active' : ''}>
-                    <a>PRESUPUESTO</a>
+                    <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                 </li>
                 <li className={tag === 'indicadores' ? 'active' : ''}>
                     <a>PNCC - INDICADORES</a>
@@ -30,7 +30,7 @@ function TabsMenu({tag}: {
                     <a>VINCULACIÓN PP-PNCC</a>
                 </li>
                 <li className={tag === 'componentes' ? 'active' : ''}>
-                    <a>COMPONENTES</a>
+                    <a>TIPO DE CONTRIBUCIÓN</a>
                 </li>
                 <li className={tag === 'cuantificacion' ? 'active' : ''}>
                     <a>CUANTIFICACIÓN</a>

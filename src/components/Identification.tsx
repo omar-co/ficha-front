@@ -330,25 +330,44 @@ function Identification({onSubmit, store}: {
                                 <label htmlFor="unidadResponsable" className="control-label">Unidad Responsable:</label>
                                 {unidades()}
                             </div>
+                            <br/>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <label className="control-label">Objetivos MIR</label>
+                                </div>
+                            </div>
+                            <hr className="red"/>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <label htmlFor="nivel" className="control-label">Nivel</label>
+                                    <select className="form-control" {...register('nivel')} onClick={getObjetivos} >
+                                        <option value="">Seleccione una opción...</option>
+                                        {niveles()}
+                                    </select>
+                                </div>
+                                <div className="col-md-6">
+                                    <label htmlFor="objetivoMir" className="control-label">Objetivo MIR:</label>
+                                    <select className="form-control" {...register('objetivoMir')}>
+                                        <option value="">Seleccione una opción...</option>
+                                        {objetivos()}
+                                    </select>
+                                </div>
+                            </div>
                             <div className="form-group">
                                 <label htmlFor="objetivo" className="control-label">Objetivo del Programa (Propósito):</label>
                                 {objetivosPrograma()}
                             </div>
                             <div className="form-group">
                                 <label htmlFor="componentes" className="control-label">Bienes y productos generados con posible
-                                    incidencia (Componentes)_1:</label>
+                                    incidencia (Componentes):</label>
                                 <input className="form-control" {...register('componentes')} />
                             </div>
                             <div className="form-group">
                                 <label htmlFor="actividades" className="control-label">Actividad(es) actual(es) con posible
-                                    incidencia_1:</label>
+                                    incidencia:</label>
                                 <textarea className="form-control" {...register('actividades')} />
                             </div>
                             <br/>
-                            <label htmlFor="mitigacion" className="control-label">
-                                Partida presupuestaria al ATCC_1 (Mitigación)
-                            </label>
-                            <hr className="red"/>
                             <div className="row">
                                 <div className="form-group col-md-4">
                                     <label className='control-label' htmlFor="finalidad">Finalidad:</label>
@@ -395,28 +414,6 @@ function Identification({onSubmit, store}: {
                                 </div>
                             </div>
                             <br/>
-                            <div className="row">
-                                <div className="col-md-12">
-                                    <label className="control-label">Objetivos MIR</label>
-                                </div>
-                            </div>
-                            <hr className="red"/>
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <label htmlFor="nivel" className="control-label">Nivel</label>
-                                    <select className="form-control" {...register('nivel')} onClick={getObjetivos} >
-                                        <option value="">Seleccione una opción...</option>
-                                        {niveles()}
-                                    </select>
-                                </div>
-                                <div className="col-md-6">
-                                    <label htmlFor="objetivoMir" className="control-label">Objetivo MIR:</label>
-                                    <select className="form-control" {...register('objetivoMir')}>
-                                        <option value="">Seleccione una opción...</option>
-                                        {objetivos()}
-                                    </select>
-                                </div>
-                            </div>
                             <div className="row">
                                 <div className="form-group right">
                                     <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
