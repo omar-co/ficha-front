@@ -11,7 +11,7 @@ function Validacion({onSubmit, store}: {
     let history = useHistory();
 
     const handleClick = () => {
-        history.push("/pregunta");
+        history.push("/cuantificacion");
     };
 
     const error = () => (
@@ -22,9 +22,6 @@ function Validacion({onSubmit, store}: {
 
     const exitoso = () => (
         <div>
-            <div className="alert alert-success">
-                ¿Las acciones sustantivas y de apoyo establecidas en la AI actividad Institucional o en el Pp Programa presupuestal contribuyen a alguna acción relacionada con cambio climático?
-            </div>
             <Componentes onSubmit={onSubmit} />
 
             <div className="form-group right">

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import axios from "axios";
-import BotonSiguiente from "./BotonSiguiente";
+import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
 
 function ObjetivosDesarrolloSustentable({onSubmit, store}: {
@@ -9,6 +9,11 @@ function ObjetivosDesarrolloSustentable({onSubmit, store}: {
     store: any
 }){
 
+    let history = useHistory();
+
+    function handleClick() {
+        history.push("/pregunta");
+    }
 
     let initial: any[] = [];
 
@@ -41,7 +46,7 @@ function ObjetivosDesarrolloSustentable({onSubmit, store}: {
                 <div className="tab-pane" id="ods">
                     <div className="panel-body">
                         <h6>
-                            Vinculación con los indicadores de la Agenda 2030 para el Desarrollo Sostenible de la ONU
+                            Vinculación con la Agenda 2030 y los Objetivos de Desarrollo Sostenible ODS
                         </h6>
                         <hr className="red"/>
                         <form onChange={handleSubmit(onSubmit)}>
@@ -55,7 +60,7 @@ function ObjetivosDesarrolloSustentable({onSubmit, store}: {
                                 <br/>
                                 <div className="row">
                                     <div className="form-group right">
-                                        <BotonSiguiente store={store}/>
+                                        <button className='btn btn-primary pull-right' onClick={handleClick}>Siguiente</button>
                                     </div>
                                 </div>
                             </div>

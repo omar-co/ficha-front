@@ -1,33 +1,33 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
 import TabsMenu from "./TabsMenu";
+import BotonSiguiente from "./BotonSiguiente";
 
-function Pregunta({onSubmit}: {
+function Pregunta({onSubmit, store}: {
+    store: any
     onSubmit: SubmitHandler<any>;
 }) {
     const {handleSubmit, register} = useForm();
-    let history = useHistory();
-
-    const handleClick = () => {
-        history.push("/areas");
-    };
 
 
     return (
         <div className="row">
             <div className="col-md-3">
-                <TabsMenu tag={'componentes'}/>
+                <TabsMenu tag={'pregunta'}/>
             </div>
             <div className="col-md-9">
                 <div>
                     <form onChange={handleSubmit(onSubmit)}>
                         <div className="row">
                             <div className="col-md-12">
+                                <label className="control-label">Vinculación entre el Programa presupuestario Pp y la Política Nacional de Cambio Climático PNCC</label>
+                                <hr className="red"/>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12">
                                 <label htmlFor="directamente" className="control-label">
-                                    ¿El objetivo del Programa presupuestario hace referencia a su contribución para la
-                                    adaptación y
-                                    mitigación de los efectos de cambio climático?
+                                    ¿Las acciones sustantivas y de apoyo establecidas en la AI actividad Institucional o en el Pp Programa presupuestal contribuyen a alguna acción relacionada con cambio climático?
                                 </label>
                                 <select className="form-control" {...register('directamente', {valueAsNumber: true})}>
                                     <option value="">Selecciona una opcion</option>
@@ -38,7 +38,7 @@ function Pregunta({onSubmit}: {
                             </div>
 
                             <div className="form-group">
-                                <button className='btn btn-primary pull-right' onClick={handleClick}>Siguiente</button>
+                                <BotonSiguiente store={store}/>
                             </div>
                         </div>
                     </form>

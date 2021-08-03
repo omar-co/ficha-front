@@ -12,7 +12,7 @@ function TabsMenu({tag}: {
                     <a>PRESUPUESTO</a>
                 </li>
                 <li className={tag === 'indicadores' ? 'active' : ''}>
-                    <a>INDICADORES</a>
+                    <a>PNCC - INDICADORES</a>
                 </li>
                 <li className={tag === 'pecc' ? 'active' : ''}>
                     <a>PNCC - PECC</a>
@@ -25,6 +25,9 @@ function TabsMenu({tag}: {
                 </li>
                 <li className={tag === 'ods' ? 'active' : ''}>
                     <a>ODS</a>
+                </li>
+                <li className={tag === 'pregunta' ? 'active': ''}>
+                    <a>VINCULACIÓN PP-PNCC</a>
                 </li>
                 <li className={tag === 'componentes' ? 'active' : ''}>
                     <a>COMPONENTES</a>
