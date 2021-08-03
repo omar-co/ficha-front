@@ -126,6 +126,12 @@ function Aportacion({onSubmit, store}: {
                 <div key='1' className="tab-pane" id="aportacion">
                     <div key='2' className="panel-body">
                         <form onChange={updateForm()}>
+                            <div className="row">
+                                <div className="col-md-12">
+                                    <label htmlFor="titulo" className="control-label">VINCULACIÓN CON EL PROGRAMA ESPECIAL DE CAMBIO CLIMÁTICO</label>
+                                    <hr className="red"/>
+                                </div>
+                            </div>
                             <div key='3' className="form-group">
                                 <label className='control-label' htmlFor="objetivoPrioritario">Objetivo prioritario:</label>
                                 {objetivos()}

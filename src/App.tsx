@@ -51,7 +51,7 @@ function App() {
                                 <ObjetivosDesarrolloSustentable onSubmit={onSubmit} store={store}/>
                             </Route>
                             <Route path="/pregunta">
-                                <Pregunta onSubmit={onSubmit}/>
+                                <Pregunta onSubmit={onSubmit} store={store}/>
                             </Route>
                             <Route path="/validacion">
                                 <Validacion onSubmit={onSubmit} store={store}/>
