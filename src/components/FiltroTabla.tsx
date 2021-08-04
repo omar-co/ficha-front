@@ -63,10 +63,15 @@ export default function FiltroTabla({store, mainStore}: {
     };
 
     return (
-        <div id="table" className="text-center"  style={{height: 600, width: '100%'}}>
-            <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)} onRowClick={item => validarModaldiad(item)} />
+        <div className="row">
+            <div id="table" className="text-center"  style={{height: 600, width: '100%'}}>
+                <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)} onRowClick={item => validarModaldiad(item)} />
+            </div>
             <br/>
-            <button type="button" className="btn btn-primary" onClick={() => addItemsToMainArray(select)}>Guardar programas seleccionados</button>
+            <div className="row">
+                <button type="button" className="btn btn-primary" onClick={() => addItemsToMainArray(select)}>Guardar programas seleccionados</button>
+            </div>
         </div>
+
 );
 }

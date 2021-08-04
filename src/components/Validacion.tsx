@@ -14,6 +14,10 @@ function Validacion({onSubmit, store}: {
         history.push("/cuantificacion");
     };
 
+    const goBack = () => {
+        history.push("/pregunta");
+    };
+
     const error = () => (
         <div className="alert alert-danger">
             Su Pp no contribuye a la Política Nacional de Cambio Climático. Gracias
@@ -24,8 +28,14 @@ function Validacion({onSubmit, store}: {
         <div>
             <Componentes onSubmit={onSubmit} />
 
-            <div className="form-group right">
-                <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+            <div className="row">
+                <br/>
+                <div className="form-group col-md-6">
+                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                </div>
+                <div className="form-group right col-md-6">
+                    <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                </div>
             </div>
         </div>
 

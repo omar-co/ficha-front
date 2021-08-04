@@ -16,6 +16,10 @@ function Vinculation({onSubmit} : {
         history.push("/otros");
     }
 
+    function goBack() {
+        history.push("/pecc");
+    }
+
     return (
         <div className="row">
             <div className="col-md-3">
@@ -54,8 +58,13 @@ function Vinculation({onSubmit} : {
                                     {Componentes.map((item) => <option key={item.id} value={item.id}>{item.nombre}</option>)}
                                 </select>
                             </div>
-                            <div className="form-group right">
-                                <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                                </div>
+                                <div className="form-group right col-md-6">
+                                    <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                                </div>
                             </div>
                         </form>
                     </div>

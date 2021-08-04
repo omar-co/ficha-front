@@ -1,20 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import TabsMenu from "./TabsMenu";
+
 
 function ObjetivosDesarrolloSustentable({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
     store: any
 }){
-
-    let history = useHistory();
-
-    function handleClick() {
-        history.push("/pregunta");
-    }
-
     let initial: any[] = [];
 
     const [ods, setOds] = useState(initial);

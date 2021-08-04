@@ -22,6 +22,10 @@ function Aportacion({onSubmit, store}: {
         history.push("/ndc");
     }
 
+    function goBack() {
+        history.push("/indicadores");
+    }
+
     const methods = useForm();
 
     const addObjetivosToStore = (item: any) => {
@@ -197,9 +201,16 @@ function Aportacion({onSubmit, store}: {
                                 </div>
                             </div>
                             <br/>
-                            <div className="form-group right">
-                                <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                            <div className="row">
+                                <br/>
+                                <div className="form-group col-md-6">
+                                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                                </div>
+                                <div className="form-group right col-md-6">
+                                    <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                                </div>
                             </div>
+
                         </form>
                     </div>
                 </div>

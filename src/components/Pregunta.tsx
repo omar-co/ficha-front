@@ -2,12 +2,19 @@ import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import TabsMenu from "./TabsMenu";
 import BotonSiguiente from "./BotonSiguiente";
+import { useHistory } from "react-router-dom";
 
 function Pregunta({onSubmit, store}: {
     store: any
     onSubmit: SubmitHandler<any>;
 }) {
+
+    let history = useHistory();
     const {handleSubmit, register} = useForm();
+
+    function goBack() {
+        history.push("/otros");
+    }
 
 
     return (
@@ -37,8 +44,13 @@ function Pregunta({onSubmit, store}: {
                                 <br/>
                             </div>
 
-                            <div className="form-group">
-                                <BotonSiguiente store={store}/>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                                </div>
+                                <div className="form-group right col-md-6">
+                                    <BotonSiguiente store={store}/>
+                                </div>
                             </div>
                         </div>
                     </form>

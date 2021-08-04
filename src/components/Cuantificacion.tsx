@@ -29,7 +29,7 @@ function Cuantificacion({ store}: {
             </div>
         </div>
 
-    );
+    ); 
 
 }
 

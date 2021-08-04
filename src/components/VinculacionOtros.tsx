@@ -11,8 +11,13 @@ function VinculacionOtros({onSubmit}: {
     let history = useHistory();
 
     const handleClick = () => {
-        history.push("/ods");
+        history.push("/pregunta");
     };
+
+    const goBack = () => {
+        history.push("/ndc");
+    };
+
 
     const {register, handleSubmit} = useForm();
     const [rawValue, setRawValue] = useState<string | undefined>(' ');
@@ -94,7 +99,10 @@ function VinculacionOtros({onSubmit}: {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="form-group right">
+                                <div className="form-group col-md-6">
+                                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                                </div>
+                                <div className="form-group right col-md-6">
                                     <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
                                 </div>
                             </div>

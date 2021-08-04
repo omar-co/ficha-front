@@ -20,6 +20,10 @@ function Indicadores({onSubmit, store}: {
         history.push("/pecc");
     }
 
+    function goBack(){
+        history.push("/")
+    }
+
     const rows: GridRowsProp = [
         {id: 1, idField: 'A1', politica: 'Adaptación', nombre: 'Fortalecimiento de capacidades adaptativas de los municipios para responder al cambio climático'},
         {id: 2, idField: 'M1', politica: 'Mitigación', nombre: 'Emisiones totales nacionales de gases y compuestos de efecto invernadero en CO2e'},
@@ -66,7 +70,11 @@ function Indicadores({onSubmit, store}: {
                                 <br/>
                             </div>
                             <div className="row">
-                                <div className="form-group right">
+                                <br/>
+                                <div className="form-group col-md-6">
+                                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                                </div>
+                                <div className="form-group right col-md-6">
                                     <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
                                 </div>
                             </div>

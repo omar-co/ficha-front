@@ -13,9 +13,6 @@ function Identification({onSubmit, store}: {
 
     const initial: any[] = [];
     const {handleSubmit, register, getValues} = useForm({mode: "onBlur"});
-    const [gasto, setGasto] = useState(initial);
-    const [entidad, setEntidad] = useState(initial);
-    const [fuente, setFuente] = useState(initial);
     const [ramo, setRamo] = useState(initial);
     const [modalidad, setModalidad] = useState(initial);
     const [pp, setPp] = useState(initial);
@@ -24,9 +21,6 @@ function Identification({onSubmit, store}: {
     const [nivel, setNivel] = useState(initial);
     const [objetivo, setObjetivo] = useState(initial);
     const [objetivoPrograma, setObjetivoPrograma] = useState(initial);
-    const [finalidad, setFinalidad] = useState(initial);
-    const [funcion, setFuncion] = useState(initial);
-    const [subfuncion, setSubfuncion] = useState(initial);
 
     let history = useHistory();
 
@@ -45,27 +39,11 @@ function Identification({onSubmit, store}: {
     };
 
     const fetchData = () => {
-        const gastoApi = process.env.REACT_APP_API_URL + '/tipo-gasto';
-        const entidadApi = process.env.REACT_APP_API_URL + '/entidad-federativa';
-        const fuenteApi = process.env.REACT_APP_API_URL + '/fuente-financiamiento';
         const ramoApi = process.env.REACT_APP_API_URL + '/ramo';
-
-        const getGasto = axios.get(gastoApi)
-        const getEntidad = axios.get(entidadApi)
-        const getFuente = axios.get(fuenteApi)
-        const getRamo = axios.get(ramoApi)
-        axios.all([getGasto, getEntidad, getFuente, getRamo]).then(
-            axios.spread((...allData) => {
-                const allGastoData = allData[0].data;
-                const allEntidadData = allData[1].data;
-                const allFuenteData = allData[2].data;
-                const allRamoData = allData[3].data;
-
-                setGasto(allGastoData);
-                setEntidad(allEntidadData);
-                setFuente(allFuenteData);
-                setRamo(allRamoData);
-            })
+        axios.get(ramoApi).then(
+            (response) => {
+                setRamo(response.data)
+            }
         )
     }
 
@@ -103,32 +81,20 @@ function Identification({onSubmit, store}: {
             const actividadApi = process.env.REACT_APP_API_URL + '/actividad/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
             const unidadApi = process.env.REACT_APP_API_URL + '/unidad-responsable/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
             const objetivoProgramaApi = process.env.REACT_APP_API_URL + '/objetivo-programa/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
-            const finalidadApi = process.env.REACT_APP_API_URL + '/finalidad/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
-            const funcionApi = process.env.REACT_APP_API_URL + '/funcion/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
-            const subfuncionApi = process.env.REACT_APP_API_URL + '/subfuncion/' + getValues('ramo') + '/' + getValues('modalidad') + '/'+ getValues('programa');
 
             const getActividad = axios.get(actividadApi)
             const getUnidad = axios.get(unidadApi)
             const getObjetivoPrograma = axios.get(objetivoProgramaApi)
-            const getFinalidad = axios.get(finalidadApi)
-            const getFuncion = axios.get(funcionApi)
-            const getSubfuncion = axios.get(subfuncionApi)
 
-            axios.all([getActividad, getUnidad, getObjetivoPrograma, getFinalidad, getFuncion, getSubfuncion]).then(
+            axios.all([getActividad, getUnidad, getObjetivoPrograma]).then(
                 axios.spread((...allData) => {
                     const allActividadData = allData[0].data;
                     const allUnidadData = allData[1].data;
                     const allObjetivoProgramaData = allData[2].data;
-                    const allFinalidadData = allData[3].data;
-                    const allFuncionData = allData[4].data;
-                    const allSubfuncionData = allData[5].data;
 
                     setActividad(allActividadData);
                     setUnidad(allUnidadData);
                     setObjetivoPrograma(allObjetivoProgramaData);
-                    setFinalidad(allFinalidadData)
-                    setFuncion(allFuncionData)
-                    setSubfuncion(allSubfuncionData)
                 })
             )
         }
@@ -302,6 +268,7 @@ function Identification({onSubmit, store}: {
                             <hr className="red"/>
                             <div className="row">
                                 <div className="col-md-6">
+                                    <br/>
                                     <label htmlFor="nivel" className="control-label">Nivel</label>
                                     <select className="form-control" {...register('nivel')} onClick={getObjetivos} >
                                         <option value="">Seleccione una opción...</option>
