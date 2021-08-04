@@ -34,7 +34,16 @@ function App() {
   return (
     <div className="App">
         <div className="container">
-            <h4>HERRAMIENTA PARA LA IDENTIFICACIÓN Y CUANTIFICACIÓN PARA LA INTEGRACIÓN DEL ANEXO TRANSVERSAL DE CAMBIO CLIMÁTICO.</h4>
+            <div className="row">
+                <div className="col-md-10">
+                    <h4>HERRAMIENTA PARA LA IDENTIFICACIÓN Y CUANTIFICACIÓN PARA LA INTEGRACIÓN DEL ANEXO TRANSVERSAL DE CAMBIO CLIMÁTICO.</h4>
+                </div>
+                <div className="col-md-2">
+                    <br/>
+                    <button className="btn btn-primary pull-right">Biblioteca</button>
+                </div>
+            </div>
+
             <hr className="red"/>
             <div className="row">
                 <div className="col-md-12">

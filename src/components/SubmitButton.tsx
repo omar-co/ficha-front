@@ -12,6 +12,10 @@ function SubmitButton({store}: {
         history.push("/");
     }
 
+    function goBack() {
+        history.push("/validacion");
+    }
+
     const saveData = async () => {
         return axios.post(process.env.REACT_APP_API_URL + '/generate', store, {
             responseType: 'blob',
@@ -24,7 +28,10 @@ function SubmitButton({store}: {
 
     return (
         <div className="row">
-            <div className="form-group col-md-4">
+            <div className="form-group col-md-2">
+                <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+            </div>
+            <div className="form-group col-md-2">
 
             </div>
             <div className="form-group col-md-4">
@@ -34,7 +41,7 @@ function SubmitButton({store}: {
             </div>
             <div className="form-group col-md-4">
                 <div className="form-group">
-                    <button className='btn btn-primary' onClick={() => saveData()}>Guardado final para la exportación  del CSV</button>
+                    <button className="btn btn-primary" onClick={() => saveData()}>Guardado final para la exportación  del CSV</button>
                 </div>
             </div>
 
