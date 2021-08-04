@@ -18,8 +18,10 @@ import ObjetivosDesarrolloSustentable from "./components/ObjetivosDesarrolloSust
 import Validacion from "./components/Validacion";
 import Pregunta from "./components/Pregunta";
 import VinculacionOtros from "./components/VinculacionOtros";
+import Biblioteca from "./components/Biblioteca";
 
 function App() {
+
     const [store, setStore] = React.useState(MainForm);
 
     const onSubmit = (
@@ -31,6 +33,10 @@ function App() {
         });
     };
 
+    function handleClick(){
+        window.location.href = "/biblioteca"
+    }
+
   return (
     <div className="App">
         <div className="container">
@@ -40,7 +46,7 @@ function App() {
                 </div>
                 <div className="col-md-2">
                     <br/>
-                    <button className="btn btn-primary pull-right">Biblioteca</button>
+                    <button onClick={handleClick} className="btn btn-primary pull-right">Biblioteca</button>
                 </div>
             </div>
 
@@ -49,6 +55,9 @@ function App() {
                 <div className="col-md-12">
                     <Router>
                         <Switch>
+                            <Route path="/biblioteca">
+                                <Biblioteca/>
+                            </Route>
                             <Route path="/cuantificacion">
                                 <Cuantificacion store={store}/>
                                 <SubmitButton store={store}/>
