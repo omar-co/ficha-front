@@ -39,10 +39,7 @@ function ObjetivosDesarrolloSustentable({onSubmit, store}: {
 
     return(
         <div className="row">
-            <div className="col-md-3">
-                <TabsMenu tag={'ods'}/>
-            </div>
-            <div className="col-md-9">
+            <div className="col-md-12">
                 <div className="tab-pane" id="ods">
                     <div className="panel-body">
                         <h6>
@@ -58,11 +55,6 @@ function ObjetivosDesarrolloSustentable({onSubmit, store}: {
                                     </div>
                                 </div>
                                 <br/>
-                                <div className="row">
-                                    <div className="form-group right">
-                                        <button className='btn btn-primary pull-right' onClick={handleClick}>Siguiente</button>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>

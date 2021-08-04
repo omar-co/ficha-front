@@ -57,7 +57,7 @@ function Indicadores({onSubmit, store}: {
                             <hr className="red"/>
                             <div className="row">
                                 <div style={{height: 400, width: 800}}>
-                                    <DataGrid  rows={rows} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)}/>
+                                    <DataGrid rowsPerPageOptions={[]} rows={rows} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)}/>
                                 </div>
                                 <br/>
                                 <div className="text-center">

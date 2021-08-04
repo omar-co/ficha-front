@@ -23,9 +23,6 @@ function TabsMenu({tag}: {
                 <li className={tag === 'otros' ? 'active' : ''}>
                     <a>VINCULACIÓN CON OTROS INSTRUMENTOS RELEVANTES</a>
                 </li>
-                <li className={tag === 'ods' ? 'active' : ''}>
-                    <a>ODS</a>
-                </li>
                 <li className={tag === 'pregunta' ? 'active': ''}>
                     <a>VINCULACIÓN PP-PNCC</a>
                 </li>

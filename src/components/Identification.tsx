@@ -4,6 +4,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
 import Select from 'react-select';
+import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -143,24 +144,6 @@ function Identification({onSubmit, store}: {
         }
     }
 
-    const spendingType = () => (
-        gasto.map((obj) =>
-            <option value={obj.id}>{obj.nombre}</option>
-        )
-    );
-
-    const entity = () => (
-        entidad.map((obj) =>
-            <option value={obj.id}>{obj.nombre}</option>
-        )
-    );
-
-    const sources = () => (
-        fuente.map((obj) =>
-            <option value={obj.id}>{obj.nombre}</option>
-        )
-    );
-
     const ramos = () => (
         ramo.map((obj) =>
             <option value={obj.id}>{obj.id} - {obj.name}</option>
@@ -256,26 +239,6 @@ function Identification({onSubmit, store}: {
        )
    );
 
-   const finalidades = () => (
-       finalidad.map((obj) =>
-               obj.desc_gpo_funcional.toString()
-
-       )
-   );
-
-    const funciones = () => (
-        funcion.map((obj) =>
-            obj.desc_funcion.toString()
-
-        )
-    );
-
-    const subfunciones = () => (
-        subfuncion.map((obj) =>
-            obj.desc_subfuncion.toString()
-
-        )
-    );
 
     return (
         <div className="row">
@@ -346,7 +309,7 @@ function Identification({onSubmit, store}: {
                                     </select>
                                 </div>
                                 <div className="col-md-6">
-                                    <label htmlFor="objetivoMir" className="control-label">Objetivo MIR:</label>
+                                    <label htmlFor="objetivoMir" className="control-label">Objetivos del instrumento de seguimiento:</label>
                                     <select className="form-control" {...register('objetivoMir')}>
                                         <option value="">Seleccione una opción...</option>
                                         {objetivos()}
@@ -367,53 +330,9 @@ function Identification({onSubmit, store}: {
                                     incidencia:</label>
                                 <textarea className="form-control" {...register('actividades')} />
                             </div>
-                            <br/>
                             <div className="row">
-                                <div className="form-group col-md-4">
-                                    <label className='control-label' htmlFor="finalidad">Finalidad:</label>
-                                    <input className="form-control" value={finalidades()} disabled />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label className='control-label' htmlFor="funcion">Función:</label>
-                                    <input className="form-control" value={funciones()} disabled />
-                                </div>
-                                <div className="form-group col-md-4">
-                                    <label className='control-label' htmlFor="subfuncion">Subfunción:</label>
-                                    <input className="form-control" value={subfunciones()} disabled />
-                                </div>
+                                <ObjetivosDesarrolloSustentable onSubmit={onSubmit} store={store}/>
                             </div>
-                            <hr/>
-                            <div className="row">
-                                <div className="form-group col-md-6">
-                                    <label htmlFor="tipoGasto" className="control-label">Tipo de gasto:</label>
-                                    <select className="form-control" {...register('tipoGasto')}>
-                                        <option value="">Seleccione una opción</option>
-                                        {spendingType()}
-                                    </select>
-                                </div>
-                                <div className="col-md-6">
-                                    <label htmlFor="fuenteFinanciamiento" className="control-label">Fuente de
-                                        Financiamiento:</label>
-                                    <select className='form-control' {...register('fuenteFinanciamiento')}>
-                                        <option value="">Seleccione una opción</option>
-                                        {sources()}
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-md-6">
-                                    <label htmlFor="entidadFederativa" className="control-label">Entidad Federativa:</label>
-                                    <select className='form-control' {...register('entidadFederativa')}>
-                                        <option value="">Seleccione una opción</option>
-                                        {entity()}
-                                    </select>
-                                </div>
-                                <div className="col-md-6">
-                                    <label htmlFor="claveCartera" className="control-label">Clave de Cartera:</label>
-                                    <input className='form-control' {...register('claveCartera')}/>
-                                </div>
-                            </div>
-                            <br/>
                             <div className="row">
                                 <div className="form-group right">
                                     <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
