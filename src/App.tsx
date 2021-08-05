@@ -37,7 +37,7 @@ function App() {
     <div className="App">
         <div className="container">
             <div className="row">
-                <div className="col-md-10">
+                <div className="col-md-12">
                     <h4>HERRAMIENTA PARA LA IDENTIFICACIÓN Y CUANTIFICACIÓN PARA LA INTEGRACIÓN DEL ANEXO TRANSVERSAL DE CAMBIO CLIMÁTICO.</h4>
                 </div>
             </div>
