@@ -33,10 +33,6 @@ function App() {
         });
     };
 
-    function handleClick(){
-        window.location.href = "/biblioteca"
-    }
-
   return (
     <div className="App">
         <div className="container">
@@ -46,7 +42,7 @@ function App() {
                 </div>
                 <div className="col-md-2">
                     <br/>
-                    <button onClick={handleClick} className="btn btn-primary pull-right">Biblioteca</button>
+                    <a type="button" href="/biblioteca" className="btn btn-primary pull-right">Biblioteca</a>
                 </div>
             </div>
 
