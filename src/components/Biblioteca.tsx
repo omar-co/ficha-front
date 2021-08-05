@@ -1,8 +1,6 @@
 import React from "react";
 
-
 function Biblioteca () {
-
 
     function handleClick() {
         window.history.back();

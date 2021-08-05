@@ -2,7 +2,7 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
+    Route
 } from "react-router-dom";
 import './App.css';
 import {MainFormModel} from "./model/MainFormModel";
@@ -40,10 +40,6 @@ function App() {
                 <div className="col-md-10">
                     <h4>HERRAMIENTA PARA LA IDENTIFICACIÓN Y CUANTIFICACIÓN PARA LA INTEGRACIÓN DEL ANEXO TRANSVERSAL DE CAMBIO CLIMÁTICO.</h4>
                 </div>
-                <div className="col-md-2">
-                    <br/>
-                    <a type="button" href="/biblioteca" className="btn btn-primary pull-right">Biblioteca</a>
-                </div>
             </div>
 
             <hr className="red"/>
@@ -51,9 +47,6 @@ function App() {
                 <div className="col-md-12">
                     <Router>
                         <Switch>
-                            <Route path="/biblioteca">
-                                <Biblioteca/>
-                            </Route>
                             <Route path="/cuantificacion">
                                 <Cuantificacion store={store}/>
                                 <SubmitButton store={store}/>
@@ -82,9 +75,13 @@ function App() {
                             <Route path="/indicadores">
                                 <Indicadores onSubmit={onSubmit} store={store}/>
                             </Route>
+                            <Route path="/biblioteca">
+                                <Biblioteca/>
+                            </Route>
                             <Route path="/">
                                 <Identification onSubmit={onSubmit} store={store}/>
                             </Route>
+
                         </Switch>
                     </Router>
                 </div>
