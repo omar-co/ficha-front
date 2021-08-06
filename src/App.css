@@ -46,3 +46,7 @@
   border-radius: 0 4px 4px 0;
   margin-right: 0;
 }
+
+.library-button {
+  padding: 12px 84px;
+}

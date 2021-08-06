@@ -16,7 +16,7 @@ function TabsMenu({tag}: {
         <div>
             <div className="row">
                 <div className="row text-center">
-                    <button className="btn btn-primary" onClick={goToLibrary}>Biblioteca</button>
+                    <button className="btn btn-primary library-button" onClick={goToLibrary}>Biblioteca</button>
                 </div>
             </div>
             <nav>
