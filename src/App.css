@@ -47,6 +47,14 @@
   margin-right: 0;
 }
 
-.library-button {
-  padding: 12px 84px;
+.tabs-button {
+  width: 100%;
+
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
