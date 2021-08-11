@@ -9,7 +9,6 @@ import {MainFormModel} from "./model/MainFormModel";
 import {MainForm} from "./data/MainForm";
 import Identification from "./components/Identification";
 import Vinculation from "./components/Vinculation";
-import SubmitButton from "./components/SubmitButton";
 import Aportacion from "./components/Aportacion";
 import Cuantificacion from "./components/Cuantificacion";
 import Indicadores from "./components/Indicadores";
@@ -19,6 +18,9 @@ import Validacion from "./components/Validacion";
 import Pregunta from "./components/Pregunta";
 import VinculacionOtros from "./components/VinculacionOtros";
 import Biblioteca from "./components/Biblioteca";
+import Login from "./components/Login";
+import {PrivateRoute, PrivateRouteWithoutStore, PrivateRouteWithoutSubmit} from "./components/PrivateRoute";
+import {PrivateRouteWithoutData} from "./components/PrivateRoute";
 
 function App() {
 
@@ -32,6 +34,7 @@ function App() {
             ...data
         });
     };
+
 
   return (
     <div className="App">
@@ -47,41 +50,20 @@ function App() {
                 <div className="col-md-12">
                     <Router>
                         <Switch>
-                            <Route path="/cuantificacion">
-                                <Cuantificacion store={store}/>
-                                <SubmitButton store={store}/>
+                            <PrivateRouteWithoutSubmit path="/cuantificacion" component={Cuantificacion} store={store}/>
+                            <PrivateRouteWithoutStore path="/areas" component={AreasIdentificacion} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/ods" component={ObjetivosDesarrolloSustentable} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/pregunta" component={Pregunta} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/validacion" component={Validacion} store={store} onSubmit={onSubmit}/>
+                            <PrivateRouteWithoutStore path="/otros" component={VinculacionOtros} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/ndc" component={Vinculation} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/pecc" component={Aportacion} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/indicadores" component={Indicadores} store={store} onSubmit={onSubmit}/>
+                            <PrivateRouteWithoutData path="/biblioteca" component={Biblioteca}/>
+                            <PrivateRoute exact path="/" component={Identification} store={store} onSubmit={onSubmit}/>
+                            <Route path="/login">
+                                <Login/>
                             </Route>
-                            <Route path="/areas">
-                                <AreasIdentificacion onSubmit={onSubmit}/>
-                            </Route>
-                            <Route path="/ods">
-                                <ObjetivosDesarrolloSustentable onSubmit={onSubmit} store={store}/>
-                            </Route>
-                            <Route path="/pregunta">
-                                <Pregunta onSubmit={onSubmit} store={store}/>
-                            </Route>
-                            <Route path="/validacion">
-                                <Validacion onSubmit={onSubmit} store={store}/>
-                            </Route>
-                            <Route path="/otros">
-                                <VinculacionOtros onSubmit={onSubmit}/>
-                            </Route>
-                            <Route path="/ndc">
-                                <Vinculation onSubmit={onSubmit}/>
-                            </Route>
-                            <Route path="/pecc">
-                                <Aportacion onSubmit={onSubmit} store={store}/>
-                            </Route>
-                            <Route path="/indicadores">
-                                <Indicadores onSubmit={onSubmit} store={store}/>
-                            </Route>
-                            <Route path="/biblioteca">
-                                <Biblioteca/>
-                            </Route>
-                            <Route path="/">
-                                <Identification onSubmit={onSubmit} store={store}/>
-                            </Route>
-
                         </Switch>
                     </Router>
                 </div>

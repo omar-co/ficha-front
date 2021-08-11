@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import authenticationService from "../services/AuthenticationService";
 
 function TabsMenu({tag}: {
     tag: any
@@ -11,16 +12,20 @@ function TabsMenu({tag}: {
         history.push('/biblioteca')
     }
 
+    const logout = () => {
+        authenticationService.logout();
+        history.push('/login');
+    }
+
+
     return (
         /* eslint-disable jsx-a11y/anchor-is-valid */
-        <div>
-            <div className="row">
-                <div className="row text-center">
-                    <button className="btn btn-primary library-button" onClick={goToLibrary}>Biblioteca</button>
-                </div>
-            </div>
+        <>
             <nav>
                 <ul className="nav nav-tabs tabs-left">
+                    <li>
+                        <button className="btn btn-primary tabs-button" onClick={logout}>Cerrar sesión</button>
+                    </li>
                     <li className={tag === 'identificacion' ? 'active' : ''}>
                         <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
@@ -45,9 +50,12 @@ function TabsMenu({tag}: {
                     <li className={tag === 'cuantificacion' ? 'active' : ''}>
                         <a>CUANTIFICACIÓN</a>
                     </li>
+                    <li>
+                        <button className="btn btn-primary tabs-button" onClick={goToLibrary}>Biblioteca</button>
+                    </li>
                 </ul>
             </nav>
-        </div>
+        </>
 
 
     );
