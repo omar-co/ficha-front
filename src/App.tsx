@@ -21,6 +21,7 @@ import Biblioteca from "./components/Biblioteca";
 import Login from "./components/Login";
 import {PrivateRoute, PrivateRouteWithoutStore, PrivateRouteWithoutSubmit} from "./components/PrivateRoute";
 import {PrivateRouteWithoutData} from "./components/PrivateRoute";
+import NavMenu from "./components/NavMenu";
 
 function App() {
 
@@ -38,13 +39,15 @@ function App() {
 
   return (
     <div className="App">
+        <>
+            <NavMenu/>
+        </>
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
                     <h4>HERRAMIENTA PARA LA IDENTIFICACIÓN Y CUANTIFICACIÓN PARA LA INTEGRACIÓN DEL ANEXO TRANSVERSAL DE CAMBIO CLIMÁTICO.</h4>
                 </div>
             </div>
-
             <hr className="red"/>
             <div className="row">
                 <div className="col-md-12">

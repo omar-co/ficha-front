@@ -1,31 +1,14 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import authenticationService from "../services/AuthenticationService";
+
 
 function TabsMenu({tag}: {
     tag: any
 }) {
-
-    let history = useHistory();
-
-    function goToLibrary(){
-        history.push('/biblioteca')
-    }
-
-    const logout = () => {
-        authenticationService.logout();
-        history.push('/login');
-    }
-
-
     return (
         /* eslint-disable jsx-a11y/anchor-is-valid */
         <>
             <nav>
                 <ul className="nav nav-tabs tabs-left">
-                    <li>
-                        <button className="btn btn-primary tabs-button" onClick={logout}>Cerrar sesión</button>
-                    </li>
                     <li className={tag === 'identificacion' ? 'active' : ''}>
                         <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
@@ -49,9 +32,6 @@ function TabsMenu({tag}: {
                     </li>
                     <li className={tag === 'cuantificacion' ? 'active' : ''}>
                         <a>CUANTIFICACIÓN</a>
-                    </li>
-                    <li>
-                        <button className="btn btn-primary tabs-button" onClick={goToLibrary}>Biblioteca</button>
                     </li>
                 </ul>
             </nav>
