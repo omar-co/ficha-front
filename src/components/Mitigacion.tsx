@@ -8,14 +8,14 @@ function Mitigacion({onSubmit}: {
     const {handleSubmit, register, getValues} = useForm();
 
     const totalAmount = () => {
-        if (getValues('fines')) {
-            totals = 100;
-        } else {
+        if (!getValues('fines')) {
             totals =
                 getValues('definicion') +
                 getValues('tipo') +
                 getValues('gycei') +
                 getValues('fuentes');
+        } else if(getValues('fines') === 1){
+            totals = 100;
         }
 
         if(totals){
@@ -27,33 +27,43 @@ function Mitigacion({onSubmit}: {
         }
     }
 
-    const segundasPreguntas = () => (
-        !getValues('fines') ? <div className="row">
+    const segundaPreguntas = () => (
+      getValues('fines') === 0 ? <div className="row">
+          <br/>
             <div className="col-md-12">
                 <label htmlFor="reducir" className="control-label">
                     ¿La actividad que se desarrolla es para reducir o evitar emisiones GyCEI?
                 </label>
                 <select className="form-control" {...register('reducir', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="100">Si</option>
-                    <option value="0">No</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>W
                 </select>
             </div>
+        </div>:null
+    );
+
+    const terceraPreguntas = () => (
+       (getValues('fines') === 0 && getValues('reducir') === 0) ?  <div className="row">
+           <br/>
             <div className="col-md-12">
                 <label htmlFor="secuestrar" className="control-label">
                     ¿La actividad que se desarrolla es para secuestrar o capturar GyCEI?
                 </label>
                 <select className="form-control" {...register('secuestrar', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="100">Si</option>
+                    <option value="1">Si</option>
                     <option value="0">No</option>
                 </select>
             </div>
-        </div> : null
+
+        </div>: null
     );
 
-    const tercerasPreguntas = () => (
-        (getValues('reducir') && getValues('secuestrar') ) ? <div className="row">
+    const cuartaPreguntas = () => (
+       (getValues('reducir') === 1 || getValues('secuestrar') === 1) ?
+           <div className="row">
+               <hr/>
             <div className="col-md-12">
                 <label htmlFor="definicion" className="control-label">¿Se cuenta con una definición del límite geográfico en la que se lleve a cabo el proyecto y/o actividad?</label>
                 <select className="form-control" {...register('definicion', {valueAsNumber: true})}>
@@ -92,7 +102,7 @@ function Mitigacion({onSubmit}: {
                     <option value="0">No</option>
                 </select>
             </div>
-        </div> : null
+        </div>:null
     )
 
     return(
@@ -106,13 +116,14 @@ function Mitigacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fines', {valueAsNumber: true})}>
                                 <option value="">Selecciona una opcion</option>
-                                <option value="100">Si</option>
+                                <option value="1" >Si</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
                     </div>
-                    { segundasPreguntas() }
-                    { tercerasPreguntas() }
+                    { segundaPreguntas() }
+                    { terceraPreguntas() }
+                    { cuartaPreguntas() }
                     {totalAmount()}
                 </form>
             </div>

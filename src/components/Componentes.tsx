@@ -9,10 +9,6 @@ function Componentes({onSubmit}: {
 
     const {handleSubmit, register, getValues} = useForm();
 
-    const showMitigacion = () => (
-        getValues('tieneMitigacion') ? <Mitigacion onSubmit={onSubmit} /> : null
-    )
-
     const showAdaptacion = () => (
         getValues('tieneAdaptacion') ? <Adaptacion onSubmit={onSubmit} /> : null
     )
@@ -26,15 +22,7 @@ function Componentes({onSubmit}: {
                 <hr className="red"/>
                 <form onChange={handleSubmit(onSubmit)}>
                     <div className="row">
-                        <div className="col-md-12 form-group">
-                            <label htmlFor="tieneMitigacion" className="control-label">¿Los programas del PP contabilizan las emisiones de actividades institucionales ?</label>
-                            <select className="form-control" {...register('tieneMitigacion', {valueAsNumber: true})}>
-                                <option value="">Seleccione una opción</option>
-                                <option value="1">Si</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        { showMitigacion() }
+                        <Mitigacion onSubmit={onSubmit} />
                     </div>
                     <h6>
                         Adaptación

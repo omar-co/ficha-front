@@ -46,3 +46,15 @@
   border-radius: 0 4px 4px 0;
   margin-right: 0;
 }
+
+.tabs-button {
+  width: 100%;
+
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
