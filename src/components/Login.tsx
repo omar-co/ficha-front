@@ -3,7 +3,9 @@ import authenticationService from "../services/AuthenticationService";
 import { useHistory } from "react-router-dom";
 import {useForm} from "react-hook-form";
 
-const Login = () => {
+const Login = ({store}: {
+    store: any;
+}) => {
 
     const {handleSubmit, getValues, register} = useForm();
     const [error, setError] = useState(null);
@@ -11,19 +13,28 @@ const Login = () => {
     let history = useHistory();
 
     if(authenticationService.currentUserValue){
-        history.push('/');
+        history.push('/identificacion');
     }
 
     const onSubmit = () => {
         authenticationService.login(getValues('email'), getValues('password'))
             .then(
-                access_token => {
-                    history.push('/')
-                }, error => {
+                data => {
+                    if(data.has_data){
+                        store.ramo = data.ramo;
+                        store.modalidad = data.modalidad;
+                        store.programa = data.programa;
+                        store.directamente = data.directamente;
+                        history.push('/cuantificacion');
+                    } else {
+                        history.push('/identificacion');
+                    }
+                },error => {
                     setError(error);
                 }
             )
     }
+
 
     return(
         <div className="row">

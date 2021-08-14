@@ -2,6 +2,7 @@ import * as React from 'react';
 import {DataGrid, GridColDef } from '@material-ui/data-grid';
 import {GRID_LOCALE_TEXT} from "../data/cuantificacion/TraduccionDataGrid";
 import {useState} from "react";
+import SubmitButton from "./SubmitButton";
 
 
 export default function FiltroTabla({store, mainStore}: {
@@ -48,10 +49,6 @@ export default function FiltroTabla({store, mainStore}: {
         {field: 'monto_aprobado', headerName: 'Monto Aprobado', width: 150} ,
     ];
 
-    const addItemsToMainArray = (item: any) => {
-       mainStore.programasSeleccionados = item;
-    }
-
     const validarModaldiad = (item) => {
         const modalidad = item.getValue(item.id, 'id_modalidad');
         if (modalidad === 'S' || modalidad === 'U') {
@@ -69,7 +66,7 @@ export default function FiltroTabla({store, mainStore}: {
             </div>
             <br/>
             <div className="row">
-                <button type="button" className="btn btn-primary" onClick={() => addItemsToMainArray(select)}>Guardar programas seleccionados</button>
+                <SubmitButton store={mainStore} selectedStore={select}/>
             </div>
         </div>
 

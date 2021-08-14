@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
 import Select from 'react-select';
 import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";
+import {authHeader} from "../helpers/AuthHeader";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -40,7 +41,7 @@ function Identification({onSubmit, store}: {
 
     const fetchData = () => {
         const ramoApi = process.env.REACT_APP_API_URL + '/ramo';
-        axios.get(ramoApi).then(
+        axios.get(ramoApi, {headers: authHeader()}).then(
             (response) => {
                 setRamo(response.data)
             }

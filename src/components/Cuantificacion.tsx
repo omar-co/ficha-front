@@ -3,15 +3,18 @@ import React from "react";
 
 import FiltroModal from "./FiltroModal";
 import TabsMenu from "./TabsMenu";
-import SubmitButton from "./SubmitButton";
 
 
 function Cuantificacion({store}: {
     store: any;
+    setStore: any
 }) {
 
     return (
         <>
+            <div className="row">
+                {store.alert &&  <div className="alert alert-success text-center" role="alert">Cuantificación guardada</div>}
+            </div>
             <div className="row">
                 <div className="col-md-3">
                     <TabsMenu tag={'cuantificacion'}/>
@@ -29,9 +32,6 @@ function Cuantificacion({store}: {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="row">
-                <SubmitButton store={store}/>
             </div>
         </>
 

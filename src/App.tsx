@@ -63,9 +63,9 @@ function App() {
                             <PrivateRoute path="/pecc" component={Aportacion} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/indicadores" component={Indicadores} store={store} onSubmit={onSubmit}/>
                             <PrivateRouteWithoutData path="/biblioteca" component={Biblioteca}/>
-                            <PrivateRoute exact path="/" component={Identification} store={store} onSubmit={onSubmit}/>
-                            <Route path="/login">
-                                <Login/>
+                            <PrivateRoute exact path="/identificacion" component={Identification} store={store} onSubmit={onSubmit}/>
+                            <Route path="/">
+                                <Login store={store}/>
                             </Route>
                         </Switch>
                     </Router>
