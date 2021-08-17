@@ -1,16 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {Acciones, Componentes, Ejes} from "../data/vinculation/Ods";
 
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
+import Select from 'react-select';
 
-function Vinculation({onSubmit} : {
+function Vinculation({onSubmit, store} : {
     onSubmit: SubmitHandler<any>;
+    store: any
 }) {
 
+    let initial = {value: null, label: ""};
     let history = useHistory();
-    const { handleSubmit, register, getValues } = useForm();
+    const { handleSubmit, register } = useForm();
+    const [selectedOption, setSelectedOption] = useState(initial);
 
     function handleClick() {
         history.push("/otros");
@@ -19,6 +23,20 @@ function Vinculation({onSubmit} : {
     function goBack() {
         history.push("/pecc");
     }
+
+    const filteredOptions = Acciones.filter(
+        (option) => option.link === selectedOption.value
+    );
+
+    const addEjesToStore = (item: any) => {
+        setSelectedOption(item);
+        store.eje = item.value;
+    }
+
+    const addAccionesToStore = (item: any) => {
+        store.accionPutual = item.value;
+    }
+
 
     return (
         <div className="row">
@@ -36,21 +54,16 @@ function Vinculation({onSubmit} : {
                         <form onChange={handleSubmit(onSubmit)}>
                             <div key={1} className="form-group">
                                 <label className='control-label' htmlFor="eje">Eje:</label>
-                                <select className='form-control' {...register('eje', {valueAsNumber: true})}>
-                                    <option value="0">Seleccione una opción</option>
-                                    {Ejes.map((item) => <option key={item.id} value={item.id}>{item.clave}: {item.nombre}</option>)}
-                                </select>
+                                <Select options={Ejes}
+                                        onChange={val => addEjesToStore(val)}/>
                             </div>
                             <div key={2} className="form-group">
                                 <label className='control-label' htmlFor="accionPutual">Acción Puntual:</label>
-                                <select className='form-control' {...register('accionPutual', {valueAsNumber: true})}>
-                                    <option value="0">Seleccione una opción</option>
-                                    {Acciones.filter(({eje_ndc_id}) => eje_ndc_id === getValues('eje')).map((item) => <option value={item.id}>{item.clave}: {item.nombre}</option>)}
-                                </select>
+                                <Select options={filteredOptions} onChange={val => addAccionesToStore(val)}/>
                             </div>
-
+                            <hr/>
                             <h5>Mitigación</h5>
-
+                            <br/>
                             <div key={3} className="form-group">
                                 <label className='control-label' htmlFor="componenteMitigacion">Componente de Mitigación:</label>
                                 <select className='form-control' {...register('componenteMitigacion', {valueAsNumber: true})}>
