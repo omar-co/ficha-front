@@ -29,7 +29,7 @@ const Login = ({store}: {
                     } else {
                         history.push('/identificacion');
                     }
-                },error => {
+                }, error => {
                     setError(error);
                 }
             )
