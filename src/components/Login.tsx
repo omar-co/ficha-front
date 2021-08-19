@@ -48,7 +48,7 @@ const Login = ({store}: {
                 }
                 <div className="row center">
                     <div className="col-md-4 text-center">
-                        <label htmlFor="email" className="control-label">Correo:</label>
+                        <label htmlFor="email" className="control-label">Usuario:</label>
                         <input type="text" className="form-control" {...register('email')}/>
                     </div>
                 </div>
