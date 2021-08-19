@@ -62,7 +62,7 @@ const Login = ({store}: {
                <br/>
                 <div className="row center">
                     <div className="form-group">
-                        <button className="btn btn-primary" type="submit">Login</button>
+                        <button className="btn btn-primary" type="submit">Iniciar Sesión</button>
                     </div>
                 </div>
             </form>
