@@ -55,7 +55,7 @@ export default function FiltroTabla({store, mainStore}: {
         {field: 'id_entidad_federativa', headerName: 'ID Entidad Federativa', width: 150},
         {field: 'entidad_federativa', headerName: 'Entidad Federativa', width: 150},
         {field: 'id_clave_cartera', headerName: 'ID Clave Cartera', width: 150},
-        {field: 'monto_aprobado', headerName: 'Monto Aprobado', width: 150, editable: true} ,
+        {field: 'newValue', headerName: 'Monto Aprobado', width: 150, editable: true } ,
     ];
 
     const validarModaldiad = (item) => {

@@ -27,14 +27,15 @@ function Pregunta({onSubmit, store}: {
                     <form onChange={handleSubmit(onSubmit)}>
                         <div className="row">
                             <div className="col-md-12">
-                                <label className="control-label">Vinculación entre el Programa presupuestario Pp y la Política Nacional de Cambio Climático PNCC</label>
+                                <label className="control-label">Vinculación entre el Programa presupuestario (Pp) y la Política Nacional de Cambio Climático (PNCC)</label>
                                 <hr className="red"/>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-12">
                                 <label htmlFor="directamente" className="control-label">
-                                    ¿Las acciones sustantivas y de apoyo establecidas en la AI actividad Institucional o en el Pp Programa presupuestal contribuyen a alguna acción relacionada con cambio climático?
+                                    ¿Cómo considera que es la contribución de las acciones sustantivas y de apoyo del Pp
+                                    a la PNCC (PECC, NDC, etc.) de acuerdo con los objetivos seleccionados en las etapas previas?
                                 </label>
                                 <select className="form-control" {...register('directamente', {valueAsNumber: true})} defaultValue={store.directamente}>
                                     <option value="">Selecciona una opcion</option>

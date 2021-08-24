@@ -48,9 +48,7 @@ function Vinculation({onSubmit, store} : {
             <div className="col-md-9">
                 <div key={2} className="tab-pane" id="vinculacion">
                     <div key={3} className="panel-body">
-                        <h4>
-                            Vinculación con metas de la Contribución Determinada a Nivel Nacional y la Ley General de Cambio Climático
-                        </h4>
+                        <h4>Vinculación con los componentes de la Contribución Determinada a Nivel Nacional</h4>
                         <hr className="red"/>
                         <h5>Adaptación</h5>
                         <form onChange={handleSubmit(onSubmit)}>
