@@ -20,10 +20,12 @@ function Aportacion({onSubmit, store}: {
 
     function handleClick() {
         history.push("/ndc");
+        window.scrollTo(0,0);
     }
 
     function goBack() {
         history.push("/indicadores");
+        window.scrollTo(0,0);
     }
 
     const methods = useForm();

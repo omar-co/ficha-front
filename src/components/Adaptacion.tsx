@@ -44,7 +44,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldOne', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="20">Si</option>
+                                <option value="20">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -56,7 +56,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldTwo', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -68,7 +68,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldThree', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -80,7 +80,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldFour', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -92,7 +92,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldFive', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -104,7 +104,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldSix', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -116,7 +116,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldSeven', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -128,7 +128,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldEight', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>
@@ -140,7 +140,7 @@ function Adaptacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fieldNine', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="10">Si</option>
+                                <option value="10">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>

@@ -27,6 +27,7 @@ function Identification({onSubmit, store}: {
 
     function handleClick() {
         history.push("/indicadores");
+        window.scrollTo(0,0);
     }
 
     const programName = () => {

@@ -4,6 +4,7 @@ function Biblioteca () {
 
     function handleClick() {
         window.history.back();
+        window.scrollTo(0,0);
     }
 
 

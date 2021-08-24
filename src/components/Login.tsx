@@ -28,6 +28,7 @@ const Login = ({store}: {
                         history.push('/cuantificacion');
                     } else {
                         history.push('/identificacion');
+                        window.location.reload();
                     }
                 }, error => {
                     setError(error);

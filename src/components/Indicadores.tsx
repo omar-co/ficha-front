@@ -18,10 +18,12 @@ function Indicadores({onSubmit, store}: {
 
     function handleClick() {
         history.push("/pecc");
+        window.scrollTo(0,0);
     }
 
     function goBack(){
-        history.push("/")
+        history.push("/");
+        window.scrollTo(0,0);
     }
 
     const rows: GridRowsProp = [

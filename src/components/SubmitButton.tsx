@@ -13,10 +13,12 @@ function SubmitButton({store, selectedStore}: {
     function handleClick() {
         delete store.ramo;
         history.push("/identificacion");
+        window.scrollTo(0,0);
     }
 
     function goBack() {
         history.push("/validacion");
+        window.scrollTo(0,0);
     }
 
     const exportData = async () => {

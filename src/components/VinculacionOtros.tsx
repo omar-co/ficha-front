@@ -12,10 +12,12 @@ function VinculacionOtros({onSubmit}: {
 
     const handleClick = () => {
         history.push("/pregunta");
+        window.scrollTo(0,0);
     };
 
     const goBack = () => {
         history.push("/ndc");
+        window.scrollTo(0,0);
     };
 
 
@@ -55,14 +57,14 @@ function VinculacionOtros({onSubmit}: {
                                 <div className="form-group col-md-6">
                                     <label htmlFor="diversidadBiologica" className="control-label">Convenio sobre la Diversidad Biológica:</label>
                                     <select className="form-control" {...register('diversidadBiologica')}>
-                                        <option value="1">Si</option>
+                                        <option value="1">Sí</option>
                                         <option value="2">No</option>
                                     </select>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label htmlFor="diversidadBiologica" className="control-label">Convenio internacional de lucha contra la desertificación:</label>
                                     <select className="form-control" {...register('desertificacion')}>
-                                        <option value="1">Si</option>
+                                        <option value="1">Sí</option>
                                         <option value="2">No</option>
                                     </select>
                                 </div>
@@ -81,7 +83,7 @@ function VinculacionOtros({onSubmit}: {
                                 <div className="col-md-12 form-group">
                                     <label htmlFor="plataforma" className="control-label">Plataforma para la Reducción del Riesgo de Desastres:</label>
                                     <select className="form-control" {...register('plataforma')}>
-                                        <option value="1">Si</option>
+                                        <option value="1">Sí</option>
                                         <option value="2">No</option>
                                     </select>
                                 </div>

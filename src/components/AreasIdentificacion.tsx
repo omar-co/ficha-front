@@ -13,6 +13,7 @@ function AreasIdentificacion({onSubmit}: {
 
     function handleClick() {
         history.push("/cuantificacion");
+        window.scrollTo(0,0);
     }
 
 

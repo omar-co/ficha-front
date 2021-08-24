@@ -9,6 +9,7 @@ function BotonSiguiente({store}: {
     const handleClick = () => {
         validate();
         history.push("/validacion");
+        window.scrollTo(0,0);
     };
 
     const validate = () => {

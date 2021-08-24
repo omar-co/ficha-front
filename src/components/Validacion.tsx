@@ -12,10 +12,12 @@ function Validacion({onSubmit, store}: {
 
     const handleClick = () => {
         history.push("/cuantificacion");
+        window.scrollTo(0,0);
     };
 
     const goBack = () => {
         history.push("/pregunta");
+        window.scrollTo(0,0);
     };
 
     const error = () => (

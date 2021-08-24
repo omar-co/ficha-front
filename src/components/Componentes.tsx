@@ -33,7 +33,7 @@ function Componentes({onSubmit}: {
                             <label htmlFor="tieneAdaptacion" className="control-label">¿El objetivo del PP se vincula con alguna(s) problemática(s) relacionada(s) con el clima?</label>
                             <select className="form-control" {...register('tieneAdaptacion', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
-                                <option value="1">Si</option>
+                                <option value="1">Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>

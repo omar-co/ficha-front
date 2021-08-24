@@ -36,7 +36,7 @@ function Mitigacion({onSubmit}: {
                 </label>
                 <select className="form-control" {...register('reducir', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="1">Si</option>
+                    <option value="1">Sí</option>
                     <option value="0">No</option>W
                 </select>
             </div>
@@ -52,7 +52,7 @@ function Mitigacion({onSubmit}: {
                 </label>
                 <select className="form-control" {...register('secuestrar', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="1">Si</option>
+                    <option value="1">Sí</option>
                     <option value="0">No</option>
                 </select>
             </div>
@@ -68,7 +68,7 @@ function Mitigacion({onSubmit}: {
                 <label htmlFor="definicion" className="control-label">¿Se cuenta con una definición del límite geográfico en la que se lleve a cabo el proyecto y/o actividad?</label>
                 <select className="form-control" {...register('definicion', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="25">Si</option>
+                    <option value="25">Sí</option>
                     <option value="0">No</option>
                 </select>
             </div>
@@ -78,7 +78,7 @@ function Mitigacion({onSubmit}: {
                 </label>
                 <select className="form-control" {...register('tipo', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="25">Si</option>
+                    <option value="25">Sí</option>
                     <option value="0">No</option>
                 </select>
             </div>
@@ -88,7 +88,7 @@ function Mitigacion({onSubmit}: {
                 </label>
                 <select className="form-control" {...register('gycei', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="25">Si</option>
+                    <option value="25">Sí</option>
                     <option value="0">No</option>
                 </select>
             </div>
@@ -98,7 +98,7 @@ function Mitigacion({onSubmit}: {
                 </label>
                 <select className="form-control" {...register('fuentes', {valueAsNumber: true})}>
                     <option value="">Selecciona una opcion</option>
-                    <option value="25">Si</option>
+                    <option value="25">Sí</option>
                     <option value="0">No</option>
                 </select>
             </div>
@@ -116,7 +116,7 @@ function Mitigacion({onSubmit}: {
                             </label>
                             <select className="form-control" {...register('fines', {valueAsNumber: true})}>
                                 <option value="">Selecciona una opcion</option>
-                                <option value="1" >Si</option>
+                                <option value="1" >Sí</option>
                                 <option value="0">No</option>
                             </select>
                         </div>

@@ -18,10 +18,12 @@ function Vinculation({onSubmit, store} : {
 
     function handleClick() {
         history.push("/otros");
+        window.scrollTo(0,0);
     }
 
     function goBack() {
         history.push("/pecc");
+        window.scrollTo(0,0);
     }
 
     const filteredOptions = Acciones.filter(
