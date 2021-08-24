@@ -46,6 +46,7 @@ function Indicadores({onSubmit, store}: {
 
     const addItemsToMainArray = (item: any) => {
         store.indicadoresSistema = item;
+        alert('Datos Guardados');
     }
 
 
