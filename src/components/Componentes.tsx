@@ -3,8 +3,9 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import Mitigacion from "./Mitigacion";
 import Adaptacion from "./Adaptacion";
 
-function Componentes({onSubmit}: {
+function Componentes({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
+    store: any
 }) {
 
     const {handleSubmit, register, getValues} = useForm();
@@ -22,7 +23,7 @@ function Componentes({onSubmit}: {
                 <hr className="red"/>
                 <form onChange={handleSubmit(onSubmit)}>
                     <div className="row">
-                        <Mitigacion onSubmit={onSubmit} />
+                        <Mitigacion onSubmit={onSubmit} store={store} />
                     </div>
                     <h6>
                         Adaptación

@@ -24,16 +24,6 @@ export const PrivateRouteWithoutData = ({ component: Component, ...rest }) => (
 );
 
 
-export const PrivateRouteWithoutStore = ({ component: Component, onSubmit, ...rest }) => (
-    <Route {...rest} render={props => {
-        const currentUser = authenticationService.currentUserValue;
-        if (!currentUser) {
-            return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-        }
-        return <Component {...props} onSubmit={onSubmit} />
-    }} />
-);
-
 export const PrivateRouteWithoutSubmit = ({ component: Component, store, ...rest }) => (
     <Route {...rest} render={props => {
         const currentUser = authenticationService.currentUserValue;
