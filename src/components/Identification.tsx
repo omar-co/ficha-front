@@ -13,7 +13,7 @@ function Identification({onSubmit, store}: {
 }) {
 
     const initial: any[] = [];
-    const {handleSubmit, register, getValues} = useForm({mode: "onBlur"});
+    const {handleSubmit, register, getValues, setValue} = useForm({mode: "onBlur"});
     const [ramo, setRamo] = useState(initial);
     const [modalidad, setModalidad] = useState(initial);
     const [pp, setPp] = useState(initial);
@@ -40,14 +40,7 @@ function Identification({onSubmit, store}: {
         return '';
     };
 
-    const fetchData = () => {
-        const ramoApi = process.env.REACT_APP_API_URL + '/ramo';
-        axios.get(ramoApi, {headers: authHeader()}).then(
-            (response) => {
-                setRamo(response.data)
-            }
-        )
-    }
+
 
     const getPp = () => {
         if(getValues('ramo') && getValues('modalidad')){
@@ -125,8 +118,16 @@ function Identification({onSubmit, store}: {
     );
 
     useEffect(() => {
-        fetchData();
-    }, []);
+            const ramoApi = process.env.REACT_APP_API_URL + '/ramo';
+            axios.get(ramoApi, {headers: authHeader()}).then(
+                (response) => {
+                    setRamo(response.data);
+                    setValue('ramo', store.ramo);
+                //   setValue('modalidad', store.modalidad);
+                  //  setValue('programa', store.programa);
+                }
+            )
+    }, [setValue, store.ramo]);
 
     const programasPresupuestales = () => (
         pp.map((obj) =>
@@ -155,7 +156,7 @@ function Identification({onSubmit, store}: {
                 inputRef={ref}
                 value={actividad.find(c => c.value === value)}
                 isMulti
-                defaultValue=''
+                defaultValue={store.actividadMultiple}
                 getOptionLabel={(option) => option.desc_ai}
                 getOptionValue={(option) => option.id_ai}
                 options={actividad}
@@ -175,7 +176,7 @@ function Identification({onSubmit, store}: {
                     onChange={val => addUnidadesToMainStore(val)}
                     inputRef={ref}
                     isMulti
-                    defaultValue=''
+                    defaultValue={store.unidadMultiple}
                     getOptionLabel={(option) => option.desc_ur}
                     getOptionValue={(option) => option.id_ur}
                     options={unidad}
@@ -250,7 +251,7 @@ function Identification({onSubmit, store}: {
                             <div className="form-group">
                                 <label htmlFor="nombrePrograma" className="control-label">Nombre del programa
                                     presupuestario:</label>
-                                <input className="form-control" {...register('nombrePrograma')} value={programName()} readOnly/>
+                                <input className="form-control" {...register('nombrePrograma')} value={programName()} readOnly defaultValue={store.nombrePrograma}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="actividadInstitucional" className="control-label">Actividad
@@ -292,12 +293,12 @@ function Identification({onSubmit, store}: {
                             <div className="form-group">
                                 <label htmlFor="componentes" className="control-label">Bienes y productos generados con posible
                                     incidencia (Componentes):</label>
-                                <input className="form-control" {...register('componentes')} />
+                                <input className="form-control" {...register('componentes')} defaultValue={store.componentes}/>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="actividades" className="control-label">Actividad(es) actual(es) con posible
                                     incidencia:</label>
-                                <textarea className="form-control" {...register('actividades')} />
+                                <textarea className="form-control" {...register('actividades')} defaultValue={store.actividades}/>
                             </div>
                             <div className="row">
                                 <ObjetivosDesarrolloSustentable onSubmit={onSubmit} store={store}/>

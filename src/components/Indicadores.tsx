@@ -46,7 +46,6 @@ function Indicadores({onSubmit, store}: {
 
     const addItemsToMainArray = (item: any) => {
         store.indicadoresSistema = item;
-        console.log(store);
     }
 
 

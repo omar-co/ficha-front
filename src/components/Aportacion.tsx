@@ -58,7 +58,7 @@ function Aportacion({onSubmit, store}: {
                 onChange={val => addObjetivosToStore(val)}
                 inputRef={ref}
                 isMulti
-                defaultValue=''
+                defaultValue={store.objetivoPrioritario}
                 options={Objetivos}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.id}
@@ -78,7 +78,7 @@ function Aportacion({onSubmit, store}: {
                 onChange={val => addEstrategiasToStore(val)}
                 inputRef={ref}
                 isMulti
-                defaultValue=''
+                defaultValue={store.estrategias}
                 options={Estrategias}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.id}
@@ -97,7 +97,7 @@ function Aportacion({onSubmit, store}: {
                 onChange={val => addActividadesToStore(val)}
                 inputRef={ref}
                 isMulti
-                defaultValue=''
+                defaultValue={store.actividadPuntual}
                 options={Actividades}
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.id}
@@ -167,23 +167,24 @@ function Aportacion({onSubmit, store}: {
                             <div key='10' className="form-group">
                                 <label htmlFor="actividadComprometida" className="control-label">Actividad o proyecto comprometido para la atención del Programa
                                     Especial de Cambio Climático:</label>
-                                <textarea className="form-control" {...register('actividadComprometida')} />
+                                <textarea className="form-control" {...register('actividadComprometida')} defaultValue={store.actividadComprometida}/>
                             </div>
                             <div key='11' className="row">
                                 <div key='12' className="form-group col-md-6">
                                     <label htmlFor="indicador" className="control-label">Indicador o parámetro propuesto para el monitoreo y reporte
                                         de los avances en torno a la actividad o proyecto:</label>
-                                    <textarea className="form-control" {...register('indicador')} />
+                                    <textarea className="form-control" {...register('indicador')} defaultValue={store.indicador}/>
                                 </div>
                                 <div key='13' className="form-group col-md-6">
                                     <br/>
                                     <label htmlFor="periodo" className="control-label">Periodo de implementación de la actividad o proyecto:</label>
-                                    <textarea className="form-control" {...register('periodo')} />
+                                    <textarea className="form-control" {...register('periodo')} defaultValue={store.periodo}/>
                                 </div>
                             </div>
                             <div key='14' className="form-group">
                                 <label htmlFor="tipoIncidencia" className="control-label">Tipo de incidencia:</label>
-                                <select className="form-control" {...register('tipoIncidencia')}>
+                                <select className="form-control" {...register('tipoIncidencia')} defaultValue={store.tipoIncidencia}>
+                                    <option value="">Selecciona una opción:</option>
                                     <option value="1">Explícita</option>
                                     <option value="2">Implícita</option>
                                 </select>
@@ -191,13 +192,15 @@ function Aportacion({onSubmit, store}: {
                             <div key='15' className="row">
                                 <div key='16' className="form-group col-md-6">
                                     <label htmlFor="etapa1" className="control-label">Etapa de la política_1:</label>
-                                    <select className="form-control" {...register('etapa1')}>
+                                    <select className="form-control" {...register('etapa1')} defaultValue={store.etapa1}>
+                                        <option value="">Selecciona una opción:</option>
                                         {Etapas.map((index) => <option value={index.id}>{index.name}</option>)}
                                     </select>
                                 </div>
                                 <div key='17' className="form-group col-md-6">
                                     <label htmlFor="etapa2" className="control-label">Etapa de la política_2:</label>
-                                    <select className="form-control" {...register('etapa2')}>
+                                    <select className="form-control" {...register('etapa2')} defaultValue={store.etapa2}>
+                                        <option value="">Selecciona una opción:</option>
                                         {Etapas.map((index) => <option value={index.id}>{index.name}</option>)}
                                     </select>
                                 </div>

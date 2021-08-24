@@ -36,7 +36,7 @@ function Pregunta({onSubmit, store}: {
                                 <label htmlFor="directamente" className="control-label">
                                     ¿Las acciones sustantivas y de apoyo establecidas en la AI actividad Institucional o en el Pp Programa presupuestal contribuyen a alguna acción relacionada con cambio climático?
                                 </label>
-                                <select className="form-control" {...register('directamente', {valueAsNumber: true})}>
+                                <select className="form-control" {...register('directamente', {valueAsNumber: true})} defaultValue={store.directamente}>
                                     <option value="">Selecciona una opcion</option>
                                     <option value="1">Explícitamente/Directamente</option>
                                     <option value="0">Implícitamente/Indirectamente</option>

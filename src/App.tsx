@@ -19,7 +19,7 @@ import Pregunta from "./components/Pregunta";
 import VinculacionOtros from "./components/VinculacionOtros";
 import Biblioteca from "./components/Biblioteca";
 import Login from "./components/Login";
-import {PrivateRoute, PrivateRouteWithoutStore, PrivateRouteWithoutSubmit} from "./components/PrivateRoute";
+import {PrivateRoute, PrivateRouteWithoutSubmit} from "./components/PrivateRoute";
 import {PrivateRouteWithoutData} from "./components/PrivateRoute";
 import NavMenu from "./components/NavMenu";
 
@@ -54,11 +54,11 @@ function App() {
                     <Router>
                         <Switch>
                             <PrivateRouteWithoutSubmit path="/cuantificacion" component={Cuantificacion} store={store}/>
-                            <PrivateRouteWithoutStore path="/areas" component={AreasIdentificacion} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/areas" component={AreasIdentificacion} onSubmit={onSubmit} store={store}/>
                             <PrivateRoute path="/ods" component={ObjetivosDesarrolloSustentable} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/pregunta" component={Pregunta} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/validacion" component={Validacion} store={store} onSubmit={onSubmit}/>
-                            <PrivateRouteWithoutStore path="/otros" component={VinculacionOtros} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/otros" component={VinculacionOtros} onSubmit={onSubmit} store={store}/>
                             <PrivateRoute path="/ndc" component={Vinculation} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/pecc" component={Aportacion} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/indicadores" component={Indicadores} store={store} onSubmit={onSubmit}/>

@@ -28,7 +28,7 @@ function Validacion({onSubmit, store}: {
 
     const exitoso = () => (
         <div>
-            <Componentes onSubmit={onSubmit} />
+            <Componentes onSubmit={onSubmit} store={store}/>
 
             <div className="row">
                 <br/>
@@ -59,4 +59,4 @@ function Validacion({onSubmit, store}: {
     )
 }
 
-export default Validacion;
+export default Validacion

@@ -1,8 +1,9 @@
 import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 
-function Mitigacion({onSubmit}: {
+function Mitigacion({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
+    store: any;
 }){
     let totals;
     const {handleSubmit, register, getValues} = useForm();
@@ -34,7 +35,7 @@ function Mitigacion({onSubmit}: {
                 <label htmlFor="reducir" className="control-label">
                     ¿La actividad que se desarrolla es para reducir o evitar emisiones GyCEI?
                 </label>
-                <select className="form-control" {...register('reducir', {valueAsNumber: true})}>
+                <select className="form-control" {...register('reducir', {valueAsNumber: true})} defaultValue={store.reducir}>
                     <option value="">Selecciona una opcion</option>
                     <option value="1">Sí</option>
                     <option value="0">No</option>W
@@ -50,7 +51,7 @@ function Mitigacion({onSubmit}: {
                 <label htmlFor="secuestrar" className="control-label">
                     ¿La actividad que se desarrolla es para secuestrar o capturar GyCEI?
                 </label>
-                <select className="form-control" {...register('secuestrar', {valueAsNumber: true})}>
+                <select className="form-control" {...register('secuestrar', {valueAsNumber: true})} defaultValue={store.secuestrar}>
                     <option value="">Selecciona una opcion</option>
                     <option value="1">Sí</option>
                     <option value="0">No</option>
@@ -66,7 +67,7 @@ function Mitigacion({onSubmit}: {
                <hr/>
             <div className="col-md-12">
                 <label htmlFor="definicion" className="control-label">¿Se cuenta con una definición del límite geográfico en la que se lleve a cabo el proyecto y/o actividad?</label>
-                <select className="form-control" {...register('definicion', {valueAsNumber: true})}>
+                <select className="form-control" {...register('definicion', {valueAsNumber: true})} defaultValue={store.definicion}>
                     <option value="">Selecciona una opcion</option>
                     <option value="25">Sí</option>
                     <option value="0">No</option>
@@ -76,7 +77,7 @@ function Mitigacion({onSubmit}: {
                 <label htmlFor="tipo" className="control-label">
                     ¿Se identifica el sector en donde se reducen las emisiones de GyCEI?
                 </label>
-                <select className="form-control" {...register('tipo', {valueAsNumber: true})}>
+                <select className="form-control" {...register('tipo', {valueAsNumber: true})} defaultValue={store.tipo}>
                     <option value="">Selecciona una opcion</option>
                     <option value="25">Sí</option>
                     <option value="0">No</option>
@@ -86,7 +87,7 @@ function Mitigacion({onSubmit}: {
                 <label htmlFor="gycei" className="control-label">
                     ¿Se identifica el GyCEI que se mitiga?
                 </label>
-                <select className="form-control" {...register('gycei', {valueAsNumber: true})}>
+                <select className="form-control" {...register('gycei', {valueAsNumber: true})} defaultValue={store.gycei}>
                     <option value="">Selecciona una opcion</option>
                     <option value="25">Sí</option>
                     <option value="0">No</option>
@@ -96,7 +97,7 @@ function Mitigacion({onSubmit}: {
                 <label htmlFor="fuentes" className="control-label">
                     ¿Se utiliza alguna metodología para calcular las reducciones de emisiones?
                 </label>
-                <select className="form-control" {...register('fuentes', {valueAsNumber: true})}>
+                <select className="form-control" {...register('fuentes', {valueAsNumber: true})} defaultValue={store.fuentes}>
                     <option value="">Selecciona una opcion</option>
                     <option value="25">Sí</option>
                     <option value="0">No</option>
@@ -114,7 +115,7 @@ function Mitigacion({onSubmit}: {
                             <label htmlFor="fines" className="control-label">
                                 ¿La actividad que desarrolla con fines de reducción de GyCEI es de tipo legal, regulatoria o normativa?
                             </label>
-                            <select className="form-control" {...register('fines', {valueAsNumber: true})}>
+                            <select className="form-control" {...register('fines', {valueAsNumber: true})} defaultValue={store.fines}>
                                 <option value="">Selecciona una opcion</option>
                                 <option value="1" >Sí</option>
                                 <option value="0">No</option>
