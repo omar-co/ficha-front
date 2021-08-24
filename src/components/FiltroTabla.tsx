@@ -5,13 +5,22 @@ import {useState} from "react";
 import SubmitButton from "./SubmitButton";
 
 
+interface Change {
+    id: number,
+    field: string,
+    value: string
+}
+
+
 export default function FiltroTabla({store, mainStore}: {
     store: any;
     mainStore: any;
 }) {
 
     const initial: any[] = [];
+    const initialChange: Change[] = [];
     const [select, setSelection] = useState(initial);
+    const [changed, setChanged] = useState(initialChange);
 
     const columns: GridColDef[] = [
         {field: 'ciclo', headerName: 'Ciclo', width: 150},
@@ -46,23 +55,21 @@ export default function FiltroTabla({store, mainStore}: {
         {field: 'id_entidad_federativa', headerName: 'ID Entidad Federativa', width: 150},
         {field: 'entidad_federativa', headerName: 'Entidad Federativa', width: 150},
         {field: 'id_clave_cartera', headerName: 'ID Clave Cartera', width: 150},
-        {field: 'monto_aprobado', headerName: 'Monto Aprobado', width: 150} ,
+        {field: 'monto_aprobado', headerName: 'Monto Aprobado', width: 150, editable: true} ,
     ];
 
     const validarModaldiad = (item) => {
-        const modalidad = item.getValue(item.id, 'id_modalidad');
-        if (modalidad === 'S' || modalidad === 'U') {
-            if (window.confirm('¿Requiere establecer un monto distinto al total de la partida especifica?')) {
-                window.prompt('Justifique la necesidad de establecer un monto distinto al total de la partida especifica', '');
-                window.prompt('Monto en pesos', '');
-            }
-        }
+        setChanged([...changed, item]);
+        console.log(changed)
     };
 
     return (
         <div className="row">
             <div id="table" className="text-center"  style={{height: 600, width: '100%'}}>
-                <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection onSelectionModelChange={item => setSelection(item)} onRowClick={item => validarModaldiad(item)} />
+                <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection
+                           onSelectionModelChange={item => setSelection(item)}
+                           onCellValueChange={item => validarModaldiad(item)}
+                />
             </div>
             <br/>
             <div className="row">
