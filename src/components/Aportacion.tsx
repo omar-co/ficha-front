@@ -24,7 +24,7 @@ function Aportacion({onSubmit, store}: {
     }
 
     function goBack() {
-        history.push("/indicadores");
+        history.push("/identificacion");
         window.scrollTo(0,0);
     }
 

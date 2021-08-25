@@ -25,7 +25,7 @@ function Identification({onSubmit, store}: {
     let history = useHistory();
 
     function handleClick() {
-        history.push("/indicadores");
+        history.push("/pecc");
         window.scrollTo(0,0);
     }
 
