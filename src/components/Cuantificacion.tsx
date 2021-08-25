@@ -22,7 +22,7 @@ function Cuantificacion({store}: {
                 <div className="col-md-9">
                     <div className="tab-pane" id="cuantificacion">
                         <div className="panel-body">
-                            <label className="control-label">Partida especifica</label>
+                            <label className="control-label">Cuantificación del presupuesto</label>
                             <hr className="red"/>
 
                             <FiltroModal store={store}/>

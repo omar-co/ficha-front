@@ -58,3 +58,8 @@
   pointer-events: none;
   cursor: default;
 }
+
+.tooltip-italic {
+  font-size: 13px;
+  font-style: italic;
+}

@@ -65,6 +65,7 @@ export default function FiltroTabla({store, mainStore}: {
 
     return (
         <div className="row">
+            <span className="tooltip-italic">Para facilidad del análisis para la cuantificación puedes filtrar u ordenar la información de la tabla</span>
             <div id="table" className="text-center"  style={{height: 600, width: '100%'}}>
                 <DataGrid  rows={store} localeText={GRID_LOCALE_TEXT} columns={columns} checkboxSelection
                            onSelectionModelChange={item => setSelection(item)}
