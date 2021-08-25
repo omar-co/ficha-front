@@ -31,7 +31,7 @@ function Componentes({onSubmit, store}: {
                     <hr className="red"/>
                     <div className="row">
                         <div className="col-md-12 form-group">
-                            <label htmlFor="tieneAdaptacion" className="control-label">¿El objetivo del PP se vincula con alguna(s) problemática(s) relacionada(s) con el clima?</label>
+                            <label htmlFor="tieneAdaptacion" className="control-label">¿El objetivo del Pp se vincula con alguna(s) problemática(s) relacionada(s) con el clima?</label>
                             <select className="form-control" {...register('tieneAdaptacion', {valueAsNumber: true})}>
                                 <option value="">Seleccione una opción</option>
                                 <option value="1">Sí</option>
