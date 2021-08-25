@@ -1,6 +1,7 @@
 
 
 export const Ejes = [
+    {value: 10, label: "Sin vinculación"},
     {value: 1, label: "Eje A.- Impactos negativos en la poblaci\u00f3n"},
     {value: 2, label: "Eje B.- Seguridad alimentaria"},
     {value: 3, label: "Eje C.- Biodiversidad"},

@@ -57,10 +57,10 @@ function Vinculation({onSubmit, store} : {
                                 <Select options={Ejes}
                                         onChange={val => addEjesToStore(val)}/>
                             </div>
-                            <div key={2} className="form-group">
+                            {store.eje !== 10 && <div key={2} className="form-group">
                                 <label className='control-label' htmlFor="accionPutual">Acción Puntual:</label>
                                 <Select options={filteredOptions} onChange={val => addAccionesToStore(val)}/>
-                            </div>
+                            </div>}
                             <hr/>
                             <h5>Mitigación</h5>
                             <br/>
@@ -68,6 +68,7 @@ function Vinculation({onSubmit, store} : {
                                 <label className='control-label' htmlFor="componenteMitigacion">Componente de Mitigación:</label>
                                 <select className='form-control' {...register('componenteMitigacion', {valueAsNumber: true})} defaultValue={store.componenteMitigacion}>
                                     <option value="0">Seleccione una opción</option>
+                                    <option value="10">Sin vinculación</option>
                                     {Componentes.map((item) => <option key={item.id} value={item.id}>{item.nombre}</option>)}
                                 </select>
                             </div>
