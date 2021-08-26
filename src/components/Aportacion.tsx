@@ -1,6 +1,6 @@
 import  React from "react";
 import {SubmitHandler, useForm, Controller} from "react-hook-form";
-import {Actividades, Estrategias, Objetivos, Valores} from "../data/aportacion/Objetivos";
+import {Actividades, Estrategias, Objetivos} from "../data/aportacion/Objetivos";
 import { Etapas } from "../data/aportacion/Etapas";
 import TabsMenu from "./TabsMenu";
 
@@ -13,7 +13,7 @@ function Aportacion({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
 }) {
 
-    const {handleSubmit, register, getValues} = useForm();
+    const {handleSubmit, register} = useForm();
 
     let history = useHistory();
 
@@ -108,17 +108,6 @@ function Aportacion({onSubmit, store}: {
     );
 
 
-    const values = () => {
-        const value = Valores.filter(({accion_id}) => (
-            accion_id === getValues('actividadPuntual')
-        ));
-
-        if(value){
-            return value;
-        }
-    }
-
-
     const updateForm = () => {
         store.porcentajeAtcc =  Marcadores[store.marcador] * 100;
         return handleSubmit(onSubmit);
@@ -150,22 +139,8 @@ function Aportacion({onSubmit, store}: {
                                 <label htmlFor="actividadPuntual" className="control-label">Actividad puntual:</label>
                                 {actions()}
                             </div>
-                            <div key='6' className="row">
-                                <div key='7' className="form-group col-md-4">
-                                    <label htmlFor="tipoAccion" className="control-label">Tipo de Acción puntual:</label>
-                                    <input className="form-control" {...register('tipoAccion')} value={values()!.map(({accion}) => accion)} readOnly/>
-                                </div>
-                                <div key='8' className="form-group col-md-4">
-                                    <label htmlFor="instCoordinadas" className="control-label">Instituciones coordinadas:</label>
-                                    <input className="form-control" {...register('instCoordinadas')} value={(values()!.map(({instituciones}) => instituciones))} readOnly/>
-                                </div>
-                                <div key='9' className="form-group col-md-4">
-                                    <label htmlFor="encargado" className="control-label">Encargado del seguimiento:</label>
-                                    <input className="form-control" {...register('encargado')} value={values()!.map(({encargado}) => encargado)}  readOnly/>
-                                </div>
-                            </div>
                             <div key='10' className="form-group">
-                                <label htmlFor="actividadComprometida" className="control-label">Actividad o proyecto comprometido para la atención del Programa
+                                <label htmlFor="actividadComprometida" className="control-label">Actividades o proyectos comprometidos para la atención del Programa
                                     Especial de Cambio Climático:</label>
                                 <textarea className="form-control" {...register('actividadComprometida')} defaultValue={store.actividadComprometida}/>
                             </div>
@@ -180,14 +155,6 @@ function Aportacion({onSubmit, store}: {
                                     <label htmlFor="periodo" className="control-label">Periodo de implementación de la actividad o proyecto:</label>
                                     <textarea className="form-control" {...register('periodo')} defaultValue={store.periodo}/>
                                 </div>
-                            </div>
-                            <div key='14' className="form-group">
-                                <label htmlFor="tipoIncidencia" className="control-label">Tipo de incidencia:</label>
-                                <select className="form-control" {...register('tipoIncidencia')} defaultValue={store.tipoIncidencia}>
-                                    <option value="">Selecciona una opción:</option>
-                                    <option value="1">Explícita</option>
-                                    <option value="2">Implícita</option>
-                                </select>
                             </div>
                             <div key='15' className="row">
                                 <div key='16' className="form-group col-md-6">
