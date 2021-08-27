@@ -60,7 +60,6 @@ export default function FiltroTabla({store, mainStore}: {
 
     const validarModaldiad = (item) => {
         setChanged([...changed, item]);
-        console.log(changed)
     };
 
     return (
@@ -74,7 +73,7 @@ export default function FiltroTabla({store, mainStore}: {
             </div>
             <br/>
             <div className="row">
-                <SubmitButton store={mainStore} selectedStore={select}/>
+                <SubmitButton store={mainStore} selectedStore={select} changed={changed}/>
             </div>
         </div>
 

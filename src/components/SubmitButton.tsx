@@ -4,9 +4,10 @@ import {saveAs} from 'file-saver'
 import { useHistory } from "react-router-dom";
 import {authHeader} from "../helpers/AuthHeader";
 
-function SubmitButton({store, selectedStore}: {
+function SubmitButton({store, selectedStore, changed}: {
     store: any;
     selectedStore: any;
+    changed: any;
 }) {
     let history = useHistory();
 
@@ -36,6 +37,7 @@ function SubmitButton({store, selectedStore}: {
         let dialog = window.confirm("Desea guardar los datos?");
         if(dialog){
             addItemsToMainStore(selectedStore);
+            addChangedToMainStore(changed);
             store.alert = true;
             alert("Datos guardados");
             window.scroll(0, 0);
@@ -45,6 +47,10 @@ function SubmitButton({store, selectedStore}: {
 
     const addItemsToMainStore = (item: any) => {
         store.programasSeleccionados = item;
+    }
+
+    const addChangedToMainStore = (item: any) => {
+        store.changed = item;
     }
 
     return (
