@@ -46,6 +46,10 @@ function Identification({onSubmit, store}: {
             axios.get(process.env.REACT_APP_API_URL + '/programa-presupuestal/' + getValues('ramo') + '/' + getValues('modalidad')).then(
                 (response) => {
                     setPp(response.data)
+                    if (store.programa) {
+                        setValue('programa', store.programa);
+                        getActividadesUnidadesAndObjetivoPrograma();
+                    }
                 }
             )
         }
@@ -64,6 +68,16 @@ function Identification({onSubmit, store}: {
 
                     setModalidad(allModalidadData);
                     setNivel(allNivelesData);
+
+                    if (store.modalidad) {
+                        setValue('modalidad', store.modalidad);
+                        getPp();
+                    }
+                    if (store.nivel){
+                        setValue('nivel', store.nivel);
+                        getObjetivos();
+                    }
+
                 })
             )
 
@@ -99,6 +113,9 @@ function Identification({onSubmit, store}: {
             axios.get(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo') + '/' + getValues('nivel')).then(
                 (response) => {
                     setObjetivo(response.data)
+                    if (store.objetivoMir) {
+                        setValue('objetivoMir', store.objetivoMir);
+                    }
                 }
             )
         }
@@ -121,7 +138,10 @@ function Identification({onSubmit, store}: {
             axios.get(ramoApi, {headers: authHeader()}).then(
                 (response) => {
                     setRamo(response.data);
-                    setValue('ramo', store.ramo);
+                    if (store.ramo) {
+                        setValue('ramo', store.ramo);
+                        getModalidadesAndNiveles();
+                    }
                 //   setValue('modalidad', store.modalidad);
                   //  setValue('programa', store.programa);
                 }
