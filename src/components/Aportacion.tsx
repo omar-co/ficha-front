@@ -23,10 +23,14 @@ function Aportacion({onSubmit, store}: {
     if (!store.actividades) {
         store.actividades = [];
     }
+    if (!store.etapa1) {
+        store.etapa1 = [];
+    }
 
     const [objetivo, setObjetivo] = React.useState(store.objetivos);
     const [estrategias, setEstrategias] = React.useState(store.estrategias);
     const [actividades, setActividades] = React.useState(store.actividades);
+    const [etapa, setEtapa] = React.useState(store.etapa1);
     const {handleSubmit, register} = useForm();
 
     let history = useHistory();
@@ -62,13 +66,19 @@ function Aportacion({onSubmit, store}: {
         ))
     }
 
+    const addEtapasToStore = (item: any) => {
+        setEtapa(item.map((obj) =>
+            obj.id
+        ))
+    }
+
 
     const objetivos = () => (
         <Select
             isMulti
             className="reactSelect"
             name="objetivosMultipleSelect"
-            placeholder="Platform"
+            placeholder="Objetivo prioritario"
             defaultValue={Objetivos.filter(item => store.objetivos.includes(item.id))}
             onChange={addObjetivosToStore}
             options={Objetivos}
@@ -85,6 +95,7 @@ function Aportacion({onSubmit, store}: {
             isMulti
             className="reactSelect"
             name="estrategiasMultipleSelect"
+            placeholder="Estrategia prioritaria"
             onChange={addEstrategiasToStore}
             defaultValue={Estrategias.filter(item => store.estrategias.includes(item.id))}
             options={Estrategias.filter(item => (
@@ -102,6 +113,7 @@ function Aportacion({onSubmit, store}: {
             isMulti
             className="reactSelect"
             name="actividadesMultipleSelection"
+            placeholder="Actividad puntual"
             onChange={addActividadesToStore}
             defaultValue={Actividades.filter(item => store.actividades.includes(item.id))}
             options={Actividades.filter(item => (
@@ -119,6 +131,7 @@ function Aportacion({onSubmit, store}: {
         store.objetivos = objetivo;
         store.estrategias = estrategias;
         store.actividades = actividades;
+        store.etapa1 = etapa;
         store.porcentajeAtcc =  Marcadores[store.marcador] * 100;
         return handleSubmit(onSubmit);
     }
@@ -167,19 +180,20 @@ function Aportacion({onSubmit, store}: {
                                 </div>
                             </div>
                             <div key='15' className="row">
-                                <div key='16' className="form-group col-md-6">
-                                    <label htmlFor="etapa1" className="control-label">Etapa de la política_1:</label>
-                                    <select className="form-control" {...register('etapa1')} defaultValue={store.etapa1}>
-                                        <option value="">Selecciona una opción:</option>
-                                        {Etapas.map((index) => <option value={index.id}>{index.name}</option>)}
-                                    </select>
-                                </div>
-                                <div key='17' className="form-group col-md-6">
-                                    <label htmlFor="etapa2" className="control-label">Etapa de la política_2:</label>
-                                    <select className="form-control" {...register('etapa2')} defaultValue={store.etapa2}>
-                                        <option value="">Selecciona una opción:</option>
-                                        {Etapas.map((index) => <option value={index.id}>{index.name}</option>)}
-                                    </select>
+                                <div key='16' className="form-group col-md-12">
+                                    <label htmlFor="etapa1" className="control-label">Etapa de la política:</label>
+                                    <Select
+                                        isMulti
+                                        className="reactSelect"
+                                        name="etapasMultipleSelection"
+                                        placeholder="Etapa de la política"
+                                        onChange={addEtapasToStore}
+                                        defaultValue={Etapas.filter(item => store.etapa1.includes(item.id))}
+                                        options={Etapas}
+                                        getOptionLabel={(option) => option.name}
+                                        getOptionValue={(option) => option.id}
+                                        ref={e => register('etapasMultipleSelection')}
+                                    />
                                 </div>
                             </div>
                             <br/>

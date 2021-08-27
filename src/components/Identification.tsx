@@ -6,6 +6,7 @@ import TabsMenu from "./TabsMenu";
 import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";
 import {authHeader} from "../helpers/AuthHeader";
 import  Select from "react-select";
+import {Objetivos} from "../data/aportacion/Objetivos";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -22,6 +23,7 @@ function Identification({onSubmit, store}: {
     const [nivel, setNivel] = useState(initial);
     const [objetivo, setObjetivo] = useState(initial);
     const [objetivoPrograma, setObjetivoPrograma] = useState(initial);
+    const [niveles, setNiveles] = useState(initial);
 
     let history = useHistory();
 
@@ -39,6 +41,12 @@ function Identification({onSubmit, store}: {
 
         return '';
     };
+
+    const addNivelesToStore = (item: any) => {
+        setNiveles(item.map((obj) =>
+            obj.id_nivel
+        ))
+    }
 
 
 
@@ -59,7 +67,7 @@ function Identification({onSubmit, store}: {
     const getModalidadesAndNiveles = () => {
         if(getValues('ramo')){
             const modalidadApi = process.env.REACT_APP_API_URL + '/modalidad/' + getValues('ramo');
-            const nivelesApi =process.env.REACT_APP_API_URL + '/nivel-objetivo/' + getValues('ramo');
+            const nivelesApi =process.env.REACT_APP_API_URL + '/nivel-objetivo';
             const getModalidad = axios.get(modalidadApi);
             const getNiveles = axios.get(nivelesApi);
             axios.all([getModalidad, getNiveles]).then(
@@ -75,7 +83,6 @@ function Identification({onSubmit, store}: {
                         getPp();
                     }
                     if (store.nivel){
-                        setValue('nivel', store.nivel);
                         getObjetivos();
                     }
 
@@ -111,7 +118,7 @@ function Identification({onSubmit, store}: {
 
     const getObjetivos = () => {
         if(getValues('ramo') && getValues('nivel')){
-            axios.get(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo') + '/' + getValues('nivel')).then(
+            axios.post(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo') + '/', niveles).then(
                 (response) => {
                     setObjetivo(response.data)
                     if (store.objetivoMir) {
@@ -143,10 +150,11 @@ function Identification({onSubmit, store}: {
                         setValue('ramo', store.ramo);
                         getModalidadesAndNiveles();
                     }
-                //   setValue('modalidad', store.modalidad);
-                  //  setValue('programa', store.programa);
                 }
             )
+        if (!store.niveles) {
+            store.niveles = [];
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [store.ramo, setRamo]);
 
@@ -197,6 +205,11 @@ function Identification({onSubmit, store}: {
         store.niveles = item;
     }
 
+    const updateForm = () => {
+       store.niveles = niveles;
+       return handleSubmit(onSubmit);
+    }
+
 
     return (
         <div className="row">
@@ -206,7 +219,7 @@ function Identification({onSubmit, store}: {
             <div className="col-md-9">
                 <div className="tab-pane" id="identificacion">
                     <div className="panel-body">
-                        <form onChange={handleSubmit(onSubmit)}>
+                        <form onChange={updateForm()}>
                             <div className="row">
                                 <div className="form-group col-md-12">
                                     <label className='control-label' htmlFor="ramo">Ramo:</label>
@@ -264,12 +277,13 @@ function Identification({onSubmit, store}: {
                                     <label htmlFor="nivel" className="control-label">Nivel</label>
                                     <Select
                                         isMulti
+                                        className="reactSelect"
+                                        placeholder="Nivel"
+                                        defaultValue={nivel.filter(item => nivel && [1,2].includes(item.id_nivel))}
+                                        onChange={addNivelesToStore}
+                                        options={nivel}
                                         getOptionLabel={(option) => option.desc_nivel}
                                         getOptionValue={(option) => option.id_nivel}
-                                        options={nivel}
-                                        className="basic-multi-select"
-                                        classNamePrefix="select"
-                                        onChange={val => addNivelesToMainStore(val)}
                                     />
                                 </div>
                                 <div className="col-md-6">
