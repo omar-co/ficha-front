@@ -7,12 +7,26 @@ import TabsMenu from "./TabsMenu";
 import {Marcadores} from "../data/shared";
 import { useHistory } from "react-router-dom";
 import Select from 'react-select';
+import {MainForm} from "../data/MainForm";
 
 function Aportacion({onSubmit, store}: {
     store: any;
     onSubmit: SubmitHandler<any>;
 }) {
 
+    if (!store.objetivos) {
+        store.objetivos = [];
+    }
+    if (!store.estrategias) {
+        store.estrategias = [];
+    }
+    if (!store.actividades) {
+        store.actividades = [];
+    }
+
+    const [objetivo, setObjetivo] = React.useState(store.objetivos);
+    const [estrategias, setEstrategias] = React.useState(store.estrategias);
+    const [actividades, setActividades] = React.useState(store.actividades);
     const {handleSubmit, register} = useForm();
 
     let history = useHistory();
@@ -31,84 +45,80 @@ function Aportacion({onSubmit, store}: {
     const methods = useForm();
 
     const addObjetivosToStore = (item: any) => {
-        store.objetivoPrioritario = item.map((obj) =>
+        setObjetivo(item.map((obj) =>
             obj.id
-        )
+        ))
     }
 
     const addEstrategiasToStore = (item: any) => {
-        store.estrategias = item.map((obj) =>
+        setEstrategias(item.map((obj) =>
             obj.id
-        )
+        ))
     }
 
     const addActividadesToStore = (item: any) => {
-        store.actividadPuntual = item.map((obj) =>
+        setActividades(item.map((obj) =>
             obj.id
-        )
-        console.log(store);
+        ))
     }
 
+
     const objetivos = () => (
-        <Controller
-            name={'objetivosMultipleSelect'}
-            control={methods.control}
-            defaultValue={[]}
-            render={({ field: { onChange, onBlur, value, ref } }) => <Select
-                onChange={val => addObjetivosToStore(val)}
-                inputRef={ref}
-                isMulti
-                defaultValue={store.objetivoPrioritario}
-                options={Objetivos}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.id}
-                className="basic-multi-select"
-                classNamePrefix="select"
-            />}
+        <Select
+            isMulti
+            className="reactSelect"
+            name="objetivosMultipleSelect"
+            placeholder="Platform"
+            defaultValue={Objetivos.filter(item => store.objetivos.includes(item.id))}
+            onChange={addObjetivosToStore}
+            options={Objetivos}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id}
+            ref={e => register('objetivosMultipleSelect')}
         />
     );
 
 
+
     const strategies = () => (
-        <Controller
-            name={'estrategiasMultipleSelect'}
-            control={methods.control}
-            defaultValue={[]}
-            render={({ field: { onChange, onBlur, value, ref } }) => <Select
-                onChange={val => addEstrategiasToStore(val)}
-                inputRef={ref}
-                isMulti
-                defaultValue={store.estrategias}
-                options={Estrategias}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.id}
-                className="basic-multi-select"
-                classNamePrefix="select"
-            />}
+        <Select
+            isMulti
+            className="reactSelect"
+            name="estrategiasMultipleSelect"
+            onChange={addEstrategiasToStore}
+            defaultValue={Estrategias.filter(item => store.estrategias.includes(item.id))}
+            options={Estrategias.filter(item => (
+                // @ts-ignore
+                objetivo && objetivo.includes(item.objetivo_id)
+            ))}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id}
+            ref={e => register('estrategiasMultipleSelect')}
         />
     );
 
     const actions = () => (
-        <Controller
-            name={'actividadesMultipleSelection'}
-            control={methods.control}
-            defaultValue={[]}
-            render={({ field: { onChange, onBlur, value, ref } }) => <Select
-                onChange={val => addActividadesToStore(val)}
-                inputRef={ref}
-                isMulti
-                defaultValue={store.actividadPuntual}
-                options={Actividades}
-                getOptionLabel={(option) => option.name}
-                getOptionValue={(option) => option.id}
-                className="basic-multi-select"
-                classNamePrefix="select"
-            />}
+        <Select
+            isMulti
+            className="reactSelect"
+            name="actividadesMultipleSelection"
+            onChange={addActividadesToStore}
+            defaultValue={Actividades.filter(item => store.actividades.includes(item.id))}
+            options={Actividades.filter(item => (
+                // @ts-ignore
+                estrategias && estrategias.includes(item.estrategia_id)
+            ))}
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id}
+            ref={e => register('actividadesMultipleSelection')}
         />
     );
 
 
     const updateForm = () => {
+        store.objetivos = objetivo;
+        store.estrategias = estrategias;
+        store.actividades = actividades;
         store.porcentajeAtcc =  Marcadores[store.marcador] * 100;
         return handleSubmit(onSubmit);
     }
