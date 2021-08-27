@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import {saveAs} from 'file-saver'
 import { useHistory } from "react-router-dom";
@@ -51,7 +51,7 @@ function SubmitButton({store, selectedStore}: {
         <>
             <div className="row">
                 <div className="form-group col-md-3">
-                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                    <button className='btn-primary' type="button" >Eliminar por Pprograma presupuestario</button>
                 </div>
                 <div className="form-group col-md-3">
                     <button className='btn-primary' type="button" onClick={saveData}>Guardar cuantificación seleccionada</button>
@@ -65,6 +65,11 @@ function SubmitButton({store, selectedStore}: {
                     <div className="form-group">
                         <button className="btn-primary" onClick={() => exportData()}>Guardado final para la exportación  del CSV</button>
                     </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="form-group col-md-3">
+                    <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
                 </div>
             </div>
         </>
