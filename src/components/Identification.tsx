@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
 import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";
 import {authHeader} from "../helpers/AuthHeader";
+import  Select from "react-select";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -146,7 +147,8 @@ function Identification({onSubmit, store}: {
                   //  setValue('programa', store.programa);
                 }
             )
-    }, [setValue, store.ramo]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [store.ramo, setRamo]);
 
     const programasPresupuestales = () => (
         pp.map((obj) =>
@@ -175,12 +177,6 @@ function Identification({onSubmit, store}: {
 
     );
 
-   const niveles = () => (
-       nivel.map((obj) =>
-           <option value={obj.id_nivel}>{obj.desc_nivel}</option>
-       )
-   );
-
    const objetivos = () => (
        objetivo.map((obj) =>
            <option value={obj.id_objetivo}>{obj.desc_objetivo}</option>
@@ -196,6 +192,10 @@ function Identification({onSubmit, store}: {
            </div>
        )
    );
+
+   const addNivelesToMainStore = (item: any) => {
+        store.niveles = item;
+    }
 
 
     return (
@@ -262,10 +262,15 @@ function Identification({onSubmit, store}: {
                                 <div className="col-md-6">
                                     <br/>
                                     <label htmlFor="nivel" className="control-label">Nivel</label>
-                                    <select className="form-control" {...register('nivel')} onClick={getObjetivos} >
-                                        <option value="">Seleccione una opción...</option>
-                                        {niveles()}
-                                    </select>
+                                    <Select
+                                        isMulti
+                                        getOptionLabel={(option) => option.desc_nivel}
+                                        getOptionValue={(option) => option.id_nivel}
+                                        options={nivel}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                        onChange={val => addNivelesToMainStore(val)}
+                                    />
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="objetivoMir" className="control-label">Objetivos del instrumento de seguimiento:</label>
