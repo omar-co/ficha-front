@@ -6,7 +6,6 @@ import TabsMenu from "./TabsMenu";
 import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";
 import {authHeader} from "../helpers/AuthHeader";
 import  Select from "react-select";
-import {Objetivos} from "../data/aportacion/Objetivos";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -200,10 +199,6 @@ function Identification({onSubmit, store}: {
            </div>
        )
    );
-
-   const addNivelesToMainStore = (item: any) => {
-        store.niveles = item;
-    }
 
     const updateForm = () => {
        store.niveles = niveles;

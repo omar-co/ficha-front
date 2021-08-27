@@ -1,5 +1,5 @@
 import  React from "react";
-import {SubmitHandler, useForm, Controller} from "react-hook-form";
+import {SubmitHandler, useForm} from "react-hook-form";
 import {Actividades, Estrategias, Objetivos} from "../data/aportacion/Objetivos";
 import { Etapas } from "../data/aportacion/Etapas";
 import TabsMenu from "./TabsMenu";
@@ -7,7 +7,6 @@ import TabsMenu from "./TabsMenu";
 import {Marcadores} from "../data/shared";
 import { useHistory } from "react-router-dom";
 import Select from 'react-select';
-import {MainForm} from "../data/MainForm";
 
 function Aportacion({onSubmit, store}: {
     store: any;
@@ -45,8 +44,6 @@ function Aportacion({onSubmit, store}: {
         history.push("/identificacion");
         window.scrollTo(0,0);
     }
-
-    const methods = useForm();
 
     const addObjetivosToStore = (item: any) => {
         setObjetivo(item.map((obj) =>
