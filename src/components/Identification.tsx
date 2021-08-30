@@ -81,9 +81,6 @@ function Identification({onSubmit, store}: {
                         setValue('modalidad', store.modalidad);
                         getPp();
                     }
-                    if (store.nivel){
-                        getObjetivos();
-                    }
 
                 })
             )
@@ -116,8 +113,8 @@ function Identification({onSubmit, store}: {
     }
 
     const getObjetivos = () => {
-        if(getValues('ramo') && getValues('nivel')){
-            axios.post(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo') + '/', niveles).then(
+        if(getValues('ramo') && niveles){
+            axios.post(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo'), {niveles}).then(
                 (response) => {
                     setObjetivo(response.data)
                     if (store.objetivoMir) {
@@ -181,11 +178,15 @@ function Identification({onSubmit, store}: {
 
     );
 
-   const objetivos = () => (
-       objetivo.map((obj) =>
+   const objetivos = () => {
+       if(!objetivo.length){
+          return <option>No hay objetivos</option>
+       }
+       return objetivo.map((obj) =>
            <option value={obj.id_objetivo}>{obj.desc_objetivo}</option>
        )
-   );
+   }
+
 
    const objetivosPrograma = () => (
        objetivoPrograma.map((obj) =>
@@ -282,8 +283,8 @@ function Identification({onSubmit, store}: {
                                 </div>
                                 <div className="col-md-6">
                                     <label htmlFor="objetivoMir" className="control-label">Objetivos del instrumento de seguimiento:</label>
-                                    <select className="form-control" {...register('objetivoMir')}>
-                                        <option value="">Seleccione una opción...</option>
+                                    <select className="form-control" {...register('objetivoMir')} onClick={getObjetivos}>
+                                        <option value="">Seleccione una opcion</option>
                                         {objetivos()}
                                     </select>
                                 </div>
