@@ -28,18 +28,21 @@ function VinculacionOtros({onSubmit, store}: {
     const [rawValue2, setRawValue2] = useState<string | undefined>(' ');
 
     const validateValue = (value: string | undefined): void => {
-        const rawValue = value === undefined ? 'undefined' : value;
-        setRawValue(rawValue || ' ');
+        const val = value === undefined ? 'undefined' : value;
+        setRawValue(val || ' ');
+        store.recursosConvenio = rawValue;
     }
 
     const validateValue1 = (value1: string | undefined): void => {
-        const rawValue1 = value1 === undefined ? 'undefined' : value1;
-        setRawValue1(rawValue1 || ' ');
+        const val = value1 === undefined ? 'undefined' : value1;
+        setRawValue1(val || ' ');
+        store.recursosConvencion = rawValue1;
     }
 
     const validateValue2 = (value2: string | undefined): void => {
-        const rawValue2 = value2 === undefined ? 'undefined' : value2;
-        setRawValue2(rawValue2 || ' ');
+        const val = value2 === undefined ? 'undefined' : value2;
+        setRawValue2(val || ' ');
+        store.recursosInternacionales = rawValue2;
     }
 
     return(
@@ -75,11 +78,11 @@ function VinculacionOtros({onSubmit, store}: {
                             <div className="row">
                                 <div className="form-group col-md-6">
                                     <label htmlFor="recursosConvenio" className="control-label">Recursos internacionales recibidos para este ejercicio presupuestario en el marco de este Convenio:</label>
-                                    <CurrencyInput className="form-control" onValueChange={validateValue}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosConvenio', {value: rawValue, valueAsNumber: true})} defaultValue={store.recursosConvenio}/>
+                                    <CurrencyInput className="form-control" onValueChange={validateValue}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} defaultValue={store.recursosConvenio}/>
                                 </div>
                                 <div className="form-group col-md-6">
                                     <label htmlFor="recursosConvencion" className="control-label">Recursos internacionales recibidos para este ejercicio presupuestario en el marco de esta Convención:</label>
-                                    <CurrencyInput className="form-control" onValueChange={validateValue1}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosConvencion', {value: rawValue1, valueAsNumber: true})}  defaultValue={store.recursosConvencion}/>
+                                    <CurrencyInput className="form-control" onValueChange={validateValue1}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} defaultValue={store.recursosConvencion}/>
                                 </div>
                             </div>
                             <div className="row">
@@ -95,7 +98,7 @@ function VinculacionOtros({onSubmit, store}: {
                             <div className="row">
                                 <div className="form-group col-md-12">
                                     <label htmlFor="recursosInternacionales" className="control-label">Recursos internacionales recibidos para este ejercicio presupuestario en el marco de esta Plataforma:</label>
-                                    <CurrencyInput className="form-control" onValueChange={validateValue2}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} {...register('recursosInternacionales', {value: rawValue2, valueAsNumber: true})}  defaultValue={store.recursosInternacionales}/>
+                                    <CurrencyInput className="form-control" onValueChange={validateValue2}  intlConfig={{ locale: 'en-US', currency: 'MXN' }} defaultValue={store.recursosInternacionales}/>
                                 </div>
                             </div>
                             <div className="row">

@@ -15,7 +15,7 @@ function Mitigacion({onSubmit, store}: {
                 getValues('tipo') +
                 getValues('gycei') +
                 getValues('fuentes');
-        } else if(getValues('fines') === 1){
+        } else if(getValues('fines')  || store.fines){
             totals = 100;
         }
 
@@ -38,7 +38,7 @@ function Mitigacion({onSubmit, store}: {
                 <select className="form-control" {...register('reducir', {valueAsNumber: true})} defaultValue={store.reducir}>
                     <option value="">Selecciona una opcion</option>
                     <option value="1">Sí</option>
-                    <option value="0">No</option>W
+                    <option value="0">No</option>
                 </select>
             </div>
         </div>:null

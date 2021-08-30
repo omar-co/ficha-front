@@ -11,10 +11,13 @@ function Vinculation({onSubmit, store} : {
     store: any
 }) {
 
-    let initial = {value: null, label: ""};
+    if (!store.eje) {
+        store.eje = [];
+    }
+
     let history = useHistory();
     const { handleSubmit, register } = useForm();
-    const [selectedOption, setSelectedOption] = useState(initial);
+    const [selectedOption, setSelectedOption] = useState(store.eje);
 
     function handleClick() {
         history.push("/otros");
@@ -27,11 +30,11 @@ function Vinculation({onSubmit, store} : {
     }
 
     const filteredOptions = Acciones.filter(
-        (option) => option.link === selectedOption.value
+        (option) => option.link === selectedOption
     );
 
     const addEjesToStore = (item: any) => {
-        setSelectedOption(item);
+        setSelectedOption(item.value);
         store.eje = item.value;
     }
 
@@ -54,12 +57,12 @@ function Vinculation({onSubmit, store} : {
                         <form onChange={handleSubmit(onSubmit)}>
                             <div key={1} className="form-group">
                                 <label className='control-label' htmlFor="eje">Eje:</label>
-                                <Select options={Ejes}
+                                <Select options={Ejes} defaultValue={Ejes.filter(item => store.eje === item.value)}
                                         onChange={val => addEjesToStore(val)}/>
                             </div>
                             {store.eje !== 10 && <div key={2} className="form-group">
                                 <label className='control-label' htmlFor="accionPutual">Acción Puntual:</label>
-                                <Select options={filteredOptions} onChange={val => addAccionesToStore(val)}/>
+                                <Select options={filteredOptions} onChange={val => addAccionesToStore(val)} defaultValue={filteredOptions.filter(item => store.accionPutual === item.value)}/>
                             </div>}
                             <hr/>
                             <h5>Mitigación</h5>
