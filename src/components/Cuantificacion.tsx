@@ -39,7 +39,9 @@ function Cuantificacion({store}: {
                             <div className="row">
                                 <label className="control-label">Cuantificación del presupuesto</label>
                                 <hr className="red"/>
+                                <h5 className="tooltip-italic text-center">Para la cuantificación del presupuesto destinado a los objetivos climáticos se muestra una tabla con la estructura programática a nivel partida presupuestaria, en la cual debes seleccionar la partida o partidas dando click a la respectiva fila e incluir el monto destinado a dichos objetivos en la columna “Monto Aprobado” de la extrema derecha</h5>
                             </div>
+                            <br/>
                             <div className="row">
                                 <div className="pull-right col-md-1">
                                     <button type="button" className="btn btn-sm btn-primary" onClick={deletePp}>Eliminar Pp</button>
