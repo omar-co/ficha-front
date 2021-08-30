@@ -6,11 +6,16 @@ import TabsMenu from "./TabsMenu";
 import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";
 import {authHeader} from "../helpers/AuthHeader";
 import  Select from "react-select";
+import {Niveles} from "../data/identification/Niveles";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
     store: any;
 }) {
+
+    if (!store.niveles) {
+        store.niveles = [];
+    }
 
     const initial: any[] = [];
     const {handleSubmit, register, getValues, setValue} = useForm({mode: "onBlur"});
@@ -19,10 +24,9 @@ function Identification({onSubmit, store}: {
     const [pp, setPp] = useState(initial);
     const [actividad, setActividad] = useState(initial);
     const [unidad, setUnidad] = useState(initial);
-    const [nivel, setNivel] = useState(initial);
     const [objetivo, setObjetivo] = useState(initial);
     const [objetivoPrograma, setObjetivoPrograma] = useState(initial);
-    const [niveles, setNiveles] = useState(initial);
+    const [niveles, setNiveles] = useState(store.niveles);
 
     let history = useHistory();
 
@@ -44,7 +48,7 @@ function Identification({onSubmit, store}: {
     const addNivelesToStore = (item: any) => {
         setNiveles(item.map((obj) =>
             obj.id_nivel
-        ))
+        ));
     }
 
 
@@ -66,16 +70,12 @@ function Identification({onSubmit, store}: {
     const getModalidadesAndNiveles = () => {
         if(getValues('ramo')){
             const modalidadApi = process.env.REACT_APP_API_URL + '/modalidad/' + getValues('ramo');
-            const nivelesApi =process.env.REACT_APP_API_URL + '/nivel-objetivo';
             const getModalidad = axios.get(modalidadApi);
-            const getNiveles = axios.get(nivelesApi);
-            axios.all([getModalidad, getNiveles]).then(
+            axios.all([getModalidad]).then(
                 axios.spread((...allData) => {
                     const allModalidadData = allData[0].data;
-                    const allNivelesData = allData[1].data;
 
                     setModalidad(allModalidadData);
-                    setNivel(allNivelesData);
 
                     if (store.modalidad) {
                         setValue('modalidad', store.modalidad);
@@ -151,9 +151,6 @@ function Identification({onSubmit, store}: {
                     }
                 }
             )
-        if (!store.niveles) {
-            store.niveles = [];
-        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [store.ramo, setRamo]);
 
@@ -273,12 +270,14 @@ function Identification({onSubmit, store}: {
                                     <Select
                                         isMulti
                                         className="reactSelect"
+                                        name="nivelesMultipleSelect"
                                         placeholder="Nivel"
-                                        defaultValue={nivel.filter(item => nivel && [1,2].includes(item.id_nivel))}
+                                        defaultValue={Niveles.filter(item => store.niveles.includes(item.id_nivel))}
                                         onChange={addNivelesToStore}
-                                        options={nivel}
+                                        options={Niveles}
                                         getOptionLabel={(option) => option.desc_nivel}
                                         getOptionValue={(option) => option.id_nivel}
+                                        ref={e => register('nivelesMultipleSelect')}
                                     />
                                 </div>
                                 <div className="col-md-6">

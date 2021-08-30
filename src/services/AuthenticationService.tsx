@@ -25,10 +25,13 @@ export default class authenticationService  {
             });
     }
 
-    static logout() {
+    static logout(reload = false) {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
         currentUserSubject.next(null);
+        if (reload) {
+            window.location.reload();
+        }
     }
 
 }

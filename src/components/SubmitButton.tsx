@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {saveAs} from 'file-saver'
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {authHeader} from "../helpers/AuthHeader";
 
 function SubmitButton({store, selectedStore, changed}: {
@@ -14,15 +14,17 @@ function SubmitButton({store, selectedStore, changed}: {
     function handleClick() {
         delete store.ramo;
         history.push("/identificacion");
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     function goBack() {
         history.push("/validacion");
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
     const exportData = async () => {
+        addItemsToMainStore(selectedStore);
+        addChangedToMainStore(changed);
         return axios.post(process.env.REACT_APP_API_URL + '/generate', store, {
             responseType: 'blob',
             headers: authHeader()
@@ -33,9 +35,19 @@ function SubmitButton({store, selectedStore, changed}: {
         );
     }
 
+    const close = async () => {
+        store.preview = false;
+        return exportData();
+    }
+
+    const preview = async () => {
+        store.preview = true;
+        return exportData();
+    }
+
     const saveData = () => {
         let dialog = window.confirm("Desea guardar los datos?");
-        if(dialog){
+        if (dialog) {
             addItemsToMainStore(selectedStore);
             addChangedToMainStore(changed);
             store.alert = true;
@@ -59,17 +71,29 @@ function SubmitButton({store, selectedStore, changed}: {
                 <div className="form-group col-md-3">
                     <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
                 </div>
+            </div>
+            <div className="row">
                 <div className="form-group col-md-3">
-                    <button className='btn-primary' type="button" onClick={saveData}>Guardar cuantificación seleccionada</button>
+                    <button className='btn-primary' type="button" onClick={saveData}>Guardar cuantificación seleccionada
+                    </button>
                 </div>
                 <div className="form-group col-md-3">
                     <div className="form-group">
-                        <button className='btn-primary' onClick={handleClick}>Agregar la cuantificación de otro Pp </button>
+                        <button className='btn-primary' onClick={handleClick}>Agregar la cuantificación de otro Pp
+                        </button>
                     </div>
                 </div>
                 <div className="form-group col-md-3">
                     <div className="form-group">
-                        <button className="btn-primary" onClick={() => exportData()}>Guardado final para la exportación  del CSV</button>
+                        <button className="btn-primary" onClick={() => preview()}>Descargar vista previa del CSV
+                        </button>
+                    </div>
+                </div>
+                <div className="form-group col-md-3">
+                    <div className="form-group">
+                        <button className="btn-primary" onClick={() => close()}>Guardado final para la exportación
+                            del CSV
+                        </button>
                     </div>
                 </div>
             </div>

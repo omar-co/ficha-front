@@ -65,7 +65,7 @@ function Vinculation({onSubmit, store} : {
                             <h5>Mitigación</h5>
                             <br/>
                             <div key={3} className="form-group">
-                                <label className='control-label' htmlFor="componenteMitigacion">Componente de Mitigación:</label>
+                                <label className='control-label' htmlFor="componenteMitigacion">Sector:</label>
                                 <select className='form-control' {...register('componenteMitigacion', {valueAsNumber: true})} defaultValue={store.componenteMitigacion}>
                                     <option value="0">Seleccione una opción</option>
                                     <option value="10">Sin vinculación</option>

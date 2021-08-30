@@ -22,8 +22,18 @@ import Login from "./components/Login";
 import {PrivateRoute, PrivateRouteWithoutSubmit} from "./components/PrivateRoute";
 import {PrivateRouteWithoutData} from "./components/PrivateRoute";
 import NavMenu from "./components/NavMenu";
+import axios from "axios";
+import authenticationService from "./services/AuthenticationService";
 
 function App() {
+
+    axios.interceptors.response.use(function (response) {
+        return response;
+    }, function (error) {
+        if ([401, 403].indexOf(error.response.status) !== -1) {
+            authenticationService.logout(true);
+        }
+    })
 
     const [store, setStore] = React.useState(MainForm);
 
