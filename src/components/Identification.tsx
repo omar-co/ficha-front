@@ -62,6 +62,9 @@ function Identification({onSubmit, store}: {
                         setValue('programa', store.programa);
                         getActividadesUnidadesAndObjetivoPrograma();
                     }
+                    if (store.niveles.length && store.objetivoMir) {
+                        getObjetivos();
+                    }
                 }
             )
         }
@@ -112,8 +115,9 @@ function Identification({onSubmit, store}: {
         }
     }
 
+
     const getObjetivos = () => {
-        if(getValues('ramo') && niveles){
+        if(store.ramo && niveles){
             axios.post(process.env.REACT_APP_API_URL + '/objetivo-mir/' + getValues('ramo'), {niveles}).then(
                 (response) => {
                     setObjetivo(response.data)
