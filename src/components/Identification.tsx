@@ -208,6 +208,15 @@ function Identification({onSubmit, store}: {
     }
 
 
+    const deletePp = () => {
+        let id = getValues('delete');
+        if (window.confirm("Desea borrar la información que se registró en la base de datos para el Pp seleccionado?")) {
+            axios.delete(process.env.REACT_APP_API_URL + '/pp/delete/' + id, {headers: authHeader()}).then(
+                () => true
+            )
+        }
+    }
+
     return (
         <div className="row">
             <div className="col-md-3">
@@ -217,6 +226,14 @@ function Identification({onSubmit, store}: {
                 <div className="tab-pane" id="identificacion">
                     <div className="panel-body">
                         <form onChange={updateForm()}>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <input type="text" className="form-control" {...register('delete')} placeholder="Eliminar Pp"/>
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <button type="button" className="btn btn-sm btn-primary" onClick={deletePp}>Eliminar Pp</button>
+                                </div>
+                            </div>
                             <div className="row">
                                 <div className="form-group col-md-12">
                                     <label className='control-label' htmlFor="ramo">Ramo:</label>

@@ -3,26 +3,12 @@ import React from "react";
 
 import FiltroModal from "./FiltroModal";
 import TabsMenu from "./TabsMenu";
-import {useForm} from "react-hook-form";
-import axios from "axios";
-import {authHeader} from "../helpers/AuthHeader";
 
 
 function Cuantificacion({store}: {
     store: any;
     setStore: any
 }) {
-
-    const { getValues, register } = useForm();
-
-    const deletePp = () => {
-        let id = getValues('delete');
-        if (window.confirm("Quieres borrar el presupuesto?")) {
-            axios.delete(process.env.REACT_APP_API_URL + '/pp/delete/' + id, {headers: authHeader()}).then(
-                () => true
-            )
-        }
-    }
 
     return (
         <>
@@ -42,14 +28,6 @@ function Cuantificacion({store}: {
                                 <h5 className="tooltip-italic text-center">Para la cuantificación del presupuesto destinado a los objetivos climáticos se muestra una tabla con la estructura programática a nivel partida presupuestaria, en la cual debes seleccionar la partida o partidas dando click a la respectiva fila e incluir el monto destinado a dichos objetivos en la columna “Monto Aprobado” de la extrema derecha</h5>
                             </div>
                             <br/>
-                            <div className="row">
-                                <div className="pull-right col-md-1">
-                                    <button type="button" className="btn btn-sm btn-primary" onClick={deletePp}>Eliminar Pp</button>
-                                </div>
-                                <div className="pull-right">
-                                    <input type="text" className="form-control" {...register('delete')} placeholder="Eliminar Pp"/>
-                                </div>
-                            </div>
                             <div className="row">
                                 <FiltroModal store={store}/>
                                 <br/>
