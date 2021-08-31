@@ -21,19 +21,16 @@ function Biblioteca () {
                     <div className="col-md-12">
                         <ul>
                             <li>
-                                <a href="https://drive.google.com/uc?export=download&id=1WuTxkcGMfXSf6PBXiZtIbj6YzMt8kIQy">1.- Instrucciones para el pilotaje de la herramienta</a>
+                                <a href="https://hacienda.frb.io/metodologia">1.- Metodologia ATCC</a>
                             </li>
                             <li>
-                                <a href="https://drive.google.com/uc?export=download&id=1uQjp6ghigGtB76A2vPjV1euw5t80zfM9">2.- Manual de Usuario V4</a>
+                                <a href="https://hacienda.frb.io/capacitacion">2.- Capacitacion Integracion ATCC</a>
                             </li>
                             <li>
-                                <a href="https://drive.google.com/uc?export=download&id=1AcijCLZLjN442e4NJFiZAs71-QsYSR7t">3.- Nota Metodológica</a>
+                                <a href="https://hacienda.frb.io/manual">3.- Manual de usuario</a>
                             </li>
                             <li>
-                                <a href="https://drive.google.com/uc?export=download&id=1-mEUrDlJCzc9SpZ9RMyxu7H2-FL_CshR">4.- Glosario</a>
-                            </li>
-                            <li>
-                                <a href="https://drive.google.com/uc?export=download&id=1NmdFjwIswGUnkum-3mmQ8laQWuAPLfL8">5.- Capacitacion 27 - 29 de Julio</a>
+                                <a href="https://hacienda.frb.io/glosario">4.- Glosario V2</a>
                             </li>
                         </ul>
                     </div>
