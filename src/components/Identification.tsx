@@ -7,6 +7,7 @@ import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";
 import {authHeader} from "../helpers/AuthHeader";
 import  Select from "react-select";
 import {Niveles} from "../data/identification/Niveles";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -27,6 +28,7 @@ function Identification({onSubmit, store}: {
     const [objetivo, setObjetivo] = useState(initial);
     const [objetivoPrograma, setObjetivoPrograma] = useState(initial);
     const [niveles, setNiveles] = useState(store.niveles);
+    const [hideFechaCorte, setHideFechaCorte] = useState(false);
 
     let history = useHistory();
 
@@ -217,11 +219,24 @@ function Identification({onSubmit, store}: {
         }
     }
 
+    const hideMessage = () => {
+        setHideFechaCorte(true);
+    }
+
+    const fechaCorte = () => {
+        return <SweetAlert
+            onConfirm={hideMessage}
+            title=''>
+            La información precargada en este sistema, corresponde al ejercicio fiscal 2022 con corte al 29 de agosto de 2021.
+        </SweetAlert>
+    }
+
     return (
         <div className="row">
             <div className="col-md-3">
                 <TabsMenu tag={'identificacion'}/>
             </div>
+            { !hideFechaCorte && fechaCorte() }
             <div className="col-md-9">
                 <div className="tab-pane" id="identificacion">
                     <div className="panel-body">
