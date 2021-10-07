@@ -1,8 +1,7 @@
 import React from 'react';
 import {
-    BrowserRouter as Router,
     Switch,
-    Route
+    Route, BrowserRouter
 } from "react-router-dom";
 import './App.css';
 import {MainFormModel} from "./model/MainFormModel";
@@ -19,11 +18,12 @@ import Pregunta from "./components/Pregunta";
 import VinculacionOtros from "./components/VinculacionOtros";
 import Biblioteca from "./components/Biblioteca";
 import Login from "./components/Login";
-import {PrivateRoute, PrivateRouteWithoutSubmit} from "./components/PrivateRoute";
+import {AdminPrivateRoute, PrivateRoute, PrivateRouteWithoutSubmit} from "./components/PrivateRoute";
 import {PrivateRouteWithoutData} from "./components/PrivateRoute";
 import NavMenu from "./components/NavMenu";
 import axios from "axios";
 import authenticationService from "./services/AuthenticationService";
+import AdminImport from "./components/AdminImport";
 
 function App() {
 
@@ -49,6 +49,7 @@ function App() {
 
   return (
     <div className="App">
+        <BrowserRouter>
         <>
             <NavMenu/>
         </>
@@ -61,7 +62,6 @@ function App() {
             <hr className="red"/>
             <div className="row">
                 <div className="col-md-12">
-                    <Router>
                         <Switch>
                             <PrivateRouteWithoutSubmit path="/cuantificacion" component={Cuantificacion} store={store}/>
                             <PrivateRoute path="/areas" component={AreasIdentificacion} onSubmit={onSubmit} store={store}/>
@@ -74,14 +74,15 @@ function App() {
                             <PrivateRoute path="/indicadores" component={Indicadores} store={store} onSubmit={onSubmit}/>
                             <PrivateRouteWithoutData path="/biblioteca" component={Biblioteca}/>
                             <PrivateRoute exact path="/identificacion" component={Identification} store={store} onSubmit={onSubmit}/>
+                            <AdminPrivateRoute path="/importar" component={AdminImport}/>
                             <Route path="/">
                                 <Login store={store}/>
                             </Route>
                         </Switch>
-                    </Router>
                 </div>
             </div>
         </div>
+        </BrowserRouter>
     </div>
   );
 }

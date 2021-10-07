@@ -7,6 +7,14 @@ export default class authenticationService  {
 
     static get currentUserValue () { return currentUserSubject.value; }
 
+    static get token () {
+        return this.currentUserValue ? this.currentUserValue.access_token : '';
+    }
+
+    static get type () {
+        return this.currentUserValue ? this.currentUserValue.mode : false;
+    }
+
     static login(email, password) {
         const requestOptions = {
             method: 'POST',

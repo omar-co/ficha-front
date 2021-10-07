@@ -23,6 +23,16 @@ export const PrivateRouteWithoutData = ({ component: Component, ...rest }) => (
     }} />
 );
 
+export const AdminPrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props => {
+        const currentUser = authenticationService.currentUserValue;
+        if (currentUser && currentUser.mode === 'admin') {
+            return <Component {...props} />
+        }
+        return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+    }} />
+);
+
 
 export const PrivateRouteWithoutSubmit = ({ component: Component, store, ...rest }) => (
     <Route {...rest} render={props => {

@@ -13,7 +13,11 @@ const Login = ({store}: {
     let history = useHistory();
 
     if(authenticationService.currentUserValue){
-        history.push('/identificacion');
+        if (authenticationService.type === 'admin') {
+            history.push('/importar');
+        } else {
+            history.push('/identificacion');
+        }
     }
 
     const onSubmit = () => {
