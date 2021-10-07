@@ -16,7 +16,7 @@ function NavMenu() {
         history.push('/login');
     }
 
-    const url = "http://api.hacienda.localhost/api/admin/export?token=" + authenticationService.token;
+    const url = process.env.REACT_APP_API_URL + "/admin/export?token=" + authenticationService.token;
 
     const adminMenu = () => (
         authenticationService.currentUserValue && authenticationService.currentUserValue.mode === 'admin' &&
