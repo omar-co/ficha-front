@@ -31,6 +31,16 @@ function NavMenu() {
                     <li> <Link to='/importar' >Importar Catálogos</Link></li>
                 </ul>
             </li>
+            <li className="dropdown">
+                <a href="/" className="dropdown-toggle" data-toggle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false">Administración <span
+                    className="caret"/></a>
+                <ul className="dropdown-menu">
+
+                    <li><a href={url}>Usuarios</a></li>
+                    <li> <Link to='/importar' ></Link></li>
+                </ul>
+            </li>
         </ul>
     )
 
