@@ -24,7 +24,7 @@ import NavMenu from "./components/NavMenu";
 import axios from "axios";
 import authenticationService from "./services/AuthenticationService";
 import AdminImport from "./components/AdminImport";
-
+import UserTable from "./components/UserTable";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -75,6 +75,7 @@ function App() {
                             <PrivateRouteWithoutData path="/biblioteca" component={Biblioteca}/>
                             <PrivateRoute exact path="/identificacion" component={Identification} store={store} onSubmit={onSubmit}/>
                             <AdminPrivateRoute path="/importar" component={AdminImport}/>
+                            <AdminPrivateRoute path="/usuarios" component={UserTable}/>
                             <Route path="/">
                                 <Login store={store}/>
                             </Route>
