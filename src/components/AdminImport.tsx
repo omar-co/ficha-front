@@ -1,81 +1,92 @@
 import React, {useState} from 'react';
 import SweetAlert from "react-bootstrap-sweetalert";
+import {useForm} from "react-hook-form";
+import axios from "axios";
+import {authHeader} from "../helpers/AuthHeader";
 
 const AdminImport = () => {
 
-    const inital : any = false;
+    const inital: any = false;
     const [archivo, setArchivo] = useState(inital);
+    const [confirmacion, setConfirmacion] = useState(false);
+    const [error, setError] = useState(false);
+    const {register, getValues} = useForm();
 
     const onFileChange = (event) => {
-      setArchivo(event.target.files[0]);
+        setArchivo(event.target.files[0]);
+    }
+
+    const hideConfirmation = () => {
+        setConfirmacion(false);
+    }
+
+    const hideError = () => {
+        setError(false);
     }
 
     const onFileUpload = () => {
-      const formData = new FormData();
+        const formData = new FormData();
 
-      formData.append(
-          'file',
-          archivo,
-          archivo.name
-      );
+        formData.append(
+            'file',
+            archivo,
+            archivo.name
+        );
 
-      console.log(archivo);
+        formData.append('tipo', getValues('tipo'));
 
+        axios.post(process.env.REACT_APP_API_URL + "/admin/import", formData, {headers: authHeader()}).then(
+            (response) => {
+                if (response && response.status === 200) {
+                    setConfirmacion(true);
+                } else {
+                    setError(true);
+                }
+            }
+        );
+    }
+
+    const mensajeConfirmacion = () => {
         return <SweetAlert
-            onConfirm={fileData}
-            title='Caca'
-            show={true}>
-            La información precargada en este sistema, corresponde al ejercicio fiscal 2022 con corte al 29 de agosto de 2021.
+            onConfirm={hideConfirmation}
+            title='Importación'
+        >
+            Se ha importado exitosamente el archivo {archivo.name}
         </SweetAlert>
     }
 
-    const fileData = () => {
-        if (archivo) {
-
-            return (
-                <div>
-                    <h2>File Details:</h2>
-                    <p>File Name: {archivo.name}</p>
-                    <p>File Type: {archivo.type}</p>
-                    <p>
-                        Last Modified:{" "}
-                        {archivo.lastModified}
-                    </p>
-                </div>
-            );
-        } else {
-            return (
-                <div>
-                    <br />
-                    <h4>Choose before Pressing the Upload button</h4>
-                </div>
-            );
-        }
-    };
+    const mensajeError = () => {
+        return <SweetAlert
+            onConfirm={hideError}
+            title='Error en la Importación'
+        >
+            Las columnas del archivo {archivo.name} no corresponden.
+        </SweetAlert>
+    }
 
     return (
         <div className="row">
+            {confirmacion && mensajeConfirmacion()}
+            {error && mensajeError()}
             <div className="col-md-12">
                 <div className="panel-body">
                     <h4>Importar Catálogos</h4>
-                        <select className="form-control" >
-                            <option value="">Seleccione una opción</option>
-                            <option value="1">Importar ODS</option>
-                            <option value="2">Importar Objetivos MIRS</option>
-                            <option value="3">Importar Catálogos</option>
-                        </select>
+                    <select className="form-control" {...register('tipo')}>
+                        <option value="">Seleccione una opción</option>
+                        <option value="ods">Importar ODS</option>
+                        <option value="mirs">Importar Objetivos MIRS</option>
+                        <option value="catalogo">Importar Catálogos</option>
+                    </select>
 
-                        <label htmlFor="file" className="control-label">
-                            Archivo CSV:
-                        </label>
-                        <input type="file" name="file" onChange={onFileChange}/>
-                        <div className="row">
-                            <div className="form-group right">
-                                <button className='btn btn-primary pull-right' onClick={onFileUpload}  >Importar</button>
-                            </div>
+                    <label htmlFor="file" className="control-label">
+                        Archivo CSV:
+                    </label>
+                    <input type="file" name="file" onChange={onFileChange}/>
+                    <div className="row">
+                        <div className="form-group right">
+                            <button className='btn btn-primary pull-right' onClick={onFileUpload}>Importar</button>
                         </div>
-
-                    { fileData() }
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,28 +1,7 @@
-import React, {useEffect, useState} from "react";
-import axios from "axios";
+import React from "react";
 import Table from "../helpers/Table";
-import { useHistory } from "react-router-dom";
-import {authHeader} from "../helpers/AuthHeader";
 
 function UserTable() {
-
-    let history = useHistory();
-
-    const initial: any[] = [];
-    const [users, setUsers] = useState(initial);
-
-    function handleClick() {
-        history.push("/identificacion");
-        window.scrollTo(0,0);
-    }
-
-    useEffect(() => {
-        axios.get(process.env.REACT_APP_API_URL + '/users', {headers: authHeader()}).then(
-            (response) => {
-                setUsers(response.data.data);
-            }
-        );
-    }, []);
 
     const columns = [
         {
@@ -47,12 +26,7 @@ function UserTable() {
     return(
         <>
             <div className="row">
-                <Table columns={columns} data={users}/>
-            </div>
-            <div className="row">
-                <div className="col-md-12 right">
-                    <button className="btn btn-secondary pull-right" onClick={handleClick}>Regresar</button>
-                </div>
+                <Table columns={columns} url={process.env.REACT_APP_API_URL + '/user'} title={"Usuarios registrados"}/>
             </div>
         </>
     );
