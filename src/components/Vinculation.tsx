@@ -65,7 +65,7 @@ function Vinculation({onSubmit, store} : {
             options={Ejes}
             getOptionLabel={(option) => option.label}
             getOptionValue={(option) => option.value}
-            ref={e => register('ejesMultipleSelect')}
+            ref={() => register('ejesMultipleSelect')}
         />
     );
 
@@ -83,7 +83,7 @@ function Vinculation({onSubmit, store} : {
             ))}
             getOptionLabel={(option) => option.label}
             getOptionValue={(option) => option.value}
-            ref={e => register('accionesPuntualesMultipleSelect')}
+            ref={() => register('accionesPuntualesMultipleSelect')}
         />
     );
 
@@ -98,7 +98,7 @@ function Vinculation({onSubmit, store} : {
             options={Componentes}
             getOptionLabel={(option) => option.nombre}
             getOptionValue={(option) => option.id}
-            ref={e => register('componentesMultipleSelect')}
+            ref={() => register('componentesMultipleSelect')}
         />
     );
 
