@@ -12,10 +12,9 @@ function TabsMenu({tag}: {
                     <li className={tag === 'identificacion' ? 'active' : ''}>
                         <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
-                    {/*SE COMENTA PARA DESPUES USARSE*/}
-                    {/*<li className={tag === 'indicadores' ? 'active' : ''}>*/}
-                    {/*    <a>PNCC - INDICADORES</a>*/}
-                    {/*</li>*/}
+                    <li className={tag === 'indicadores' ? 'active' : ''}>
+                      <a>PNCC - INDICADORES</a>
+                    </li>
                     <li className={tag === 'pecc' ? 'active' : ''}>
                         <a>PNCC - PECC</a>
                     </li>

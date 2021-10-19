@@ -25,6 +25,9 @@ import axios from "axios";
 import authenticationService from "./services/AuthenticationService";
 import AdminImport from "./components/AdminImport";
 import UserTable from "./components/UserTable";
+import OdsTable from "./components/OdsTable";
+import MirTable from "./components/MirTable";
+import CatalogosTable from "./components/CatalogosTable";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -76,6 +79,9 @@ function App() {
                             <PrivateRoute exact path="/identificacion" component={Identification} store={store} onSubmit={onSubmit}/>
                             <AdminPrivateRoute path="/importar" component={AdminImport}/>
                             <AdminPrivateRoute path="/usuarios" component={UserTable}/>
+                            <AdminPrivateRoute path="/objetivos-desarrollo-sustentable" component={OdsTable}/>
+                            <AdminPrivateRoute path="/objetivos-mir" component={MirTable}/>
+                            <AdminPrivateRoute path="/catalogos" component={CatalogosTable}/>
                             <Route path="/">
                                 <Login store={store}/>
                             </Route>

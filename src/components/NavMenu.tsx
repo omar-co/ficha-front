@@ -36,7 +36,10 @@ function NavMenu() {
                    aria-haspopup="true" aria-expanded="false">Administración <span
                     className="caret"/></a>
                 <ul className="dropdown-menu">
-                    <li> <Link to='/usuarios' >Usuarios</Link></li>
+                    {/*<li> <Link to='/usuarios' >Usuarios</Link></li>*/}
+                    <li> <Link to='/objetivos-desarrollo-sustentable' >ODS</Link></li>
+                    <li> <Link to='/objetivos-mir' >MIR</Link></li>
+                    <li> <Link to='/catalogos' >Catálogos</Link></li>
                 </ul>
             </li>
         </ul>

@@ -17,7 +17,8 @@ function Table({columns, url, title}: {
         rowsPerPageText: 'Filas por página',
         rangeSeparatorText: 'de',
         selectAllRowsItemText: 'Todos',
-        noRowsPerPage: true
+        noRowsPerPage: true,
+        loadingText: 'Cargando...'
     };
 
     const customStyles = {
