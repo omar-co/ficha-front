@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {Acciones, Componentes, Ejes} from "../data/vinculation/Ods";
-
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
 import Select from 'react-select';
@@ -14,10 +13,18 @@ function Vinculation({onSubmit, store} : {
     if (!store.eje) {
         store.eje = [];
     }
+    if (!store.accionPutual) {
+        store.accionPutual = [];
+    }
+    if(!store.componenteMitigacion){
+        store.componenteMitigacion = [];
+    }
 
     let history = useHistory();
     const { handleSubmit, register } = useForm();
     const [selectedOption, setSelectedOption] = useState(store.eje);
+    const [accionPutual, setAccionPutual] = React.useState(store.accionPutual);
+    const [componente, setComponente] = React.useState(store.componenteMitigacion);
 
     function handleClick() {
         history.push("/otros");
@@ -29,17 +36,77 @@ function Vinculation({onSubmit, store} : {
         window.scrollTo(0,0);
     }
 
-    const filteredOptions = Acciones.filter(
-        (option) => option.link === selectedOption
-    );
-
     const addEjesToStore = (item: any) => {
-        setSelectedOption(item.value);
-        store.eje = item.value;
+        setSelectedOption(item.map((obj) =>
+            obj.value
+        ));
     }
 
-    const addAccionesToStore = (item: any) => {
-        store.accionPutual = item.value;
+    const addAccionPuntualToStore = (item: any) => {
+        setAccionPutual(item.map((obj) =>
+            obj.value
+        ));
+    }
+
+    const addComponentesToStore = (item: any) => {
+        setComponente(item.map((obj) =>
+            obj.id
+        ));
+    }
+
+    const ejes = () => (
+        <Select
+            isMulti
+            className="reactSelect"
+            name="ejesMultipleSelect"
+            placeholder="Eje"
+            defaultValue={Ejes.filter(item => store.eje.includes(item.value))}
+            onChange={addEjesToStore}
+            options={Ejes}
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => option.value}
+            ref={e => register('ejesMultipleSelect')}
+        />
+    );
+
+    const accionesPuntuales = () => (
+        <Select
+            isMulti
+            className="reactSelect"
+            name="accionesPuntualesMultipleSelect"
+            placeholder="Acciones Puntuales"
+            onChange={addAccionPuntualToStore}
+            defaultValue={Acciones.filter(item => store.accionPutual.includes(item.value))}
+            options={Acciones.filter(item => (
+                // @ts-ignore
+                selectedOption && selectedOption.includes(item.link)
+            ))}
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => option.value}
+            ref={e => register('accionesPuntualesMultipleSelect')}
+        />
+    );
+
+    const componentes = () => (
+        <Select
+            isMulti
+            className="reactSelect"
+            name="componentesMultipleSelect"
+            placeholder="Componente Mitigacion"
+            defaultValue={Componentes.filter(item => store.componenteMitigacion.includes(item.id))}
+            onChange={addComponentesToStore}
+            options={Componentes}
+            getOptionLabel={(option) => option.nombre}
+            getOptionValue={(option) => option.id}
+            ref={e => register('componentesMultipleSelect')}
+        />
+    );
+
+    const updateForm = () => {
+        store.eje = selectedOption;
+        store.accionPutual = accionPutual;
+        store.componenteMitigacion = componente;
+        return handleSubmit(onSubmit);
     }
 
 
@@ -54,26 +121,21 @@ function Vinculation({onSubmit, store} : {
                         <h4>Vinculación con los componentes de la Contribución Determinada a Nivel Nacional</h4>
                         <hr className="red"/>
                         <h5>Adaptación</h5>
-                        <form onChange={handleSubmit(onSubmit)}>
+                        <form onChange={updateForm()}>
                             <div key={1} className="form-group">
                                 <label className='control-label' htmlFor="eje">Eje:</label>
-                                <Select options={Ejes} defaultValue={Ejes.filter(item => store.eje === item.value)}
-                                        onChange={val => addEjesToStore(val)}/>
+                                {ejes()}
                             </div>
                             {store.eje !== 10 && <div key={2} className="form-group">
                                 <label className='control-label' htmlFor="accionPutual">Acción Puntual:</label>
-                                <Select options={filteredOptions} onChange={val => addAccionesToStore(val)} defaultValue={filteredOptions.filter(item => store.accionPutual === item.value)}/>
+                                {accionesPuntuales()}
                             </div>}
                             <hr/>
                             <h5>Mitigación</h5>
                             <br/>
                             <div key={3} className="form-group">
                                 <label className='control-label' htmlFor="componenteMitigacion">Sector:</label>
-                                <select className='form-control' {...register('componenteMitigacion', {valueAsNumber: true})} defaultValue={store.componenteMitigacion}>
-                                    <option value="0">Seleccione una opción</option>
-                                    <option value="10">Sin vinculación</option>
-                                    {Componentes.map((item) => <option key={item.id} value={item.id}>{item.nombre}</option>)}
-                                </select>
+                                {componentes()}
                             </div>
                             <div className="row">
                                 <div className="form-group col-md-6">

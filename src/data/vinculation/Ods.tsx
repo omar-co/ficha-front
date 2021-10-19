@@ -40,29 +40,13 @@ export const Acciones = [
 ];
 
 export const Componentes = [
-    {
-        "id": 28,
-        "nombre": "Transporte"
-    }, {
-        "id": 29,
-        "nombre": "Generaci\u00f3n el\u00e9ctrica"
-    }, {
-        "id": 30,
-        "nombre": "Residencial y comercial"
-    }, {
-        "id": 31,
-        "nombre": "Petr\u00f3leo y gas"
-    }, {
-        "id": 32,
-        "nombre": "Industria"
-    }, {
-        "id": 33,
-        "nombre": "Agricultura y ganader\u00eda"
-    }, {
-        "id": 34,
-        "nombre": "Residuos"
-    }, {
-        "id": 35,
-        "nombre": "Uso de suelo, cambio de uso de suelo y  silvicultura"
-    }
+    {id: 28, nombre: "Transporte"},
+    {id: 29, nombre: "Generaci\u00f3n el\u00e9ctrica"},
+    {id: 30, nombre: "Residencial y comercial"},
+    {id: 31, nombre: "Petr\u00f3leo y gas"},
+    {id: 32, nombre: "Industria"},
+    {id: 33, nombre: "Agricultura y ganader\u00eda"},
+    {id: 34, nombre: "Residuos"},
+    {id: 35, nombre: "Uso de suelo, cambio de uso de suelo y  silvicultura"},
+    {id: 100, nombre: "Sin vinculación"}
 ];
