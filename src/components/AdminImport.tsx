@@ -84,7 +84,7 @@ const AdminImport = () => {
                     <input type="file" name="file" onChange={onFileChange}/>
                     <div className="row">
                         <div className="form-group right">
-                            <button className='btn btn-primary pull-right' onClick={onFileUpload}>Importar</button>
+                            <button className='btn btn-primary pull-right' onClick={onFileUpload} disabled={!archivo}>Importar</button>
                         </div>
                     </div>
                 </div>
