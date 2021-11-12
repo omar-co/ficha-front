@@ -28,6 +28,7 @@ import UserTable from "./components/UserTable";
 import OdsTable from "./components/OdsTable";
 import MirTable from "./components/MirTable";
 import CatalogosTable from "./components/CatalogosTable";
+import Configuracion from "./components/Configuracion";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -82,6 +83,7 @@ function App() {
                             <AdminPrivateRoute path="/objetivos-desarrollo-sustentable" component={OdsTable}/>
                             <AdminPrivateRoute path="/objetivos-mir" component={MirTable}/>
                             <AdminPrivateRoute path="/catalogos" component={CatalogosTable}/>
+                            <AdminPrivateRoute path="/configuracion" component={Configuracion}/>
                             <Route path="/">
                                 <Login store={store}/>
                             </Route>
