@@ -34,10 +34,18 @@ function Table({columns, url, title}: {
         },
     };
 
+    function hasAmper(url: string) {
+        if (url.includes('?')) {
+            return '&';
+        }
+
+        return '?';
+    }
+
     const fetchData = useCallback(async page => {
         setLoading(true);
 
-        const response = await axios.get(`${url}?page=${page}`, {headers: authHeader()});
+        const response = await axios.get(`${url}${hasAmper(url)}page=${page}`, {headers: authHeader()});
 
         setData(response.data.data);
         setTotalRows(response.data.meta.total);
@@ -51,7 +59,7 @@ function Table({columns, url, title}: {
     const handlePerRowsChange = async (newPerPage = 15, page) => {
         setLoading(true);
 
-        const response = await axios.get(`${url}?page=${page}`, {headers: authHeader()});
+        const response = await axios.get(`${url}${hasAmper(url)}page=${page}`, {headers: authHeader()});
 
         setData(response.data.data);
         setLoading(false);
