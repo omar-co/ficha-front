@@ -83,7 +83,7 @@ function App() {
                             <AdminPrivateRoute path="/objetivos-desarrollo-sustentable" component={OdsTable}/>
                             <AdminPrivateRoute path="/objetivos-mir" component={MirTable}/>
                             <AdminPrivateRoute path="/catalogos" component={CatalogosTable}/>
-                            <AdminPrivateRoute path="/configuracion" component={Configuracion}/>
+                            <AdminPrivateRoute path="/calendario" component={Configuracion}/>
                             <Route path="/">
                                 <Login store={store}/>
                             </Route>
