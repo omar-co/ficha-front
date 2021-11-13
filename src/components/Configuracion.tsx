@@ -8,7 +8,7 @@ const Configuracion = () => {
     const [data, setData] = useState([]);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
-    const {register, getValues, setValue, handleSubmit} = useForm();
+    const {register, setValue, handleSubmit} = useForm();
 
     useEffect(() => {
         loadData();
