@@ -14,7 +14,7 @@ const Login = ({store}: {
 
     if(authenticationService.currentUserValue){
         if (authenticationService.type === 'admin') {
-            history.push('/importar');
+            history.push('/catalogos');
         } else {
             history.push('/identificacion');
         }

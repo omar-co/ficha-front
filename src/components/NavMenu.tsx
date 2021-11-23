@@ -28,7 +28,6 @@ function NavMenu() {
                 <ul className="dropdown-menu">
 
                     <li><a href={url}>Descargar Registros</a></li>
-                    <li> <Link to='/importar' >Importar Catálogos</Link></li>
                 </ul>
             </li>
             <li className="dropdown">
