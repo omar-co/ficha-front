@@ -11,3 +11,7 @@
 .pull-right {
     float: right !important;
 }
+
+.static-filter {
+    display: block;
+}

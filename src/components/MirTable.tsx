@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import {authHeader} from "../helpers/AuthHeader";
 import SweetAlert from "react-bootstrap-sweetalert";
+import authenticationService from "../services/AuthenticationService";
 
 function OdsTable() {
 
@@ -18,6 +19,7 @@ function OdsTable() {
     const [error, setError] = useState(false);
     const [button, setButton] = useState('Importar');
     const [buttonActive, setButtonActive] = useState(true);
+    const [showFilters, setShowFilters] = useState(false);
 
     useEffect(() => {
         if (!data.length){
@@ -116,38 +118,22 @@ function OdsTable() {
 
 
     const onFilter = () => {
-
         const filter = getValues();
         let values: object = {};
         let filterString = '';
-        let iterator = 0;
-        let newIterator = 0;
 
         for (let key in filter) {
             if (filter.hasOwnProperty(key)) {
                 const value: string = filter[key];
-                if (value) {
+                if (value && value !== 'Todos') {
                     values[key] = value;
-                    //filterString += `${addPrefix(filterString)}[${iterator}]=${key},${value}`;
-                    iterator++;
-                }
-            }
-        }
-
-        for (let key in values) {
-            if (values.hasOwnProperty(key)) {
-                const value: string = values[key];
-                if (iterator > 1) {
-                    filterString += `${addPrefix(filterString)}[${newIterator}]=${key},${value}`;
-                    newIterator++;
-                }
-                if (iterator === 1) {
-                    filterString += `${addPrefix(filterString)}=${key},${value}`;
+                    filterString += `${addPrefix(filterString)}${key}=${value}`;
                 }
             }
         }
 
         defineUrl(filterString);
+        setShowFilters(false);
     };
 
     const defineUrl = (query: string = '') => {
@@ -155,47 +141,35 @@ function OdsTable() {
     }
 
     function addPrefix(url: string) {
-        if (!url.includes('?like')) {
-            return '?like';
+        if (!url.includes('?')) {
+            return '?';
         }
 
-        return '&like';
+        return '&';
     }
+
+    const options = (values: any) => (
+        values.map((obj) => {
+            if (obj.idx === obj.name) {
+                return <option value={obj.idx}>{obj.name}</option>
+            }
+            return <option value={obj.idx}>{obj.idx} - {obj.name}</option>
+            }
+        )
+    )
 
     const inputs = () => (
         data.map(function (item) {
-            return <div className="col-md-12">
+            return <div className="form-group">
                 <label htmlFor={item.field} className="control-label">
                     {item.label}
                 </label>
-                <input type="text" className="form-control" {...register(item.field)} />
+                <select {...register(item.field)} className="form-control">
+                    <option selected={true}>Todos</option>
+                    { options(item.values) }
+                </select>
             </div>
         })
-    )
-
-    const modal = () => (
-        <div className="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
-            <div className="modal-dialog" role="document">
-                <form >
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                            <h4 className="modal-title" id="myModalLabel">Filtros</h4>
-                        </div>
-                        <div className="modal-body">
-                            <div className="row">
-                                {inputs()}
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
-                            <button type="button" onClick={onFilter} data-dismiss="modal" className="btn btn-primary">Filtrar</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
     )
 
     const importModal = () => (
@@ -214,9 +188,9 @@ function OdsTable() {
                                     <h4>Importar Objetivos MIR</h4>
 
                                     <label htmlFor="file" className="control-label">
-                                        Archivo CSV:
+                                        Archivo CSV o Excel:
                                     </label>
-                                    <input type="file" name="file" onChange={onFileChange}/>
+                                    <input type="file" name="file" accept=".xlsx,.xls,.csv" onChange={onFileChange}/>
                                 </div>
                             </div>
                         </div>
@@ -236,16 +210,27 @@ function OdsTable() {
             {error && mensajeError()}
             <div className="row">
                 <div className="pull-right btn-toolbar">
-                    <button type="button"  className="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                        Filtros
-                    </button>
+                    <div className="btn-group">
+                        <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" onClick={() => setShowFilters(!showFilters)}>
+                            Filtros
+                        </button>
+                        <div className={`dropdown-menu ${showFilters ? ' static-filter' : ''}`}>
+                            <form style={{padding: "1rem"}} className="center" >
+                                {inputs()}
+                                <button type="button" className="btn btn-primary" onClick={onFilter}>Aplicar</button>
+                            </form>
+                        </div>
+                    </div>
                     <button type="button"  className="btn btn-primary" data-toggle="modal" data-target="#importar">
                         Importar
                     </button>
-                    {modal()}
+                    <a role="button" href={process.env.REACT_APP_API_URL + "/admin/exportar/mir?token=" + authenticationService.token}  className="btn btn-primary" >
+                        Exportar
+                    </a>
                     {importModal()}
                 </div>
-                <Table columns={columns} url={url} title={"Objetivos de Desarrollo Sustentable"}/>
+                <Table columns={columns} url={url} title={"Objetivos MIR"}/>
             </div>
         </>
     );

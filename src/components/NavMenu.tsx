@@ -26,7 +26,7 @@ function NavMenu() {
                    aria-haspopup="true" aria-expanded="false">Acciones <span
                     className="caret"/></a>
                 <ul className="dropdown-menu">
-
+                    <li> <Link to='/identificacion' >Nuevo Registro</Link></li>
                     <li><a href={url}>Descargar Registros</a></li>
                 </ul>
             </li>

@@ -37,6 +37,7 @@ function App() {
         if ([401, 403].indexOf(error.response.status) !== -1) {
             authenticationService.logout(true);
         }
+        return error;
     })
 
     const [store, setStore] = React.useState(MainForm);

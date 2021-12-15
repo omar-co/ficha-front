@@ -6,6 +6,9 @@ import {authHeader} from "../helpers/AuthHeader";
 
 function UserTable() {
 
+    const base = process.env.REACT_APP_API_URL + '/user';
+    const initial: any = [];
+    const [data, setData] = useState(initial);
     const {register, getValues, reset, setValue} = useForm();
     const [url, setUrl] = useState(process.env.REACT_APP_API_URL + '/user');
     const [formType, setFormType] = useState('');
@@ -13,23 +16,42 @@ function UserTable() {
     const [error, setError] = useState(false);
     const [ramos, setRamos] = useState([]);
     const [roles, setRoles] = useState([]);
+    const [showFilters, setShowFilters] = useState(false);
+    const [userId, setUserId] = useState(0);
 
     function onEdit(row: any) {
         setFormType('edit');
+        setUserId(row.id);
         setValue('id', row.id)
         setValue('name', row.name)
         setValue('last_name', row.lastName)
         setValue('email', row.email)
         setValue('ramo', row.ramo_id)
+        setValue('password', null)
+        setValue('ramo_id', row.ramo_id)
         setValue('role_id', row.role_id)
         setValue('active', row.active ? 1 : 0)
+    }
+
+    function onChangeStatus(row: any) {
+        setUserId(row.id);
+        setValue('id', row.id)
+        setValue('name', row.name)
+        setValue('last_name', row.lastName)
+        setValue('email', row.email)
+        setValue('password', null)
+        setValue('ramo', row.ramo_id)
+        setValue('role_id', row.role_id)
+        setValue('ramo_id', row.ramo_id)
+        setValue('active', row.active ? 0 : 1)
+        onChangeStatusSave(row.id);
     }
 
     const columns = [
         {
             name: 'Nombre Completo',
             selector: row => row.name + ' ' + row.lastName,
-            width: '20%'
+            width: '15%'
         },
         {
             name: 'Usuario',
@@ -38,7 +60,7 @@ function UserTable() {
         },
         {
             name: 'Estatus',
-            selector: row => <span className="label label-success"> {row.active ? 'Activo' : 'Desactivo'}</span>,
+            selector: row => <span className={`label ${row.active ? ' label-success' : 'label-danger'}`}> {row.active ? 'Activo' : 'Inactivo'}</span>,
             width: '10%'
         },
         {
@@ -49,17 +71,19 @@ function UserTable() {
         {
             name: 'Rol',
             selector: row => row.role,
-            width: '20%'
+            width: '15%'
         },
         {
            name: 'Acciones',
             selector: row => <div className="btn-toolbar">
                 <button className="btn btn-primary btn-space btn-sm" onClick={() => onEdit(row)} data-toggle="modal" data-target="#myModal">Editar</button>
+                <button className="btn btn-primary btn-space btn-sm" onClick={() => onChangeStatus(row)}>{row.active ? 'Desactivar' : 'Activar'}</button>
+                <button className="btn btn-primary btn-space btn-sm" onClick={() => onEdit(row)} data-toggle="modal" data-target="#password">Cambiar Contraseña</button>
             </div>,
             ignoreRowClick: true,
             allowOverflow: true,
             button: true,
-            width: '20%'
+            width: '30%'
         },
 
     ];
@@ -73,28 +97,52 @@ function UserTable() {
     )
 
     const onFilter = () => {
+        const value = getValues('ramo_id_filter');
+        let filterString = '';
 
-        const data = getValues();
+        if (value && value !== 'Todos') {
+            filterString += `${addPrefix(filterString)}ramo_id=${value}`;
+        }
 
-        if (data.name.length) {
-            setUrl(url + addPrefix(url) + 'name,' + getValues('name'));
-        }
-        if (data.last_name.length) {
-            setUrl(url + addPrefix(url) + 'last_name,' + getValues('last_name'));
-        }
-        if (data.email.length) {
-            setUrl(url + addPrefix(url) + 'email,' + getValues('email'));
-        }
-        if (data.active.length) {
-            setUrl(url + addPrefix(url) + 'active,' + getValues('active'));
-        }
-        if (!isNaN(data.ramo_id)) {
-            setUrl(url + addPrefix(url) + 'ramo_id,' + getValues('ramo_id'));
-        }
-        if (!isNaN(data.role_id)) {
-            setUrl(url + addPrefix(url) + 'role_id,' + getValues('role_id'));
-        }
+        defineUrl(filterString);
+        setShowFilters(false);
     };
+
+    const defineUrl = (query: string = '') => {
+        setUrl(base + query);
+    }
+
+    function addPrefix(url: string) {
+        if (!url.includes('?')) {
+            return '?';
+        }
+
+        return '&';
+    }
+
+    const options = (values: any) => (
+        values.map((obj) => {
+                if (obj.idx === obj.name) {
+                    return <option value={obj.idx}>{obj.name}</option>
+                }
+                return <option value={obj.idx}>{obj.idx} - {obj.name}</option>
+            }
+        )
+    )
+
+    const inputs = () => (
+        data.map(function (item) {
+            return <div className="form-group">
+                <label htmlFor='ramo_id_filter' className="control-label">
+                    {item.label}
+                </label>
+                <select {...register('ramo_id_filter')} className="form-control">
+                    <option selected={true}>Todos</option>
+                    { options(item.values) }
+                </select>
+            </div>
+        })
+    )
 
     const onSave = async () => {
 
@@ -108,49 +156,47 @@ function UserTable() {
 
     }
 
-    const onEditSave = async (id: number) => {
+    const onChangeStatusSave = async (id: number) => {
         await axios.put(process.env.REACT_APP_API_URL + '/user/' + id, getValues(), {headers: authHeader()}).then(function (response) {
             if (response && response.status === 200) {
                 setSuccess(true);
+                setUrl(base + '?' + Math.floor(Math.random() * 10));
             }
         }).catch(function (error) {
             setError(true);
         });
     }
 
-
-
-    function addPrefix(url: string) {
-        if (!url.includes('?like=')) {
-            return '?like=';
+    const onEditSave = async () => {
+        if (getValues('changePassword')) {
+            setValue('password', getValues('changePassword'))
         }
-
-        return '&like=';
-    }
-
-    const clearUrl = () => {
-        reset()
-        setUrl(process.env.REACT_APP_API_URL + '/user');
-        setFormType('filter');
+        await axios.put(process.env.REACT_APP_API_URL + '/user/' + userId, getValues(), {headers: authHeader()}).then(function (response) {
+            if (response && response.status === 200) {
+                setSuccess(true);
+                setUrl(base + '?' + Math.floor(Math.random() * 10));
+                setValue('changePassword', null);
+                setValue('password', null);
+            }
+        }).catch(function (error) {
+            setError(true);
+        });
     }
 
     const modalTitle = () => {
-        if (formType === 'filter') return 'Filtrar'
         if (formType === 'new') return 'Nuevo Usuario'
         if (formType === 'edit') return 'Editar Usuario'
     }
 
-    const modalButton = (id: number = 0) => {
-        if (formType === 'filter')
-            return <button type="button" onClick={onFilter} data-dismiss="modal" className="btn btn-primary">Filtrar</button>
+    const modalButton = () => {
         if (formType === 'new')
             return <button type="button" onClick={onSave} data-dismiss="modal" className="btn btn-primary">Guardar</button>
         if (formType === 'edit')
-            return <button type="button" onClick={() => onEditSave(id)} data-dismiss="modal" className="btn btn-primary">Actualizar</button>
+            return <button type="button" onClick={() => onEditSave()} data-dismiss="modal" className="btn btn-primary">Actualizar</button>
     }
 
     const passwordField = () => (
-      formType !== 'filter' &&
+      formType !== 'edit' &&
       <div className="col-md-12">
           <label htmlFor="last_name" className="control-label">
               Contraseña
@@ -182,6 +228,9 @@ function UserTable() {
 
         const response = await axios.get(process.env.REACT_APP_API_URL + '/role', {headers: authHeader()});
         setRoles(response.data.data);
+
+        const responseFilters = await axios.get(process.env.REACT_APP_API_URL + '/admin/filtro/user', {headers: authHeader()});
+        setData(responseFilters.data);
     }
 
     useEffect(() => {
@@ -196,9 +245,18 @@ function UserTable() {
             <div className="row">
                 <button className="btn btn-primary" onClick={add} data-toggle="modal" data-target="#myModal">Nuevo Usuairo</button>
                 <div className="pull-right">
-                    <button type="button" onClick={clearUrl} className="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                        Filtros
-                    </button>
+                    <div className="btn-group">
+                        <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" onClick={() => setShowFilters(!showFilters)}>
+                            Filtros
+                        </button>
+                        <div className={`dropdown-menu ${showFilters ? ' static-filter' : ''}`}>
+                            <form style={{padding: "1rem"}} className="center" >
+                                {inputs()}
+                                <button type="button" className="btn btn-primary" onClick={onFilter}>Aplicar</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <Table columns={columns} url={url} title={"Usuarios registrados"}/>
             </div>
@@ -235,16 +293,6 @@ function UserTable() {
                                     </div>
                                     {passwordField()}
                                     <div className="col-md-12">
-                                        <label htmlFor="active" className="control-label">
-                                            Activo
-                                        </label>
-                                        <select className="form-control" {...register('active', {valueAsNumber: true})}>
-                                            <option >Seleccione una opción</option>
-                                            <option value="1">Sí</option>
-                                            <option value="0">No</option>
-                                        </select>
-                                    </div>
-                                    <div className="col-md-12">
                                         <label htmlFor="ramo_id" className="control-label">
                                             Ramo:
                                         </label>
@@ -268,7 +316,38 @@ function UserTable() {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                {modalButton(getValues('id'))}
+                                {modalButton()}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div className="modal fade" id="password" role="dialog">
+                <div className="modal-dialog" role="document">
+                    <form >
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                                <h4 className="modal-title">Cambiar Contraseña</h4>
+                            </div>
+                            <div className="modal-body">
+                                <div className="row">
+                                    <div className="col-md-12">
+                                        <input type="hidden" className="form-control" {...register('id')} />
+                                    </div>
+                                    <div className="col-md-12">
+                                        <label htmlFor="last_name" className="control-label">
+                                            Nueva Contraseña
+                                        </label>
+                                        <input type="password" className="form-control" {...register('changePassword')} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                {modalButton()}
                             </div>
                         </div>
                     </form>
