@@ -277,19 +277,19 @@ function UserTable() {
                                             Nombre
                                         </label>
                                         <input type="hidden" className="form-control" {...register('id')} />
-                                        <input type="text" className="form-control" {...register('name')} />
+                                        <input type="text" autoComplete="off" className="form-control" {...register('name')} />
                                     </div>
                                     <div className="col-md-12">
                                         <label htmlFor="last_name" className="control-label">
                                             Apellido
                                         </label>
-                                        <input type="text" className="form-control" {...register('last_name')} />
+                                        <input type="text" autoComplete="off" className="form-control" {...register('last_name')} />
                                     </div>
                                     <div className="col-md-12">
                                         <label htmlFor="email" className="control-label">
                                             Usuario
                                         </label>
-                                        <input type="text" className="form-control" {...register('email')} />
+                                        <input type="text" autoComplete="off" className="form-control" {...register('email')} />
                                     </div>
                                     {passwordField()}
                                     <div className="col-md-12">
