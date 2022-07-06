@@ -263,7 +263,7 @@ function UserTable() {
 
             <div className="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
                 <div className="modal-dialog" role="document">
-                    <form >
+                    <form autoComplete="off">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span
