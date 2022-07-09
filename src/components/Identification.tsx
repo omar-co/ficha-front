@@ -33,7 +33,7 @@ function Identification({onSubmit, store}: {
     let history = useHistory();
 
     function handleClick() {
-        history.push("/pecc");
+        history.push("/indicadores");
         window.scrollTo(0,0);
     }
 

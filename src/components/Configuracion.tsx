@@ -32,14 +32,12 @@ const Configuracion = () => {
 
     const onSave = async (data: any) => {
       await axios.put(process.env.REACT_APP_API_URL + '/config/1', data, {headers: authHeader()}).then(function (response) {
-          console.log(response)
           if (response && response.status === 200) {
               setSuccess(true);
           } else {
               setError(true);
           }
       }).catch(function (error) {
-          console.log(error)
           setError(true);
       })
 
