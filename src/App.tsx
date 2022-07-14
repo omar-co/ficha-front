@@ -61,7 +61,8 @@ function App() {
         <div className="container">
             <div className="row">
                 <div className="col-md-12">
-                    <h4>IDENTIFICACIÓN Y CUANTIFICACIÓN DE LOS RECURSOS PARA LA MITIGACIÓN Y ADAPTACIÓN AL CAMBIO CLIMÁTICO</h4>
+                    <h4>Herramienta de capacitación para la identificación
+                        y cuantificación de acciones con vinculación climática</h4>
                 </div>
             </div>
             <hr className="red"/>
