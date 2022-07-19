@@ -3,6 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import TabsMenu from "./TabsMenu";
 import BotonSiguiente from "./BotonSiguiente";
 import { useHistory } from "react-router-dom";
+import NavigationService from "../services/NavigationService";
 
 function Pregunta({onSubmit, store}: {
     store: any
@@ -12,8 +13,11 @@ function Pregunta({onSubmit, store}: {
     let history = useHistory();
     const {handleSubmit, register} = useForm();
 
-    function goBack() {
-        history.push("/otros");
+    function goBack(e) {
+        e.preventDefault();
+        NavigationService.prev('pregunta');
+        history.push(NavigationService.prevValue);
+        window.scrollTo(0,0);
     }
 
 

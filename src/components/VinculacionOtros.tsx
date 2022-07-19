@@ -3,6 +3,7 @@ import CurrencyInput from "react-currency-input-field";
 import {SubmitHandler, useForm} from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
+import NavigationService from "../services/NavigationService";
 
 function VinculacionOtros({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -11,15 +12,19 @@ function VinculacionOtros({onSubmit, store}: {
 ){
     let history = useHistory();
 
-    const handleClick = () => {
-        history.push("/pregunta");
+    function handleClick(e) {
+        e.preventDefault();
+        NavigationService.next('otros');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
-    };
+    }
 
-    const goBack = () => {
-        history.push("/ndc");
+    function goBack(e) {
+        e.preventDefault();
+        NavigationService.prev('otros');
+        history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
-    };
+    }
 
 
     const {register, handleSubmit} = useForm();

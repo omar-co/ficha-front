@@ -1,9 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 
 
-function TabsMenu({tag}: {
-    tag: any
+function TabsMenu({tag, modules}: {
+    tag: any;
+    modules?: any;
 }) {
+
+    // @ts-ignore
+    const [activeModules] = useState(JSON.parse(localStorage.getItem('nav')) ?? []);
+
+    const activeModule = (item: string, tag: string, label: string) => {
+      if (activeModules.find(({value}) => value === item)) {
+          return <li className={tag === item ? 'active' : ''}>
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a>{ label }</a>
+                </li>
+      }
+    }
+
     return (
         /* eslint-disable jsx-a11y/anchor-is-valid */
         <>
@@ -12,27 +26,14 @@ function TabsMenu({tag}: {
                     <li className={tag === 'identificacion' ? 'active' : ''}>
                         <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
-                    <li className={tag === 'indicadores' ? 'active' : ''}>
-                      <a>PNCC - INDICADORES</a>
-                    </li>
-                    <li className={tag === 'pecc' ? 'active' : ''}>
-                        <a>PNCC - PECC</a>
-                    </li>
-                    {/*<li className={tag === 'ndc' ? 'active' : ''}>
-                        <a>PNCC - NDC</a>
-                    </li>*/}
-                    <li className={tag === 'otros' ? 'active' : ''}>
-                        <a>VINCULACIÓN CON OTROS INSTRUMENTOS RELEVANTES</a>
-                    </li>
-                    <li className={tag === 'pregunta' ? 'active': ''}>
-                        <a>VINCULACIÓN PP-PNCC</a>
-                    </li>
-                    <li className={tag === 'componentes' ? 'active' : ''}>
-                        <a>TIPO DE CONTRIBUCIÓN</a>
-                    </li>
-                    <li className={tag === 'cuantificacion' ? 'active' : ''}>
-                        <a>CUANTIFICACIÓN</a>
-                    </li>
+                    { activeModule('indicadores', tag, 'PNCC - INDICADORES')}
+                    { activeModule('pecc', tag, 'PNCC - PECC')}
+                    { activeModule('ndc', tag, 'PNCC - NDC')}
+                    { activeModule('otros', tag, 'VINCULACIÓN CON OTROS INSTRUMENTOS RELEVANTES')}
+                    { activeModule('pregunta', tag, 'VINCULACIÓN PP-PNCC')}
+                    { activeModule('componente', tag, 'TIPO DE CONTRIBUCIÓN')}
+                    { activeModule('cuantificacion', tag, 'CUANTIFICACIÓN')}
+
                 </ul>
             </nav>
         </>

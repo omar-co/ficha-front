@@ -2,17 +2,21 @@ import React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
+import NavigationService from "../services/NavigationService";
 
-function AreasIdentificacion({onSubmit}: {
+function AreasIdentificacion({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
+    store: any;
 }) {
 
     const {handleSubmit, register,} = useForm();
 
     let history = useHistory();
 
-    function handleClick() {
-        history.push("/cuantificacion");
+    function handleClick(e) {
+        e.preventDefault();
+        NavigationService.next('areas');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 

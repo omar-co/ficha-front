@@ -8,6 +8,7 @@ import {authHeader} from "../helpers/AuthHeader";
 import  Select from "react-select";
 import {Niveles} from "../data/identification/Niveles";
 import SweetAlert from "react-bootstrap-sweetalert";
+import NavigationService from "../services/NavigationService";
 
 function Identification({onSubmit, store}: {
     onSubmit: SubmitHandler<any>;
@@ -33,8 +34,10 @@ function Identification({onSubmit, store}: {
 
     let history = useHistory();
 
-    function handleClick() {
-        history.push("/indicadores");
+    function handleClick(e) {
+        e.preventDefault();
+        NavigationService.next('identificacion');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 
@@ -162,6 +165,15 @@ function Identification({onSubmit, store}: {
                 setCalendar(response.data);
             }
         )
+
+        const activeModules = process.env.REACT_APP_API_URL + '/config-by-path/app%5Cmodules';
+        axios.get(activeModules, {headers: authHeader()}).then(
+            (response) => {
+                store.modules = JSON.parse(response.data[0].value);
+                store.modules.push({value:'identificacion', label:'Identificación del programa'});
+                localStorage.setItem('nav', JSON.stringify(store.modules));
+            }
+        )
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [store.ramo, setRamo]);
 
@@ -239,10 +251,16 @@ function Identification({onSubmit, store}: {
         </SweetAlert>
     }
 
+    const tabs = () => {
+        if (store.modules) {
+            return <TabsMenu tag={'identificacion'} modules={store.modules}/>
+        }
+    }
+
     return (
         <div className="row">
             <div className="col-md-3">
-                <TabsMenu tag={'identificacion'}/>
+                { tabs() }
             </div>
             { !hideFechaCorte && calendar && fechaCorte() }
             <div className="col-md-9">
@@ -352,7 +370,7 @@ function Identification({onSubmit, store}: {
                             </div>
                             <div className="row">
                                 <div className="form-group right">
-                                    <button className='btn btn-primary pull-right' onClick={handleClick} >Siguiente</button>
+                                    <button className='btn btn-primary pull-right' onClick={handleClick}>Siguiente</button>
                                 </div>
                             </div>
                         </form>

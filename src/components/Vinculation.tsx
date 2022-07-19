@@ -4,6 +4,7 @@ import {Acciones, Componentes, Ejes} from "../data/vinculation/Ods";
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
 import Select from 'react-select';
+import NavigationService from "../services/NavigationService";
 
 function Vinculation({onSubmit, store} : {
     onSubmit: SubmitHandler<any>;
@@ -26,13 +27,17 @@ function Vinculation({onSubmit, store} : {
     const [accionPutual, setAccionPutual] = React.useState(store.accionPutual);
     const [componente, setComponente] = React.useState(store.componenteMitigacion);
 
-    function handleClick() {
-        history.push("/otros");
+    function handleClick(e) {
+        e.preventDefault();
+        NavigationService.next('ndc');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 
-    function goBack() {
-        history.push("/pecc");
+    function goBack(e) {
+        e.preventDefault();
+        NavigationService.prev('ndc');
+        history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
     }
 

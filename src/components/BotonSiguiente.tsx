@@ -1,16 +1,19 @@
 import React from "react";
 import {useHistory} from "react-router-dom";
+import NavigationService from "../services/NavigationService";
 
 function BotonSiguiente({store}: {
     store: any;
 }) {
     let history = useHistory();
 
-    const handleClick = () => {
+    function handleClick(e) {
+        e.preventDefault();
         validate();
-        history.push("/validacion");
+        NavigationService.next('pregunta');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
-    };
+    }
 
     const validate = () => {
         if (store.accionPutual || store.componenteMitigacion || store.actividadPuntual || store.pnccAdaptacion ||

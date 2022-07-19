@@ -4,6 +4,7 @@ import {DataGrid, GridColDef, GridRowsProp} from '@material-ui/data-grid';
 import {GRID_LOCALE_TEXT} from "../data/cuantificacion/TraduccionDataGrid";
 import { useHistory } from "react-router-dom";
 import TabsMenu from "./TabsMenu";
+import NavigationService from "../services/NavigationService";
 
 function Indicadores({onSubmit, store}: {
     store: any;
@@ -16,13 +17,17 @@ function Indicadores({onSubmit, store}: {
     const initial: any[] = [];
     const [select, setSelection] = useState(initial);
 
-    function handleClick() {
-        history.push("/pecc");
+    function handleClick(e) {
+        e.preventDefault();
+        NavigationService.next('indicadores');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 
-    function goBack(){
-        history.push("/");
+    function goBack(e) {
+        e.preventDefault();
+        NavigationService.prev('indicadores');
+        history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
     }
 

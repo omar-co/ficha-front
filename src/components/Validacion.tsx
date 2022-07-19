@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import Componentes from "./Componentes";
 import {SubmitHandler} from "react-hook-form";
 import TabsMenu from "./TabsMenu";
+import NavigationService from "../services/NavigationService";
 
 function Validacion({onSubmit, store}: {
     store: any;
@@ -10,15 +11,19 @@ function Validacion({onSubmit, store}: {
 }) {
     let history = useHistory();
 
-    const handleClick = () => {
-        history.push("/cuantificacion");
+    function handleClick(e) {
+        e.preventDefault();
+        NavigationService.next('validacion');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
-    };
+    }
 
-    const goBack = () => {
-        history.push("/pregunta");
+    function goBack(e) {
+        e.preventDefault();
+        NavigationService.prev('validacion');
+        history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
-    };
+    }
 
     const error = () => (
         <div className="alert alert-danger">

@@ -46,7 +46,7 @@ function NavMenu() {
                     className="caret"/></a>
                 <ul className="dropdown-menu">
                     <li> <Link to='/usuarios' >Usuarios</Link></li>
-                    <li> <Link to='/calendario' >Calendario</Link></li>
+                    <li> <Link to='/sistema' >Sistema</Link></li>
                 </ul>
             </li>
         </ul>

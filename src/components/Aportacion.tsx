@@ -7,6 +7,7 @@ import TabsMenu from "./TabsMenu";
 import {Marcadores} from "../data/shared";
 import { useHistory } from "react-router-dom";
 import Select from 'react-select';
+import NavigationService from "../services/NavigationService";
 
 function Aportacion({onSubmit, store}: {
     store: any;
@@ -35,13 +36,17 @@ function Aportacion({onSubmit, store}: {
     let history = useHistory();
 
 
-    function handleClick() {
-        history.push("/otros");
+    function handleClick(e) {
+        e.preventDefault();
+        NavigationService.next('pecc');
+        history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 
-    function goBack() {
-        history.push("/identificacion");
+    function goBack(e) {
+        e.preventDefault();
+        NavigationService.prev('pecc');
+        history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
     }
 
