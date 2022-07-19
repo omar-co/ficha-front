@@ -29,6 +29,7 @@ function Identification({onSubmit, store}: {
     const [objetivoPrograma, setObjetivoPrograma] = useState(initial);
     const [niveles, setNiveles] = useState(store.niveles);
     const [hideFechaCorte, setHideFechaCorte] = useState(false);
+    const [calendar, setCalendar] = useState(false);
 
     let history = useHistory();
 
@@ -154,6 +155,13 @@ function Identification({onSubmit, store}: {
                     }
                 }
             )
+
+        const calendarApi = process.env.REACT_APP_API_URL + '/config-by-path/app%5Ccalendar';
+        axios.get(calendarApi, {headers: authHeader()}).then(
+            (response) => {
+                setCalendar(response.data);
+            }
+        )
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [store.ramo, setRamo]);
 
@@ -227,7 +235,7 @@ function Identification({onSubmit, store}: {
         return <SweetAlert
             onConfirm={hideMessage}
             title=''>
-            La información precargada en este sistema, corresponde al ejercicio fiscal 2022 con corte al 29 de agosto de 2021.
+            La información precargada en este sistema, corresponde al ejercicio fiscal {calendar[0].value} con corte al {calendar[1].value}.
         </SweetAlert>
     }
 
@@ -236,7 +244,7 @@ function Identification({onSubmit, store}: {
             <div className="col-md-3">
                 <TabsMenu tag={'identificacion'}/>
             </div>
-            { !hideFechaCorte && fechaCorte() }
+            { !hideFechaCorte && calendar && fechaCorte() }
             <div className="col-md-9">
                 <div className="tab-pane" id="identificacion">
                     <div className="panel-body">

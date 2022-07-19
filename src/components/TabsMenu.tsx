@@ -18,9 +18,9 @@ function TabsMenu({tag}: {
                     <li className={tag === 'pecc' ? 'active' : ''}>
                         <a>PNCC - PECC</a>
                     </li>
-                    <li className={tag === 'ndc' ? 'active' : ''}>
+                    {/*<li className={tag === 'ndc' ? 'active' : ''}>
                         <a>PNCC - NDC</a>
-                    </li>
+                    </li>*/}
                     <li className={tag === 'otros' ? 'active' : ''}>
                         <a>VINCULACIÓN CON OTROS INSTRUMENTOS RELEVANTES</a>
                     </li>

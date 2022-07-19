@@ -36,7 +36,7 @@ function Aportacion({onSubmit, store}: {
 
 
     function handleClick() {
-        history.push("/ndc");
+        history.push("/otros");
         window.scrollTo(0,0);
     }
 
