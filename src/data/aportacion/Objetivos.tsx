@@ -123,7 +123,7 @@ export const Actividades = [
     {id: '2.7.1', estrategia_id: 2.7, name: '2.7.1 Reducir las quemas agropecuarias a través de la adopción prácticas sustentables '},
     {id: '2.7.2', estrategia_id: 2.7, name: '2.7.2 Promover prácticas agronómicas sustentables orientadas a la captura de Carbono en suelos '},
     {id: '2.7.3', estrategia_id: 2.7, name: '2.7.3 Contribuir a la recuperación de ecosistemas a través de la promoción de sistemas silvopastoriles '},
-    {id: '2.7.4', estrategia_id: 2.7, name: '2.7.4 Incorporar criterios de cambio climático en la implementación del programa Sembrando vida '},
+    {id: '2.7.4', estrategia_id: 2.7, name: '2.7.4 Incorporar criterios de cambio climático en la implementación del programa "Sembrando vida" '},
     {id: '2.7.5', estrategia_id: 2.7, name: '2.7.5 Fomentar el establecimiento y desarrollo de Plantaciones Forestales Comerciales competitivas de especies estratégicas en regiones prioritarias, que contribuyan al crecimiento del empleo en el medio rural. '},
     {id: '2.7.6', estrategia_id: 2.7, name: '2.7.6 Impulsar el manejo forestal comunitario como medida de mitigación al cambio climático al tiempo que se incrementan las capacidades de las comunidades forestales. '},
     {id: '3.1.1', estrategia_id: 3.1, name: '3.1.1 Promover el desarrollo de una estrategia que fortalezca la restauración, manejo y conservación de los ecosistemas que albergan el carbono azul. '},
