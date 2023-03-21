@@ -47,6 +47,7 @@ function NavMenu() {
                 <ul className="dropdown-menu">
                     <li> <Link to='/usuarios' >Usuarios</Link></li>
                     <li> <Link to='/sistema' >Sistema</Link></li>
+                    <li> <Link to='/politicas-publicas' >Politicas Públicas</Link></li>
                 </ul>
             </li>
         </ul>
