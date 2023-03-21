@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Table from "../../../helpers/Table";
+import {Link} from "react-router-dom";
 
 const PoliticasPublicasIndex = () => {
     const [urlPoliticasPublicas] = useState(process.env.REACT_APP_API_URL + '/admin/politicas-publicas');
@@ -43,7 +44,7 @@ const PoliticasPublicasIndex = () => {
     return (
         <>
             <div className="row">
-                <button className="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">Nueva Politica pública</button>
+                <Link to='/politicas-publicas/nueva' className="btn btn-primary pull-right">Nueva Politica pública</Link>
                 <Table columns={columns} url={urlPoliticasPublicas} title={"Politicas públicas"}/>
             </div>
         </>
