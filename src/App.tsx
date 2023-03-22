@@ -31,6 +31,7 @@ import CatalogosTable from "./components/CatalogosTable";
 import Configuracion from "./components/Configuracion";
 import PoliticasPublicasIndex from "./components/admin/politicasPublicas/PoliticasPublicasIndex";
 import PoliticasPublicasCreate from "./components/admin/politicasPublicas/PoliticasPublicasCreate";
+import Inicio from "./components/pv/Inicio";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -88,6 +89,7 @@ function App() {
                             <AdminPrivateRoute path="/objetivos-mir" component={MirTable}/>
                             <AdminPrivateRoute path="/catalogos" component={CatalogosTable}/>
                             <AdminPrivateRoute path="/sistema" component={Configuracion}/>
+                            <PrivateRouteWithoutData path='/presupuesto-verde' component={Inicio}/>
                             <AdminPrivateRoute path="/politicas-publicas/nueva" component={PoliticasPublicasCreate}/>
                             <AdminPrivateRoute path="/politicas-publicas" component={PoliticasPublicasIndex}/>
                             <Route path="/">
