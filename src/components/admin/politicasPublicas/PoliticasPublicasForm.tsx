@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from "axios";
+import {Redirect} from 'react-router-dom';
 import {authHeader} from "../../../helpers/AuthHeader";
 import {useForm} from "react-hook-form";
 
@@ -7,22 +8,30 @@ const PoliticasPublicasForm = () => {
 
     const [urlPoliticasPublicas] = useState(process.env.REACT_APP_API_URL + '/admin/politicas-publicas');
     const {register, getValues} = useForm();
-    const [success, setSuccess] = useState(false);
-    const [error, setError] = useState(false);
+    const [toDetail, setToDetail] = useState(false);
 
-    const onSave = async () => {
-        await axios.post(urlPoliticasPublicas, getValues(), {headers: authHeader()}).then(function (response) {
+    const onSave = async (e) => {
+        e.preventDefault();
+        await axios.post(urlPoliticasPublicas, getValues(), {headers: authHeader()})
+            .then(function (response) {
             if (response && response.status === 200) {
-                setSuccess(true);
+                setToDetail(true);
             }
         }).catch(function (error) {
-            setError(true);
+            console.log(error);
         });
 
     }
 
+    const detail = () => {
+        if (toDetail) {
+            return <Redirect to="politicas-publicas" />
+        }
+    }
+
     return (
         <div>
+            { detail() }
             <form className="clearfix">
                 <div className="row">
                     <div className="col-md-12">
