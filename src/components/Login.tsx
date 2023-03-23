@@ -13,11 +13,7 @@ const Login = ({store}: {
     let history = useHistory();
 
     if(authenticationService.currentUserValue){
-        if (authenticationService.type === 'admin') {
-            history.push('/catalogos');
-        } else {
-            history.push('/identificacion');
-        }
+        history.push('/presupuesto-verde');
     }
 
     const onSubmit = () => {
@@ -31,7 +27,7 @@ const Login = ({store}: {
                         store.directamente = data.directamente;
                         history.push('/cuantificacion');
                     } else {
-                        history.push('/identificacion');
+                        history.push('/presupuesto-verde');
                         window.location.reload();
                     }
                 }, error => {
