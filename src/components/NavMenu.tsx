@@ -48,7 +48,6 @@ function NavMenu() {
                     <li> <Link to='/usuarios' >Usuarios</Link></li>
                     <li> <Link to='/sistema' >Sistema</Link></li>
                     <li> <Link to='/politicas-publicas' >Politicas Públicas</Link></li>
-                    <li> <Link to='/presupuesto-verde' >Presupuesto Verde</Link></li>
                 </ul>
             </li>
         </ul>

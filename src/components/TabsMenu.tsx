@@ -13,7 +13,7 @@ function TabsMenu({tag, modules}: {
       if (activeModules.find(({value}) => value === item)) {
           return <li className={tag === item ? 'active' : ''}>
               {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a>{ label }</a>
+                    <a href={"/" + item} >{ label }</a>
                 </li>
       }
     }
@@ -23,10 +23,10 @@ function TabsMenu({tag, modules}: {
         <>
             <nav>
                 <ul className="nav nav-tabs tabs-left">
-                    <li className={tag === 'identificacion' ? 'active' : ''}>
-                        <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
+                    <li className={tag === 'presupuesto-verde' ? 'active' : ''}>
+                        <a href="/presupuesto-verde">Presupuesto Verde</a>
                     </li>
-                    { activeModule('indicadores', tag, 'PNCC - INDICADORES')}
+                    { activeModule('identificacion', tag, 'Presupuesto Verde Objetivos Ambientales')}
                     { activeModule('pecc', tag, 'PNCC - PECC')}
                     { activeModule('ndc', tag, 'PNCC - NDC')}
                     { activeModule('otros', tag, 'VINCULACIÓN CON OTROS INSTRUMENTOS RELEVANTES')}
@@ -36,6 +36,13 @@ function TabsMenu({tag, modules}: {
 
                 </ul>
             </nav>
+
+            <div className="row" style={{ marginTop: "40px" }}>
+                <button className="btn btn-danger btn-sm btn-block">Manual de usuario sobre el <br/> Presupuesto Verde</button>
+                <button className="btn btn-danger btn-sm btn-block">Guía metodológica sobre el <br/> Presupuesto  Verde</button>
+                <button className="btn btn-danger btn-sm btn-block">Material de capacitación <br/> sobre el Presupuesto Verde</button>
+            </div>
+
         </>
 
 

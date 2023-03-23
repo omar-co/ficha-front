@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "./Menu";
+import TabsMenu from "../TabsMenu";
 
 function Inicio() {
 
@@ -7,7 +7,7 @@ function Inicio() {
         <>
             <div className="row">
                 <div className="col-md-3">
-                    <Menu></Menu>
+                    <TabsMenu tag={'presupuesto-verde'}/>
                 </div>
                 <div className="col-md-9">
                     <div className="row ">

@@ -89,7 +89,7 @@ function App() {
                             <AdminPrivateRoute path="/objetivos-mir" component={MirTable}/>
                             <AdminPrivateRoute path="/catalogos" component={CatalogosTable}/>
                             <AdminPrivateRoute path="/sistema" component={Configuracion}/>
-                            <PrivateRouteWithoutData path='/presupuesto-verde' component={Inicio}/>
+                            <PrivateRouteWithoutSubmit store={store} path='/presupuesto-verde' component={Inicio}/>
                             <AdminPrivateRoute path="/politicas-publicas/nueva" component={PoliticasPublicasCreate}/>
                             <AdminPrivateRoute path="/politicas-publicas" component={PoliticasPublicasIndex}/>
                             <Route path="/">
