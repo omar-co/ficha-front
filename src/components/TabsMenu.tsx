@@ -23,10 +23,10 @@ function TabsMenu({tag, modules}: {
         <>
             <nav>
                 <ul className="nav nav-tabs tabs-left">
-                    <li className={tag === 'presupuesto-verde' ? 'active' : ''}>
-                        <a href="/presupuesto-verde">Presupuesto Verde</a>
+                    <li className={tag === 'identificacion' ? 'active' : ''}>
+                        <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
-                    { activeModule('identificacion', tag, 'Presupuesto Verde Objetivos Ambientales')}
+                    { activeModule('indicadores', tag, 'PNCC - INDICADORES')}
                     { activeModule('pecc', tag, 'PNCC - PECC')}
                     { activeModule('ndc', tag, 'PNCC - NDC')}
                     { activeModule('otros', tag, 'VINCULACIÓN CON OTROS INSTRUMENTOS RELEVANTES')}
