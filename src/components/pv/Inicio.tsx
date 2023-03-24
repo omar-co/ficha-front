@@ -1,23 +1,25 @@
 import React from "react";
-import TabsMenu from "../TabsMenu";
+import { useHistory } from "react-router-dom";
 
 function Inicio() {
+
+    let history = useHistory();
+    const goTo = (link) => {
+        history.push(link)
+    }
 
     return (
         <>
             <div className="row">
-                <div className="col-md-3">
-                    <TabsMenu tag={'presupuesto-verde'}/>
-                </div>
-                <div className="col-md-9">
+                <div className="col-md-12">
                     <div className="row ">
                         <p className="text-center">
                             Mensaje de bienvenida
                         </p>
                     </div>
 
-                    <div className="row" style={{ margin: "30px" }}>
-                        <div className="col-md-4">
+                    <div className="row button-container">
+                        <div className="home-buttons"  onClick={ () => goTo('/identificacion') }>
                             <p className="text-center">
                                 <b>Presupuesto Verde <br/> Objetivos Ambientales</b>
                             </p>
@@ -29,7 +31,7 @@ function Inicio() {
                                 del cambio climático.
                             </p>
                         </div>
-                        <div className="col-md-4">
+                        <div className="home-buttons">
                             <p className="text-center">
                                 <b>Presupuesto Verde <br/> Cambio Climático</b>
                             </p>
@@ -40,7 +42,7 @@ function Inicio() {
                                 se destinan al desarrollo de dichas acciones.
                             </p>
                         </div>
-                        <div className="col-md-4 ">
+                        <div className="home-buttons">
                             <p className="text-center">
                                 <b>Ingresos Verdes</b>
                             </p>

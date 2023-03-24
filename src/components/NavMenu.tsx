@@ -60,7 +60,7 @@ function NavMenu() {
                 <nav className="navbar navbar-inverse sub-navbar navbar-fixed-top">
                     <div className="container">
                         <div className="navbar-header">
-                            <a href="/" className="navbar-brand not-active ">Hacienda</a>
+                            <a href="/presupuesto-verde" className="navbar-brand ">Hacienda</a>
                         </div>
                         <div className="collapse navbar-collapse" id="subenlaces">
                             { adminMenu() }
