@@ -63,3 +63,24 @@
   font-size: 13px;
   font-style: italic;
 }
+
+.home-buttons {
+  border: 2px solid #B38E5D;
+  border-radius: 10px;
+  height: 400px;
+  width: 100%;
+  margin: 5px;
+  transition: .5s;
+  padding: 20px;
+
+}
+
+.home-buttons:hover {
+  transform: scale(1.03);
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+}
+
