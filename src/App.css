@@ -67,10 +67,12 @@
 .home-buttons {
   border: 2px solid #B38E5D;
   border-radius: 10px;
-  height: 350px;
+  height: 400px;
   width: 100%;
   margin: 5px;
   transition: .5s;
+  padding: 20px;
+
 }
 
 .home-buttons:hover {
