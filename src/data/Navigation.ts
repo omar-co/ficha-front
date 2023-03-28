@@ -18,3 +18,8 @@ export const NavigationRequired = [
     {value:'componente', label:'Tipo de Contribución'},
     {value:'cuantificacion', label:'Cuantificación'},
 ];
+
+export const NavigationObjetivosAmbientales = [
+    {value:'identificacion', label:'PNCC - Indicadores'},
+    {value:'indicadores', label:'PNCC - Indicadores'},
+    ];
