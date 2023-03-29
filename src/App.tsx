@@ -32,6 +32,7 @@ import Configuracion from "./components/Configuracion";
 import PoliticasPublicasIndex from "./components/admin/politicasPublicas/PoliticasPublicasIndex";
 import PoliticasPublicasCreate from "./components/admin/politicasPublicas/PoliticasPublicasCreate";
 import Inicio from "./components/pv/Inicio";
+import RouterCambioClimatico from "./components/pv/cambio-climatico/RouterCambioClimatico";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -92,6 +93,7 @@ function App() {
                             <PrivateRouteWithoutSubmit store={store} path='/presupuesto-verde' component={Inicio}/>
                             <AdminPrivateRoute path="/politicas-publicas/nueva" component={PoliticasPublicasCreate}/>
                             <AdminPrivateRoute path="/politicas-publicas" component={PoliticasPublicasIndex}/>
+                            <PrivateRoute path="/cambio-climatico" component={RouterCambioClimatico} store={store} onSubmit={onSubmit}/>
                             <Route path="/">
                                 <Login store={store}/>
                             </Route>
