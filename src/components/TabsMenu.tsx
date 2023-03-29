@@ -27,11 +27,11 @@ function TabsMenu({tag, modules}: {
                         <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
                     { activeModule('indicadores', tag, 'PNCC - INDICADORES')}
-                    { activeModule('pecc', tag, 'PNCC - PECC')}
+                    { activeModule('pecc', tag, 'VINCULACIÓN CON LA POLÍTICA NACIONAL DE MEDIO AMBIENTE')}
                     { activeModule('ndc', tag, 'PNCC - NDC')}
                     { activeModule('otros', tag, 'VINCULACIÓN CON OTROS INSTRUMENTOS RELEVANTES')}
-                    { activeModule('pregunta', tag, 'VINCULACIÓN PP-PNCC')}
-                    { activeModule('componente', tag, 'TIPO DE CONTRIBUCIÓN')}
+                    { activeModule('pregunta', tag, 'CONTRIBUCIÓN PP-PV')}
+                    { activeModule('componente', tag, 'CONTRIBUCIÓN A LOS OBJETIVOS Y METAS AMBIENTALES EN MATERIA DE AGUA')}
                     { activeModule('cuantificacion', tag, 'CUANTIFICACIÓN')}
 
                 </ul>
