@@ -31,7 +31,7 @@ function Inicio() {
                                 del cambio climático.
                             </p>
                         </div>
-                        <div className="home-buttons">
+                        <div className="home-buttons"   onClick={ () => goTo('/cambio-climatico') }>
                             <p className="text-center">
                                 <b>Presupuesto Verde <br/> Cambio Climático</b>
                             </p>
