@@ -14,7 +14,6 @@ import VinculacionOtros from "./VinculacionOtros";
 import Vinculation from "./Vinculation";
 import Aportacion from "./Aportacion";
 import Indicadores from "./Indicadores";
-import Biblioteca from "./Biblioteca";
 import Identification from "./Identification";
 import {SubmitHandler} from "react-hook-form";
 
@@ -41,7 +40,6 @@ function RouterCambioClimatico({onSubmit, store}: {
                                 <PrivateRoute path={`${path}/ndc`} component={Vinculation} store={store} onSubmit={onSubmit}/>
                                 <PrivateRoute path={`${path}/pecc`} component={Aportacion} store={store} onSubmit={onSubmit}/>
                                 <PrivateRoute path={`${path}/indicadores`} component={Indicadores} store={store} onSubmit={onSubmit}/>
-                                <PrivateRouteWithoutData path={`${path}/biblioteca`} component={Biblioteca}/>
                                 <PrivateRoute exact path={`${path}`} component={Identification} store={store} onSubmit={onSubmit}/>
                             </Switch>
                         </div>
