@@ -36,6 +36,7 @@ import RouterCambioClimatico from "./components/pv/cambio-climatico/RouterCambio
 import Pnh from "./components/Pnh";
 import Enbio from "./components/Enbio";
 import Enac from "./components/Enac";
+import PoliticasPublicasDetail from "./components/admin/politicasPublicas/PoliticasPublicasDetail";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -98,6 +99,7 @@ function App() {
                             <AdminPrivateRoute path="/sistema" component={Configuracion}/>
                             <PrivateRouteWithoutSubmit store={store} path='/presupuesto-verde' component={Inicio}/>
                             <AdminPrivateRoute path="/politicas-publicas/nueva" component={PoliticasPublicasCreate}/>
+                            <AdminPrivateRoute path="/politicas-publicas/detalle" component={PoliticasPublicasDetail}/>
                             <AdminPrivateRoute path="/politicas-publicas" component={PoliticasPublicasIndex}/>
                             <PrivateRoute path="/cambio-climatico" component={RouterCambioClimatico} store={store} onSubmit={onSubmit}/>
                             <Route path="/">
