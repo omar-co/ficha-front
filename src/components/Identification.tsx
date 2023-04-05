@@ -166,7 +166,7 @@ function Identification({onSubmit, store}: {
             }
         )
 
-        const activeModules = process.env.REACT_APP_API_URL + '/config-by-path/app%5Cmodules';
+        const activeModules = process.env.REACT_APP_API_URL + '/config-by-path/app%5Cmodules%5Cobjetivos-ambientales';
         axios.get(activeModules, {headers: authHeader()}).then(
             (response) => {
                 store.modules = JSON.parse(response.data[0].value);

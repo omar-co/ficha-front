@@ -1,6 +1,6 @@
 import  React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {AccionPuntual as Actividades, EstrategiasPrioritarias as Estrategias, Objetivos} from "../data/Promarnat";
+import { SubEjes as Estrategias, Ejes as Objetivos} from "../data/Enbio";
 import { Etapas } from "../data/aportacion/Etapas";
 import TabsMenu from "./TabsMenu";
 
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import Select from 'react-select';
 import NavigationService from "../services/NavigationService";
 
-function Aportacion({onSubmit, store}: {
+function Enbio({onSubmit, store}: {
     store: any;
     onSubmit: SubmitHandler<any>;
 }) {
@@ -20,16 +20,12 @@ function Aportacion({onSubmit, store}: {
     if (!store.estrategias) {
         store.estrategias = [];
     }
-    if (!store.actividades) {
-        store.actividades = [];
-    }
     if (!store.etapa1) {
         store.etapa1 = [];
     }
 
     const [objetivo, setObjetivo] = React.useState(store.objetivos);
     const [estrategias, setEstrategias] = React.useState(store.estrategias);
-    const [actividades, setActividades] = React.useState(store.actividades);
     const [etapa, setEtapa] = React.useState(store.etapa1);
     const {handleSubmit, register} = useForm();
 
@@ -38,14 +34,14 @@ function Aportacion({onSubmit, store}: {
 
     function handleClick(e) {
         e.preventDefault();
-        NavigationService.next('pecc');
+        NavigationService.next('enbio');
         history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 
     function goBack(e) {
         e.preventDefault();
-        NavigationService.prev('pecc');
+        NavigationService.prev('enbio');
         history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
     }
@@ -62,12 +58,6 @@ function Aportacion({onSubmit, store}: {
         ))
     }
 
-    const addActividadesToStore = (item: any) => {
-        setActividades(item.map((obj) =>
-            obj.value
-        ))
-    }
-
     const addEtapasToStore = (item: any) => {
         setEtapa(item.map((obj) =>
             obj.value
@@ -80,7 +70,7 @@ function Aportacion({onSubmit, store}: {
             isMulti
             className="reactSelect"
             name="objetivosMultipleSelect"
-            placeholder="Objetivo prioritario"
+            placeholder="Eje"
             defaultValue={Objetivos.filter(item => store.objetivos.includes(item.value))}
             onChange={addObjetivosToStore}
             options={Objetivos}
@@ -97,7 +87,7 @@ function Aportacion({onSubmit, store}: {
             isMulti
             className="reactSelect"
             name="estrategiasMultipleSelect"
-            placeholder="Estrategia prioritaria"
+            placeholder="Sub-eje"
             onChange={addEstrategiasToStore}
             defaultValue={Estrategias.filter(item => store.estrategias.includes(item.value))}
             options={Estrategias.filter(item => (
@@ -110,29 +100,10 @@ function Aportacion({onSubmit, store}: {
         />
     );
 
-    const actions = () => (
-        <Select
-            isMulti
-            className="reactSelect"
-            name="actividadesMultipleSelection"
-            placeholder="Actividad puntual"
-            onChange={addActividadesToStore}
-            defaultValue={Actividades.filter(item => store.actividades.includes(item.value))}
-            options={Actividades.filter(item => (
-                // @ts-ignore
-                estrategias && estrategias.includes(item.parent)
-            ))}
-            getOptionLabel={(option) => option.label}
-            getOptionValue={(option) => option.value}
-            ref={e => register('actividadesMultipleSelection')}
-        />
-    );
-
 
     const updateForm = () => {
         store.objetivos = objetivo;
         store.estrategias = estrategias;
-        store.actividades = actividades;
         store.etapa1 = etapa;
         store.porcentajeAtcc =  Marcadores[store.marcador] * 100;
         return handleSubmit(onSubmit);
@@ -140,7 +111,7 @@ function Aportacion({onSubmit, store}: {
     return(
         <div className="row">
             <div className="col-md-3">
-                <TabsMenu tag={'pecc'}/>
+                <TabsMenu tag={'enbio'}/>
             </div>
             <div className="col-md-9">
                 <div key='1' className="tab-pane" id="aportacion">
@@ -148,24 +119,20 @@ function Aportacion({onSubmit, store}: {
                         <form onChange={updateForm()}>
                             <div className="row">
                                 <div className="col-md-12">
-                                    <label htmlFor="titulo" className="control-label">VINCULACIÓN CON PROMARNAT</label>
+                                    <label htmlFor="titulo" className="control-label">VINCULACIÓN CON ENBIO</label>
                                     <hr className="red"/>
                                 </div>
                             </div>
                             <div key='3' className="form-group">
-                                <label className='control-label' htmlFor="objetivoPrioritario">Objetivo prioritario:</label>
+                                <label className='control-label' htmlFor="objetivoPrioritario">Eje de la ENBIO:</label>
                                 {objetivos()}
                             </div>
                             <div key='4' className="form-group">
-                                <label htmlFor="estrategiaPrioritaria" className="control-label">Estrategia prioritaria:</label>
+                                <label htmlFor="estrategiaPrioritaria" className="control-label">Sub-eje de la ENBIO:</label>
                                 {strategies()}
                             </div>
-                            <div key='5' className="form-group">
-                                <label htmlFor="actividadPuntual" className="control-label">Actividad puntual:</label>
-                                {actions()}
-                            </div>
                             <div key='10' className="form-group">
-                                <label htmlFor="actividadComprometida" className="control-label">Actividades o proyectos comprometidos para la atención del PROMARNAT:</label>
+                                <label htmlFor="actividadComprometida" className="control-label">Actividades o proyectos comprometidos para la atención del ENBIO:</label>
                                 <textarea className="form-control" {...register('actividadComprometida')} defaultValue={store.actividadComprometida}/>
                             </div>
                             <div key='11' className="row">
@@ -218,4 +185,4 @@ function Aportacion({onSubmit, store}: {
 
 
 }
-export default Aportacion;
+export default Enbio;

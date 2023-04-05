@@ -1,6 +1,6 @@
 import  React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {AccionPuntual as Actividades, EstrategiasPrioritarias as Estrategias, Objetivos} from "../data/Promarnat";
+import {Estrategias as Actividades, Objetivos as Estrategias, Ejes as Objetivos} from "../data/Enca";
 import { Etapas } from "../data/aportacion/Etapas";
 import TabsMenu from "./TabsMenu";
 
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import Select from 'react-select';
 import NavigationService from "../services/NavigationService";
 
-function Aportacion({onSubmit, store}: {
+function Enac({onSubmit, store}: {
     store: any;
     onSubmit: SubmitHandler<any>;
 }) {
@@ -38,14 +38,14 @@ function Aportacion({onSubmit, store}: {
 
     function handleClick(e) {
         e.preventDefault();
-        NavigationService.next('pecc');
+        NavigationService.next('enac');
         history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 
     function goBack(e) {
         e.preventDefault();
-        NavigationService.prev('pecc');
+        NavigationService.prev('enac');
         history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
     }
@@ -80,7 +80,7 @@ function Aportacion({onSubmit, store}: {
             isMulti
             className="reactSelect"
             name="objetivosMultipleSelect"
-            placeholder="Objetivo prioritario"
+            placeholder="Eje"
             defaultValue={Objetivos.filter(item => store.objetivos.includes(item.value))}
             onChange={addObjetivosToStore}
             options={Objetivos}
@@ -97,7 +97,7 @@ function Aportacion({onSubmit, store}: {
             isMulti
             className="reactSelect"
             name="estrategiasMultipleSelect"
-            placeholder="Estrategia prioritaria"
+            placeholder="Objetivo"
             onChange={addEstrategiasToStore}
             defaultValue={Estrategias.filter(item => store.estrategias.includes(item.value))}
             options={Estrategias.filter(item => (
@@ -115,7 +115,7 @@ function Aportacion({onSubmit, store}: {
             isMulti
             className="reactSelect"
             name="actividadesMultipleSelection"
-            placeholder="Actividad puntual"
+            placeholder="Estrategia"
             onChange={addActividadesToStore}
             defaultValue={Actividades.filter(item => store.actividades.includes(item.value))}
             options={Actividades.filter(item => (
@@ -140,7 +140,7 @@ function Aportacion({onSubmit, store}: {
     return(
         <div className="row">
             <div className="col-md-3">
-                <TabsMenu tag={'pecc'}/>
+                <TabsMenu tag={'enac'}/>
             </div>
             <div className="col-md-9">
                 <div key='1' className="tab-pane" id="aportacion">
@@ -148,24 +148,24 @@ function Aportacion({onSubmit, store}: {
                         <form onChange={updateForm()}>
                             <div className="row">
                                 <div className="col-md-12">
-                                    <label htmlFor="titulo" className="control-label">VINCULACIÓN CON PROMARNAT</label>
+                                    <label htmlFor="titulo" className="control-label">VINCULACIÓN CON ENAC</label>
                                     <hr className="red"/>
                                 </div>
                             </div>
                             <div key='3' className="form-group">
-                                <label className='control-label' htmlFor="objetivoPrioritario">Objetivo prioritario:</label>
+                                <label className='control-label' htmlFor="objetivoPrioritario">Eje:</label>
                                 {objetivos()}
                             </div>
                             <div key='4' className="form-group">
-                                <label htmlFor="estrategiaPrioritaria" className="control-label">Estrategia prioritaria:</label>
+                                <label htmlFor="estrategiaPrioritaria" className="control-label">Objetivo:</label>
                                 {strategies()}
                             </div>
                             <div key='5' className="form-group">
-                                <label htmlFor="actividadPuntual" className="control-label">Actividad puntual:</label>
+                                <label htmlFor="actividadPuntual" className="control-label">Estrategia:</label>
                                 {actions()}
                             </div>
                             <div key='10' className="form-group">
-                                <label htmlFor="actividadComprometida" className="control-label">Actividades o proyectos comprometidos para la atención del PROMARNAT:</label>
+                                <label htmlFor="actividadComprometida" className="control-label">Actividades o proyectos comprometidos para la atención del ENAC:</label>
                                 <textarea className="form-control" {...register('actividadComprometida')} defaultValue={store.actividadComprometida}/>
                             </div>
                             <div key='11' className="row">
@@ -218,4 +218,4 @@ function Aportacion({onSubmit, store}: {
 
 
 }
-export default Aportacion;
+export default Enac;

@@ -4,7 +4,7 @@ import {
     BrowserRouter,
     useRouteMatch
 } from "react-router-dom";
-import { PrivateRoute, PrivateRouteWithoutData, PrivateRouteWithoutSubmit} from "../../PrivateRoute";
+import { PrivateRoute, PrivateRouteWithoutSubmit} from "../../PrivateRoute";
 import Cuantificacion from "./Cuantificacion";
 import AreasIdentificacion from "./AreasIdentificacion";
 import ObjetivosDesarrolloSustentable from "./ObjetivosDesarrolloSustentable";

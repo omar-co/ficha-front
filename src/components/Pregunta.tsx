@@ -31,7 +31,7 @@ function Pregunta({onSubmit, store}: {
                     <form onChange={handleSubmit(onSubmit)}>
                         <div className="row">
                             <div className="col-md-12">
-                                <label className="control-label">Vinculación entre el Programa presupuestario (Pp) y la Política Nacional de Cambio Climático (PNCC)</label>
+                                <label className="control-label">Vinculación entre el Programa presupuestario (Pp) y los objetivos y metas ambientales plasmados en la política pública mediambiental</label>
                                 <hr className="red"/>
                             </div>
                         </div>
@@ -39,7 +39,7 @@ function Pregunta({onSubmit, store}: {
                             <div className="col-md-12">
                                 <label htmlFor="directamente" className="control-label">
                                     ¿Cómo considera que es la contribución de las acciones sustantivas y de apoyo del Pp
-                                    a la PNCC (PECC, NDC, etc.) de acuerdo con los objetivos seleccionados en las etapas previas?
+                                    a la Política Nacional mediambiental (PROMARNAT, PNH, ENBIO o ENAC) de acuerdo con los objetivos seleccionados en las etapas previas?
                                 </label>
                                 <select className="form-control" {...register('directamente', {valueAsNumber: true})} defaultValue={store.directamente}>
                                     <option value="">Selecciona una opcion</option>
