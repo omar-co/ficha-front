@@ -1,6 +1,6 @@
 import  React from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {AccionPuntual as Actividades, EstrategiasPrioritarias as Estrategias, Objetivos} from "../data/Promarnat";
+import {AccionesPuntuales as Actividades, EstrategiasPrioritarias as Estrategias, ObjetivosPrioritarios as Objetivos} from "../data/PNH";
 import { Etapas } from "../data/aportacion/Etapas";
 import TabsMenu from "./TabsMenu";
 
@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import Select from 'react-select';
 import NavigationService from "../services/NavigationService";
 
-function Aportacion({onSubmit, store}: {
+function Pnh({onSubmit, store}: {
     store: any;
     onSubmit: SubmitHandler<any>;
 }) {
@@ -38,14 +38,14 @@ function Aportacion({onSubmit, store}: {
 
     function handleClick(e) {
         e.preventDefault();
-        NavigationService.next('pecc');
+        NavigationService.next('pnh');
         history.push(NavigationService.nextValue);
         window.scrollTo(0,0);
     }
 
     function goBack(e) {
         e.preventDefault();
-        NavigationService.prev('pecc');
+        NavigationService.prev('pnh');
         history.push(NavigationService.prevValue);
         window.scrollTo(0,0);
     }
@@ -140,7 +140,7 @@ function Aportacion({onSubmit, store}: {
     return(
         <div className="row">
             <div className="col-md-3">
-                <TabsMenu tag={'pecc'}/>
+                <TabsMenu tag={'pnh'}/>
             </div>
             <div className="col-md-9">
                 <div key='1' className="tab-pane" id="aportacion">
@@ -148,7 +148,7 @@ function Aportacion({onSubmit, store}: {
                         <form onChange={updateForm()}>
                             <div className="row">
                                 <div className="col-md-12">
-                                    <label htmlFor="titulo" className="control-label">VINCULACIÓN CON PROMARNAT</label>
+                                    <label htmlFor="titulo" className="control-label">VINCULACIÓN CON PNH</label>
                                     <hr className="red"/>
                                 </div>
                             </div>
@@ -165,7 +165,7 @@ function Aportacion({onSubmit, store}: {
                                 {actions()}
                             </div>
                             <div key='10' className="form-group">
-                                <label htmlFor="actividadComprometida" className="control-label">Actividades o proyectos comprometidos para la atención del PROMARNAT:</label>
+                                <label htmlFor="actividadComprometida" className="control-label">Actividades o proyectos comprometidos para la atención del PNH:</label>
                                 <textarea className="form-control" {...register('actividadComprometida')} defaultValue={store.actividadComprometida}/>
                             </div>
                             <div key='11' className="row">
@@ -218,4 +218,4 @@ function Aportacion({onSubmit, store}: {
 
 
 }
-export default Aportacion;
+export default Pnh;

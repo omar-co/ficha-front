@@ -33,6 +33,9 @@ import PoliticasPublicasIndex from "./components/admin/politicasPublicas/Politic
 import PoliticasPublicasCreate from "./components/admin/politicasPublicas/PoliticasPublicasCreate";
 import Inicio from "./components/pv/Inicio";
 import RouterCambioClimatico from "./components/pv/cambio-climatico/RouterCambioClimatico";
+import Pnh from "./components/Pnh";
+import Enbio from "./components/Enbio";
+import Enac from "./components/Enac";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -81,6 +84,9 @@ function App() {
                             <PrivateRoute path="/otros" component={VinculacionOtros} onSubmit={onSubmit} store={store}/>
                             <PrivateRoute path="/ndc" component={Vinculation} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/pecc" component={Aportacion} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/pnh" component={Pnh} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/enbio" component={Enbio} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/enac" component={Enac} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/indicadores" component={Indicadores} store={store} onSubmit={onSubmit}/>
                             <PrivateRouteWithoutData path="/biblioteca" component={Biblioteca}/>
                             <PrivateRoute exact path="/identificacion" component={Identification} store={store} onSubmit={onSubmit}/>
