@@ -24,7 +24,7 @@ function TabsMenu({tag, modules}: {
             <nav>
                 <ul className="nav nav-tabs tabs-left">
                     <li className={tag === 'identificacion' ? 'active' : ''}>
-                        <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
+                        <a href={"/cambio-climatico"}>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
                     { activeModule('indicadores', tag, 'PNCC - INDICADORES')}
                     { activeModule('pecc', tag, 'PNCC - PECC')}

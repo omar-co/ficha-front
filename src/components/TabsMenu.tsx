@@ -24,7 +24,7 @@ function TabsMenu({tag, modules}: {
             <nav>
                 <ul className="nav nav-tabs tabs-left">
                     <li className={tag === 'identificacion' ? 'active' : ''}>
-                        <a>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
+                        <a href={'/identificacion'}>IDENTIFICACIÓN DEL PROGRAMA PRESUPUESTARIO</a>
                     </li>
                     { activeModule('pecc', tag, 'VINCULACIÓN CON LA POLÍTICA NACIONAL DE MEDIO AMBIENTE')}
                     { activeModule('pnh', tag, 'VINCULACIÓN CON EL PROGRMAMA NACIONAL HÍDRICO')}
