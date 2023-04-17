@@ -37,6 +37,7 @@ import Pnh from "./components/Pnh";
 import Enbio from "./components/Enbio";
 import Enac from "./components/Enac";
 import PoliticasPublicasDetail from "./components/admin/politicasPublicas/PoliticasPublicasDetail";
+import Clasificacion from "./components/Clasificacion";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -89,6 +90,7 @@ function App() {
                             <PrivateRoute path="/enbio" component={Enbio} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/enac" component={Enac} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/indicadores" component={Indicadores} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/clasificacion" component={Clasificacion} store={store} onSubmit={onSubmit}/>
                             <PrivateRouteWithoutData path="/biblioteca" component={Biblioteca}/>
                             <PrivateRoute exact path="/identificacion" component={Identification} store={store} onSubmit={onSubmit}/>
                             <AdminPrivateRoute path="/importar" component={AdminImport}/>
