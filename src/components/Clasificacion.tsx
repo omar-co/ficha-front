@@ -60,19 +60,20 @@ function Clasificacion({onSubmit, store}: {
     const radioButtons = () => (
         getValues('p3') === 1 ? <div className="row">
             <br/>
+
             <div className="col-md-12">
                 <div className="from-group">
-                    <div className="radio">
-                        <label>
-                            <input type="radio" {...register('gasto', {valueAsNumber: true})} value="1"/> Gasto
+                    <label htmlFor="p4">
+                        Por favor seleccione el tipo de gasto
+                    </label>
+                    <select id="p4" className="form-control" {...register('gasto', {valueAsNumber:true})}>
+                        <option selected>Seleccione una Opción</option>
+                        <option value="1">Gasto
                             favorable pero
-                            contradictorio
-                        </label>
-                        <label>
-                            <input type="radio" {...register('gasto', {valueAsNumber: true})} value="2"/> Gasto
-                            favorable
-                        </label>
-                    </div>
+                            contradictorio</option>
+                        <option value="2">Gasto
+                            favorable</option>
+                    </select>
                 </div>
             </div>
         </div> : null
@@ -117,6 +118,42 @@ function Clasificacion({onSubmit, store}: {
         </div> : null
     )
 
+    const mensajeFinalFavorable = () => (
+        (getValues('p1') === 1 && getValues('p2') === 3) ? <div className="row">
+            <br/>
+            <div className="col-md-12">
+                 <div className="alert alert-success" role="alert">
+                    <h4 className="alert-heading">¡Atención!</h4>
+                    <p>El programa presupuestario tiene un impacto ambiental favorable.</p>
+                </div>
+            </div>
+        </div> : null
+    )
+
+    const mensajeFinalNeutro = () => (
+        (getValues('gasto') === 1 || getValues('gasto') === 2) ? <div className="row">
+            <br/>
+            <div className="col-md-12">
+                 <div className="alert alert-warning" role="alert">
+                    <h4 className="alert-heading">¡Atención!</h4>
+                    <p>El programa presupuestario no tiene un impacto ambiental directo.</p>
+                </div>
+            </div>
+        </div> : null
+    )
+
+    const mensajeFinalNegativo = () => (
+        (getValues('p5') === -1 ) ? <div className="row">
+            <br/>
+            <div className="col-md-12">
+                 <div className="alert alert-danger" role="alert">
+                    <h4 className="alert-heading">¡Atención!</h4>
+                    <p>El programa presupuestario no tiene un impacto directo favorable.</p>
+                </div>
+            </div>
+        </div> : null
+    )
+
     return (
         <div className="row">
             <div className="col-md-3">
@@ -147,6 +184,15 @@ function Clasificacion({onSubmit, store}: {
                                 {radioButtons()}
                                 {cuartaPregunta()}
                                 {quintaPregunta()}
+                                {mensajeFinalFavorable()}
+                                {mensajeFinalNegativo()}
+                                {mensajeFinalNeutro()}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12 center">
+                                <br/>
+                                <button type="submit" className="btn btn-primary">Guardar</button>
                             </div>
                         </div>
                     </form>
