@@ -3,6 +3,7 @@ import axios from "axios";
 import {saveAs} from 'file-saver'
 import {useHistory} from "react-router-dom";
 import {authHeader} from "../helpers/AuthHeader";
+import NavigationService from "../services/NavigationService";
 
 function SubmitButton({store, selectedStore, changed}: {
     store: any;
@@ -15,6 +16,13 @@ function SubmitButton({store, selectedStore, changed}: {
         delete store.ramo;
         window.location.assign('/');
         window.scrollTo(0, 0);
+    }
+
+    function next(e) {
+        e.preventDefault();
+        NavigationService.next('cuantificacion');
+        history.push(NavigationService.nextValue);
+        window.scrollTo(0,0);
     }
 
     function goBack() {
@@ -70,6 +78,9 @@ function SubmitButton({store, selectedStore, changed}: {
             <div className="row">
                 <div className="form-group col-md-3">
                     <button className="btn btn-secondary" onClick={goBack}>Regresar</button>
+                </div>
+                <div className="form-group right col-md-9">
+                    <button className='btn btn-primary pull-right' onClick={next} >Siguiente</button>
                 </div>
             </div>
             <div className="row">

@@ -6,6 +6,7 @@ export const Navigation = [
     {value:'pregunta', label:'Vinculación PP-PNCC'},
     {value:'validacion', label:'Tipo de Contribución'},
     {value:'cuantificacion', label:'Cuantificación'},
+    {value:'clasificacion', label:'Clasificación'},
 ];
 
 export const NavigationRequired = [
@@ -18,6 +19,7 @@ export const NavigationRequired = [
     {value:'pregunta', label:'Vinculación PP-PNCC'},
     {value:'validacion', label:'Tipo de Contribución'},
     {value:'cuantificacion', label:'Cuantificación'},
+    {value:'clasificacion', label:'Clasificación'},
 ];
 
 export const NavigationObjetivosAmbientales = [
