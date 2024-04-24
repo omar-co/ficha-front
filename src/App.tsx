@@ -29,6 +29,7 @@ import OdsTable from "./components/OdsTable";
 import MirTable from "./components/MirTable";
 import CatalogosTable from "./components/CatalogosTable";
 import Configuracion from "./components/Configuracion";
+import Componentes from "./components/Componentes";
 function App() {
 
     axios.interceptors.response.use(function (response) {
@@ -73,6 +74,7 @@ function App() {
                             <PrivateRoute path="/areas" component={AreasIdentificacion} onSubmit={onSubmit} store={store}/>
                             <PrivateRoute path="/ods" component={ObjetivosDesarrolloSustentable} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/pregunta" component={Pregunta} store={store} onSubmit={onSubmit}/>
+                            <PrivateRoute path="/componente" component={Componentes} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/validacion" component={Validacion} store={store} onSubmit={onSubmit}/>
                             <PrivateRoute path="/otros" component={VinculacionOtros} onSubmit={onSubmit} store={store}/>
                             <PrivateRoute path="/ndc" component={Vinculation} store={store} onSubmit={onSubmit}/>
