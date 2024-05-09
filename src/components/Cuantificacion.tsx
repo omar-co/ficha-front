@@ -4,7 +4,7 @@ import React from "react";
 import FiltroModal from "./FiltroModal";
 import TabsMenu from "./TabsMenu";
 
-
+//aqui iba
 function Cuantificacion({store}: {
     store: any;
     setStore: any
