@@ -159,14 +159,14 @@ function Identification({onSubmit, store}: {
                 }
             )
 
-        const calendarApi = process.env.REACT_APP_API_URL + '/config-by-path/app-calendar';
+        const calendarApi = process.env.REACT_APP_API_URL + '/config-by-path/app%5Ccalendar';
         axios.get(calendarApi, {headers: authHeader()}).then(
             (response) => {
                 setCalendar(response.data);
             }
         )
 
-        const activeModules = process.env.REACT_APP_API_URL + '/config-by-path/app-modules';
+        const activeModules = process.env.REACT_APP_API_URL + '/config-by-path/app%5Cmodules';
         axios.get(activeModules, {headers: authHeader()}).then(
             (response) => {
                 store.modules = JSON.parse(response.data[0].value);
