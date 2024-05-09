@@ -32,9 +32,7 @@ function Componentes({onSubmit, store}: {
     )
 
     const tabs = () => {
-        if (store.modules) {
-            return <TabsMenu tag={'componente'} modules={store.modules}/>
-        }
+        return <TabsMenu tag={'componente'}/>
     }
 
     const fechaCorte = () => {
