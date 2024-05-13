@@ -13,7 +13,7 @@ function SubmitButton({store, selectedStore, changed}: {
 
     function handleClick() {
         delete store.ramo;
-        window.location.assign('/');
+        window.location.assign('/identificacion');
         window.scrollTo(0, 0);
     }
 
