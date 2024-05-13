@@ -59,8 +59,9 @@ export default function FiltroTabla({store, mainStore}: {
     ];
 
     const validarModaldiad = (item) => {
-        console.log(item)
         setChanged([...changed, item]);
+        console.log(item)
+        console.log(changed)
     };
 
     return (
